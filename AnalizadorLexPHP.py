@@ -12,7 +12,14 @@ tokens=(
     'FLOAT',
     'STRING',
     'BOOL',
-    'ARRAY',
+    'PLUS',
+    'MINUS',
+    'TIMES',
+    'DIVIDE',
+    'LPAREN',
+    'RPAREN',
+    'VARIABLE',
+
 )
 
 reserved={
