@@ -4,41 +4,9 @@ import ply.lex as lex
 
 ##Analizador Lexico PHP
 
-#List of token names
-tokens=(
-    'INT',
-    'FLOAT',
-    'STRING',
-    'BOOL',
-    'PLUS',
-    'MINUS',
-    'TIMES',
-    'DIVIDE',
-    'LPAREN',
-    'RPAREN',
-    'LBRACE',
-    'RBRACE',
-    'LBRACKET',
-    'RBRACKET',
-    'VARIABLE',
-    'EQUALS',
-    'COMMA',
-    'SEMICOLON',
-    'DOT'
-)
-
+#Reserved
 reserved={
-    #Constantes en tiempo de ejecución
-    '__class__': '__CLASS__',
-    '__dir__': '__DIR__',
-    '__file__': '__FILE__',
-    '__function__': '__FUNCTION__',
-    '__line__': '__LINE__',
-    '__method__': '__METHOD__',
-    '__namespace__': '__NAMESPACE__',
-    '__trait__': '__TRAIT__',
-    #Palabras Reservadas
-    'abstract':'ABSTRACT',
+    "abstract":"ABSTRACT",
     'and': 'AND',
     'array':'ARRAY',
     'as':'AS',
@@ -88,7 +56,29 @@ reserved={
     'try':'TRY',
     'while': 'WHILE',
 }
-tokens= tokens + tuple(reserved.values())
+
+#List of token names
+tokens=(
+    'INT',
+    'FLOAT',
+    'STRING',
+    'BOOL',
+    'PLUS',
+    'MINUS',
+    'TIMES',
+    'DIVIDE',
+    'LPAREN',
+    'RPAREN',
+    'LBRACE',
+    'RBRACE',
+    'LBRACKET',
+    'RBRACKET',
+    'VARIABLE',
+    'EQUALS',
+    'COMMA',
+    'SEMICOLON',
+    'DOT'
+)+ tuple(reserved.values())
 
 #REGULAR EXPRESSIONS
 t_PLUS = r'\+'
@@ -144,6 +134,7 @@ lexer = lex.lex()
 data = '''
     $variable = 10 + 20.5;
     $booleano = true;
+    array
 '''
 
 # Give the lexer some input
