@@ -81,7 +81,22 @@ tokens=(
     'COMMA',
     'SEMICOLON',
     'DOT',
-    'ID'
+    'ID',
+    'LT',
+    'GT',
+    'OPENTAG',
+    'POTENCIA',
+    'PLUSEQUAL',
+    'CONCATENATEEQUAL',
+    'STRICTEQ',
+    'STRICTNEQ',
+    'CLOSETAG',
+    'MINUSEQUAL',
+    'EQ',
+    'NEQ',
+    'LEQ',
+    'GEQ',
+    'MODULO'
 )+ tuple(reserved.values())
 
 #REGULAR EXPRESSIONS
@@ -185,11 +200,12 @@ data = '''
     if
     while
     $if = "String"
-     $string1 = "Hello\\nWorld!";
+    $string1 = "Hello\\nWorld!";
     $string2 = 'This is a \\ttab.';
     $escaped = "She said, \\"Hello!\\"";
     $newLine = "First Line\nSecond Line";
-    
+    4 >=5
+    5> 2
 '''
 
 # Give the lexer some input
