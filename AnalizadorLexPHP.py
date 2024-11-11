@@ -6,7 +6,7 @@ import ply.lex as lex
 
 #Reserved
 reserved={
-    "abstract":"ABSTRACT",
+    'abstract':'ABSTRACT',
     'and': 'AND',
     'array':'ARRAY',
     'as':'AS',
@@ -96,6 +96,16 @@ t_EQUALS = r'='
 t_SEMICOLON = r';'
 t_COMMA = r','
 t_DOT = r'\.'
+##MOISES ALVAREZ
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    t.type = reserved.get(t.value, 'ID') 
+    return t
+
+def t_STRING(t):
+    r'\"([^\\\"]|\\.)*\"|\'([^\\\']|\\.)*\''   
+    t.value = t.value[1:-1] 
+    return t
 
 def t_VARIABLE(t):
     r'\$[a-zA-Z_][a-zA-Z_0-9]*'
@@ -117,11 +127,7 @@ def t_BOOL(t):
     return t
 
 ##detecta solo palabras reservadas
-##MOISES ALVAREZ
-def t_ID(t):
-    r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reserved.get(t.value, 'ID') 
-    return t
+
 # Define a rule so we can track line numbers
 def t_newline(t):
     r'\n+'
@@ -146,6 +152,12 @@ data = '''
     for
     if
     while
+    $if = "String"
+     $string1 = "Hello\\nWorld!";
+    $string2 = 'This is a \\ttab.';
+    $escaped = "She said, \\"Hello!\\"";
+    $newLine = "First Line\nSecond Line";
+    
 '''
 
 # Give the lexer some input
