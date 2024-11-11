@@ -55,6 +55,9 @@ reserved={
     'true':'TRUE',
     'try':'TRY',
     'while': 'WHILE',
+    'final':'FINAL',
+    'include':'INCLUDE',
+    'interface':'INTERFACE',
 }
 
 #List of token names
@@ -96,6 +99,26 @@ t_EQUALS = r'='
 t_SEMICOLON = r';'
 t_COMMA = r','
 t_DOT = r'\.'
+t_MODULO = r'%'
+t_POTENCIA = r'\*\*'
+t_PLUSEQUAL = r'\+='
+t_MINUSEQUAL = r'-='
+t_CONCATENATEEQUAL = r'\.='
+t_AND = r'&&'
+t_OR = r'\|\|'
+t_NOT = r'!'
+t_EQ = r'=='
+t_STRICTEQ = r'==='
+t_NEQ = r'!='
+t_STRICTNEQ = r'!=='
+t_LT = r'<'
+t_GT = r'>'
+t_LEQ = r'<='
+t_GEQ = r'>='
+t_OPENTAG = r'<\?php'
+t_CLOSETAG = r'\?>'
+
+
 ##MOISES ALVAREZ
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
@@ -140,6 +163,15 @@ t_ignore  = ' \t'
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
+    
+def t_COMMENT(t):
+    r'//.*'
+    pass  # Ignorar comentarios de una línea
+
+def t_MCOMMENT(t):
+    r'/\*[\s\S]*?\*/'
+    pass  # Ignorar comentarios de múltiples líneas
+
 
 lexer = lex.lex()
 
