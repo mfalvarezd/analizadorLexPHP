@@ -77,7 +77,8 @@ tokens=(
     'EQUALS',
     'COMMA',
     'SEMICOLON',
-    'DOT'
+    'DOT',
+    'ID'
 )+ tuple(reserved.values())
 
 #REGULAR EXPRESSIONS
@@ -115,6 +116,12 @@ def t_BOOL(t):
     t.value = True if t.value == 'true' else False
     return t
 
+##detecta solo palabras reservadas
+##MOISES ALVAREZ
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    t.type = reserved.get(t.value, 'ID') 
+    return t
 # Define a rule so we can track line numbers
 def t_newline(t):
     r'\n+'
@@ -135,6 +142,10 @@ data = '''
     $variable = 10 + 20.5;
     $booleano = true;
     array
+    switch
+    for
+    if
+    while
 '''
 
 # Give the lexer some input
