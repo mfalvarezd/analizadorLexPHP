@@ -1,3 +1,11 @@
+#Estudiante 1: Jair Alexander Chaguay
+#Matrícula 1: 202112082
+
+#Estudiante 2: Moisés Fernando Alvarez
+#Matrícula 2:
+
+#Estudiante 3: Piero Valentino Pazmiñp
+#Matrícula 3:w
 import logging
 import os
 import time
@@ -8,6 +16,7 @@ import ply.lex as lex
 
 #Reserved
 reserved={
+#Inicio contribuciones Jair
     'abstract':'ABSTRACT',
     'and': 'AND',
     'array':'ARRAY',
@@ -28,7 +37,9 @@ reserved={
     'empty':'EMPTY',
     'endswitch':'ENDSWITCH',
     'extends': 'EXTENDS',
+    'exception':'EXCEPTION',
     'false':'FALSE',
+#inicio contribuciones Fernando
     'finally': 'FINALLY',
     'for': 'FOR',
     'foreach':'FOREACH',
@@ -46,6 +57,7 @@ reserved={
     'not': 'NOT',
     'or': 'OR',
     'print':'PRINT',
+#inicio contribuciones Piero
     'private': 'PRIVATE',
     'protected':'PROTECTED',
     'public':'PUBLIC',
@@ -64,6 +76,8 @@ reserved={
 
 #List of token names
 tokens=(
+    'ARROW',
+    'ARROWMAP',
     'INT',
     'FLOAT',
     'STRING',
@@ -98,7 +112,8 @@ tokens=(
     'NEQ',
     'LEQ',
     'GEQ',
-    'MODULO'
+    'MODULO',
+    'DOUBLEDOT'
 )+ tuple(reserved.values())
 
 #REGULAR EXPRESSIONS
@@ -134,17 +149,21 @@ t_LEQ = r'<='
 t_GEQ = r'>='
 t_OPENTAG = r'<\?php'
 t_CLOSETAG = r'\?>'
+_ARROW = r'\->'
+t_ARROWMAP=r'\=>'
+t_DOUBLEDOT= r'\:'
+
 
 
 ##MOISES ALVAREZ
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reserved.get(t.value, 'ID') 
+    t.type = reserved.get(t.value, 'ID')
     return t
 
 def t_STRING(t):
-    r'\"([^\\\"]|\\.)*\"|\'([^\\\']|\\.)*\''   
-    t.value = t.value[1:-1] 
+    r'\"([^\\\"]|\\.)*\"|\'([^\\\']|\\.)*\''
+    t.value = t.value[1:-1]
     return t
 
 def t_VARIABLE(t):
@@ -180,7 +199,7 @@ t_ignore  = ' \t'
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
-    
+
 def t_COMMENT(t):
     r'//.*'
     pass  # Ignorar comentarios de una línea
