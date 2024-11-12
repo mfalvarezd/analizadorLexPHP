@@ -2,7 +2,7 @@
 #Matrícula 1: 202112082
 
 #Estudiante 2: Moisés Fernando Alvarez
-#Matrícula 2:
+#Matrícula 2: 202005526
 
 #Estudiante 3: Piero Valentino Pazmiñp
 #Matrícula 3:202204053
