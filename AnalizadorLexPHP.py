@@ -1,4 +1,6 @@
 import logging
+import os
+import time
 
 import ply.lex as lex
 
@@ -217,3 +219,57 @@ while True:
     if not tok:
         break      # No more input
     print(tok)
+
+# Solicitar el usuario de Git y el número del archivo a analizar
+usuario_git = input("Ingrese su usuario de Git: ")
+archivo_numero = input("Ingrese el número del archivo a analizar (por ejemplo, '1' para algoritmo1.php): ")
+
+# Obtener la ruta del directorio actual donde se encuentra "lexico.py"
+current_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Definir las rutas para las carpetas "algoritmos" y "logs" en el mismo nivel que "lexico.py"
+algoritmos_directory = os.path.join(current_directory, "algoritmos")
+logs_directory = os.path.join(current_directory, "logs")
+
+# Crear las carpetas "algoritmos" y "logs" si no existen
+os.makedirs(algoritmos_directory, exist_ok=True)
+os.makedirs(logs_directory, exist_ok=True)
+
+# Nombre del archivo log según el formato
+fecha_hora = time.strftime("%d%m%Y-%Hh%M")
+log_filename = f"lexico-{usuario_git}-{fecha_hora}.txt"
+
+# Ruta del archivo de prueba en la carpeta "algoritmos"
+algoritmo_filename = f"algoritmo{archivo_numero}.php"
+algoritmo_filepath = os.path.join(algoritmos_directory, algoritmo_filename)
+
+# Ruta completa para el archivo de log en la carpeta "logs"
+log_filepath = os.path.join(logs_directory, log_filename)
+
+# Inicializar el lexer y el almacenamiento de errores
+lexer = lex.lex()
+lexer.errors = []
+
+# Procesa el archivo de prueba
+try:
+    with open(algoritmo_filepath, "r") as file:
+        data = file.read()
+except FileNotFoundError:
+    print(f"El archivo {algoritmo_filename} no se encontró en la carpeta 'algoritmos'.")
+    exit(1)
+
+# Genera el log en la carpeta "logs"
+with open(log_filepath, "w") as log_file:
+    lexer.input(data)
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        log_file.write(f"Token: {tok.type}, Valor: {tok.value}, Linea: {tok.lineno}\n")
+
+    # Si hay errores, escríbelos en el log
+    if lexer.errors:
+        for error in lexer.errors:
+            log_file.write(f"Error: {error}\n")
+
+print(f"El análisis léxico se completó y el log se guardó en: {log_filepath}")
