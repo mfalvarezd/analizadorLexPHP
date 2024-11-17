@@ -35,12 +35,47 @@ def p_controlStructure(p):
                         | for
                         | while
                         | switch'''
-
+#SECCION DEL IF
 def p_if(p):
-    '''if : '''
+    '''if : statementif ELSE statementif
+        | statementif ELSE LBRACE condition RBRACE
+        | statementif ELSEIF statementif
+        | statementif'''
 
+def p_statementif(p):
+    '''statementif : IF LPAREN p_conditionProdu RPAREN LBRACE body RBRACE'''
+
+def p_conditionProdu(p):
+    '''conditionProdu : condition
+                    | condition opSymbol conditionProdu'''
+def p_condition(p):
+    '''condition : valor opSymbol valor'''
+
+def opSymbol(p):
+    '''opSymbol : EQ
+                | NEQ
+                | STRICTEQ
+                | STRICTNEQ
+                | LT
+                | GT
+                | LEQ
+                | GEQ'''
+def p_opLogic(p):
+    '''opLogic : AND
+                | OR
+                | NOT'''
+
+#SECCION DEL FOR
 def p_for(p):
-    '''for : '''
+    '''for : forStatement'''
+
+def p_forStatement(p):
+    '''forStatement : FOR LPAREN forcondition RPAREN LBRACE body RBRACE'''
+
+def p_forcondition(p):
+    '''forcondition : VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
+                    | VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS'''
+
 
 def p_while(p):
     '''while : '''
@@ -147,3 +182,4 @@ while True:
     if not s: continue
     result = parser.parse(s)
     print(result)
+

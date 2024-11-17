@@ -89,6 +89,8 @@ tokens=(
     'STRING',
     'BOOL',
     'PLUS',
+    'DOUBLEPLUS',
+    'DOUBLEMINUS',
     'MINUS',
     'TIMES',
     'DIVIDE',
@@ -161,7 +163,9 @@ _ARROW = r'\->'
 t_ARROWMAP=r'\=>'
 t_DOUBLEDOT= r'\:'
 t_FGETS=r'\fgets'
-t_STDIN=r'\STDIN'
+t_STDIN=r'\STDIN',
+t_DOUBLEPLUS=r'\+\+'
+t_DOUBLEMINUS=r'--'
 
 
 
@@ -302,3 +306,4 @@ with open(log_filepath, "w") as log_file:
             log_file.write(f"Error: {error}\n")
 
 print(f"El análisis léxico se completó y el log se guardó en: {log_filepath}")
+
