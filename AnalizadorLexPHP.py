@@ -43,6 +43,7 @@ reserved={
     'finally': 'FINALLY',
     'for': 'FOR',
     'foreach':'FOREACH',
+    'fn': 'FN',
     'function':'FUNCTION',
     'global':'GLOBAL',
     'if':'IF',
@@ -72,6 +73,11 @@ reserved={
     'final':'FINAL',
     'include':'INCLUDE',
     'interface':'INTERFACE',
+    'int': 'INTEGER',
+    'float': 'FLOATING',
+    'string': 'STRINGS',
+    'bool':'BOOLEAN',
+    'void' : 'VOID'
 }
 
 #List of token names

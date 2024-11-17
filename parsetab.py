@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ABSTRACT AND ARRAY ARROW ARROWMAP AS BOOL BREAK CASE CATCH CLASS CLONE CLOSETAG COMMA CONCATENATEEQUAL CONST CONTINUE DECLARE DEFAULT DIVIDE DO DOT DOUBLEDOT ECHO ELSE ELSEIF EMPTY ENDSWITCH EQ EQUALS EXCEPTION EXTENDS FALSE FGETS FINAL FINALLY FLOAT FOR FOREACH FUNCTION GEQ GLOBAL GT ID IF IMPLEMENTS INCLUDE INSTANCEOF INT INTERFACE ISSET LBRACE LBRACKET LEQ LIST LPAREN LT MINUS MINUSEQUAL MODULO NAMESPACE NEQ NEW NOT OPENTAG OR PLUS PLUSEQUAL POTENCIA PRINT PRIVATE PROTECTED PUBLIC RBRACE RBRACKET RETURN RPAREN SEMICOLON STATIC STDIN STRICTEQ STRICTNEQ STRING SWITCH THIS THROW TIMES TRUE TRY VARIABLE WHILEprograma : sentencia\n                | sentencia programasentencia : asignacion\n                | impresion\n                | comparacionasignacion : VARIABLE EQUALS operaArit SEMICOLONimpresion : ECHO imprimir SEMICOLON\n                | PRINT imprimir SEMICOLONimprimir : LPAREN repiteValores RPAREN\n                | LPAREN RPAREN\n                | repiteValores\n                | emptyvalor : INT\n            | FLOAT\n            | VARIABLE\n            | STRINGcomparacion : INT operador INT\n                    | FLOAT operador FLOAT\n                    | INT operador FLOAT\n                    | FLOAT operador INTvalor : TRUE\n            | FALSErepiteValores : valor COMMA repiteValores\n                | valoroperaArit : valor\n                |  valor operador operaAritoperador :  PLUS\n                | MINUS\n                | TIMES\n                | DIVIDE\n                | MODULOempty :'
+_lr_signature = 'ABSTRACT AND ARRAY ARROW ARROWMAP AS BOOL BREAK CASE CATCH CLASS CLONE CLOSETAG COMMA CONCATENATEEQUAL CONST CONTINUE DECLARE DEFAULT DIVIDE DO DOT DOUBLEDOT ECHO ELSE ELSEIF EMPTY ENDSWITCH EQ EQUALS EXCEPTION EXTENDS FALSE FGETS FINAL FINALLY FLOAT FOR FOREACH FUNCTION GEQ GLOBAL GT ID IF IMPLEMENTS INCLUDE INSTANCEOF INT INTERFACE ISSET LBRACE LBRACKET LEQ LIST LPAREN LT MINUS MINUSEQUAL MODULO NAMESPACE NEQ NEW NOT OPENTAG OR PLUS PLUSEQUAL POTENCIA PRINT PRIVATE PROTECTED PUBLIC RBRACE RBRACKET RETURN RPAREN SEMICOLON STATIC STDIN STRICTEQ STRICTNEQ STRING SWITCH THIS THROW TIMES TRUE TRY VARIABLE WHILEprograma : sentencia\n                | sentencia programasentencia : asignacion\n                | impresion\n                | comparacion\n                | estructurasProgramasignacion : VARIABLE EQUALS operaArit SEMICOLONimpresion : ECHO imprimir SEMICOLON\n                | PRINT imprimir SEMICOLONestructurasProgram : controlStructure\n                            | dataStructurecontrolStructure : if\n                        | for\n                        | while\n                        | switchdataStructure : array\n                    | array : VARIABLE EQUALS LBRACKET elementos RBRACKET SEMICOLON\n             | VARIABLE EQUALS ARRAY LPAREN elementos RPAREN SEMICOLONelementos : valor COMMA elementos\n                 | valor\n                 | emptyfuncionDeclarate : classDeclarate : condition : IF LPAREN valor RPAREN LBRACE RBRACEif : IFfor : FORwhile : WHILEswitch : SWITCHimprimir : LPAREN repiteValores RPAREN\n                | LPAREN RPAREN\n                | repiteValores\n                | emptyvalor : INT\n            | FLOAT\n            | VARIABLE\n            | STRINGcomparacion : INT operador INT\n                    | FLOAT operador FLOAT\n                    | INT operador FLOAT\n                    | FLOAT operador INTvalor : TRUE\n            | FALSErepiteValores : valor COMMA repiteValores\n                | valoroperaArit : valor\n                |  valor operador operaAritoperador :  PLUS\n                | MINUS\n                | TIMES\n                | DIVIDE\n                | MODULOempty :'
     
-_lr_action_items = {'VARIABLE':([0,2,3,4,5,7,8,12,14,26,27,28,29,30,34,37,38,39,40,41,42,43,44,],[6,6,-3,-4,-5,20,20,20,20,-27,-28,-29,-30,-31,-7,20,-8,-17,-19,-18,-20,-6,20,]),'ECHO':([0,2,3,4,5,34,38,39,40,41,42,43,],[7,7,-3,-4,-5,-7,-8,-17,-19,-18,-20,-6,]),'PRINT':([0,2,3,4,5,34,38,39,40,41,42,43,],[8,8,-3,-4,-5,-7,-8,-17,-19,-18,-20,-6,]),'INT':([0,2,3,4,5,7,8,12,14,25,26,27,28,29,30,31,34,37,38,39,40,41,42,43,44,],[9,9,-3,-4,-5,18,18,18,18,39,-27,-28,-29,-30,-31,42,-7,18,-8,-17,-19,-18,-20,-6,18,]),'FLOAT':([0,2,3,4,5,7,8,12,14,25,26,27,28,29,30,31,34,37,38,39,40,41,42,43,44,],[10,10,-3,-4,-5,19,19,19,19,40,-27,-28,-29,-30,-31,41,-7,19,-8,-17,-19,-18,-20,-6,19,]),'$end':([1,2,3,4,5,11,34,38,39,40,41,42,43,],[0,-1,-3,-4,-5,-2,-7,-8,-17,-19,-18,-20,-6,]),'EQUALS':([6,],[12,]),'LPAREN':([7,8,],[14,14,]),'SEMICOLON':([7,8,13,15,16,17,18,19,20,21,22,23,24,32,33,36,45,46,47,],[-32,-32,34,-11,-12,-24,-13,-14,-15,-16,-21,-22,38,43,-25,-10,-9,-23,-26,]),'STRING':([7,8,12,14,26,27,28,29,30,37,44,],[21,21,21,21,-27,-28,-29,-30,-31,21,21,]),'TRUE':([7,8,12,14,26,27,28,29,30,37,44,],[22,22,22,22,-27,-28,-29,-30,-31,22,22,]),'FALSE':([7,8,12,14,26,27,28,29,30,37,44,],[23,23,23,23,-27,-28,-29,-30,-31,23,23,]),'PLUS':([9,10,18,19,20,21,22,23,33,],[26,26,-13,-14,-15,-16,-21,-22,26,]),'MINUS':([9,10,18,19,20,21,22,23,33,],[27,27,-13,-14,-15,-16,-21,-22,27,]),'TIMES':([9,10,18,19,20,21,22,23,33,],[28,28,-13,-14,-15,-16,-21,-22,28,]),'DIVIDE':([9,10,18,19,20,21,22,23,33,],[29,29,-13,-14,-15,-16,-21,-22,29,]),'MODULO':([9,10,18,19,20,21,22,23,33,],[30,30,-13,-14,-15,-16,-21,-22,30,]),'RPAREN':([14,17,18,19,20,21,22,23,35,46,],[36,-24,-13,-14,-15,-16,-21,-22,45,-23,]),'COMMA':([17,18,19,20,21,22,23,],[37,-13,-14,-15,-16,-21,-22,]),}
+_lr_action_items = {'VARIABLE':([0,2,3,4,5,6,8,9,12,13,14,15,16,17,18,19,20,21,22,24,26,38,39,40,41,42,45,48,51,52,53,54,55,56,57,61,62,66,69,72,],[7,7,-3,-4,-5,-6,32,32,-10,-11,-12,-13,-14,-15,-16,-26,-27,-28,-29,32,32,-48,-49,-50,-51,-52,32,-8,32,-9,-38,-40,-39,-41,-7,32,32,32,-18,-19,]),'ECHO':([0,2,3,4,5,6,12,13,14,15,16,17,18,19,20,21,22,48,52,53,54,55,56,57,69,72,],[8,8,-3,-4,-5,-6,-10,-11,-12,-13,-14,-15,-16,-26,-27,-28,-29,-8,-9,-38,-40,-39,-41,-7,-18,-19,]),'PRINT':([0,2,3,4,5,6,12,13,14,15,16,17,18,19,20,21,22,48,52,53,54,55,56,57,69,72,],[9,9,-3,-4,-5,-6,-10,-11,-12,-13,-14,-15,-16,-26,-27,-28,-29,-8,-9,-38,-40,-39,-41,-7,-18,-19,]),'INT':([0,2,3,4,5,6,8,9,12,13,14,15,16,17,18,19,20,21,22,24,26,37,38,39,40,41,42,43,45,48,51,52,53,54,55,56,57,61,62,66,69,72,],[10,10,-3,-4,-5,-6,30,30,-10,-11,-12,-13,-14,-15,-16,-26,-27,-28,-29,30,30,53,-48,-49,-50,-51,-52,56,30,-8,30,-9,-38,-40,-39,-41,-7,30,30,30,-18,-19,]),'FLOAT':([0,2,3,4,5,6,8,9,12,13,14,15,16,17,18,19,20,21,22,24,26,37,38,39,40,41,42,43,45,48,51,52,53,54,55,56,57,61,62,66,69,72,],[11,11,-3,-4,-5,-6,31,31,-10,-11,-12,-13,-14,-15,-16,-26,-27,-28,-29,31,31,54,-48,-49,-50,-51,-52,55,31,-8,31,-9,-38,-40,-39,-41,-7,31,31,31,-18,-19,]),'IF':([0,2,3,4,5,6,12,13,14,15,16,17,18,19,20,21,22,48,52,53,54,55,56,57,69,72,],[19,19,-3,-4,-5,-6,-10,-11,-12,-13,-14,-15,-16,-26,-27,-28,-29,-8,-9,-38,-40,-39,-41,-7,-18,-19,]),'FOR':([0,2,3,4,5,6,12,13,14,15,16,17,18,19,20,21,22,48,52,53,54,55,56,57,69,72,],[20,20,-3,-4,-5,-6,-10,-11,-12,-13,-14,-15,-16,-26,-27,-28,-29,-8,-9,-38,-40,-39,-41,-7,-18,-19,]),'WHILE':([0,2,3,4,5,6,12,13,14,15,16,17,18,19,20,21,22,48,52,53,54,55,56,57,69,72,],[21,21,-3,-4,-5,-6,-10,-11,-12,-13,-14,-15,-16,-26,-27,-28,-29,-8,-9,-38,-40,-39,-41,-7,-18,-19,]),'SWITCH':([0,2,3,4,5,6,12,13,14,15,16,17,18,19,20,21,22,48,52,53,54,55,56,57,69,72,],[22,22,-3,-4,-5,-6,-10,-11,-12,-13,-14,-15,-16,-26,-27,-28,-29,-8,-9,-38,-40,-39,-41,-7,-18,-19,]),'$end':([0,1,2,3,4,5,6,12,13,14,15,16,17,18,19,20,21,22,23,48,52,53,54,55,56,57,69,72,],[-17,0,-1,-3,-4,-5,-6,-10,-11,-12,-13,-14,-15,-16,-26,-27,-28,-29,-2,-8,-9,-38,-40,-39,-41,-7,-18,-19,]),'EQUALS':([7,],[24,]),'LPAREN':([8,9,46,],[26,26,61,]),'SEMICOLON':([8,9,25,27,28,29,30,31,32,33,34,35,36,44,47,50,63,64,65,68,71,],[-53,-53,48,-32,-33,-45,-34,-35,-36,-37,-42,-43,52,57,-46,-31,-30,-44,69,-47,72,]),'STRING':([8,9,24,26,38,39,40,41,42,45,51,61,62,66,],[33,33,33,33,-48,-49,-50,-51,-52,33,33,33,33,33,]),'TRUE':([8,9,24,26,38,39,40,41,42,45,51,61,62,66,],[34,34,34,34,-48,-49,-50,-51,-52,34,34,34,34,34,]),'FALSE':([8,9,24,26,38,39,40,41,42,45,51,61,62,66,],[35,35,35,35,-48,-49,-50,-51,-52,35,35,35,35,35,]),'PLUS':([10,11,30,31,32,33,34,35,47,],[38,38,-34,-35,-36,-37,-42,-43,38,]),'MINUS':([10,11,30,31,32,33,34,35,47,],[39,39,-34,-35,-36,-37,-42,-43,39,]),'TIMES':([10,11,30,31,32,33,34,35,47,],[40,40,-34,-35,-36,-37,-42,-43,40,]),'DIVIDE':([10,11,30,31,32,33,34,35,47,],[41,41,-34,-35,-36,-37,-42,-43,41,]),'MODULO':([10,11,30,31,32,33,34,35,47,],[42,42,-34,-35,-36,-37,-42,-43,42,]),'LBRACKET':([24,],[45,]),'ARRAY':([24,],[46,]),'RPAREN':([26,29,30,31,32,33,34,35,49,59,60,61,64,66,67,70,],[50,-45,-34,-35,-36,-37,-42,-43,63,-21,-22,-53,-44,-53,71,-20,]),'COMMA':([29,30,31,32,33,34,35,59,],[51,-34,-35,-36,-37,-42,-43,66,]),'RBRACKET':([30,31,32,33,34,35,45,58,59,60,66,70,],[-34,-35,-36,-37,-42,-43,-53,65,-21,-22,-53,-20,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'programa':([0,2,],[1,11,]),'sentencia':([0,2,],[2,2,]),'asignacion':([0,2,],[3,3,]),'impresion':([0,2,],[4,4,]),'comparacion':([0,2,],[5,5,]),'imprimir':([7,8,],[13,24,]),'repiteValores':([7,8,14,37,],[15,15,35,46,]),'empty':([7,8,],[16,16,]),'valor':([7,8,12,14,37,44,],[17,17,33,17,17,33,]),'operador':([9,10,33,],[25,31,44,]),'operaArit':([12,44,],[32,47,]),}
+_lr_goto_items = {'programa':([0,2,],[1,23,]),'sentencia':([0,2,],[2,2,]),'asignacion':([0,2,],[3,3,]),'impresion':([0,2,],[4,4,]),'comparacion':([0,2,],[5,5,]),'estructurasProgram':([0,2,],[6,6,]),'controlStructure':([0,2,],[12,12,]),'dataStructure':([0,2,],[13,13,]),'if':([0,2,],[14,14,]),'for':([0,2,],[15,15,]),'while':([0,2,],[16,16,]),'switch':([0,2,],[17,17,]),'array':([0,2,],[18,18,]),'imprimir':([8,9,],[25,36,]),'repiteValores':([8,9,26,51,],[27,27,49,64,]),'empty':([8,9,45,61,66,],[28,28,60,60,60,]),'valor':([8,9,24,26,45,51,61,62,66,],[29,29,47,29,59,29,59,47,59,]),'operador':([10,11,47,],[37,43,62,]),'operaArit':([24,62,],[44,68,]),'elementos':([45,61,66,],[58,67,70,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -32,31 +32,52 @@ _lr_productions = [
   ('sentencia -> asignacion','sentencia',1,'p_sentencia','main.py',10),
   ('sentencia -> impresion','sentencia',1,'p_sentencia','main.py',11),
   ('sentencia -> comparacion','sentencia',1,'p_sentencia','main.py',12),
-  ('asignacion -> VARIABLE EQUALS operaArit SEMICOLON','asignacion',4,'p_asignacion','main.py',15),
-  ('impresion -> ECHO imprimir SEMICOLON','impresion',3,'p_impresion','main.py',19),
-  ('impresion -> PRINT imprimir SEMICOLON','impresion',3,'p_impresion','main.py',20),
-  ('imprimir -> LPAREN repiteValores RPAREN','imprimir',3,'p_imprimir','main.py',23),
-  ('imprimir -> LPAREN RPAREN','imprimir',2,'p_imprimir','main.py',24),
-  ('imprimir -> repiteValores','imprimir',1,'p_imprimir','main.py',25),
-  ('imprimir -> empty','imprimir',1,'p_imprimir','main.py',26),
-  ('valor -> INT','valor',1,'p_valor','main.py',29),
-  ('valor -> FLOAT','valor',1,'p_valor','main.py',30),
-  ('valor -> VARIABLE','valor',1,'p_valor','main.py',31),
-  ('valor -> STRING','valor',1,'p_valor','main.py',32),
-  ('comparacion -> INT operador INT','comparacion',3,'p_comparacion','main.py',35),
-  ('comparacion -> FLOAT operador FLOAT','comparacion',3,'p_comparacion','main.py',36),
-  ('comparacion -> INT operador FLOAT','comparacion',3,'p_comparacion','main.py',37),
-  ('comparacion -> FLOAT operador INT','comparacion',3,'p_comparacion','main.py',38),
-  ('valor -> TRUE','valor',1,'p_valorBool','main.py',42),
-  ('valor -> FALSE','valor',1,'p_valorBool','main.py',43),
-  ('repiteValores -> valor COMMA repiteValores','repiteValores',3,'p_repiteValores','main.py',46),
-  ('repiteValores -> valor','repiteValores',1,'p_repiteValores','main.py',47),
-  ('operaArit -> valor','operaArit',1,'p_operaArit','main.py',50),
-  ('operaArit -> valor operador operaArit','operaArit',3,'p_operaArit','main.py',51),
-  ('operador -> PLUS','operador',1,'p_operador','main.py',54),
-  ('operador -> MINUS','operador',1,'p_operador','main.py',55),
-  ('operador -> TIMES','operador',1,'p_operador','main.py',56),
-  ('operador -> DIVIDE','operador',1,'p_operador','main.py',57),
-  ('operador -> MODULO','operador',1,'p_operador','main.py',58),
-  ('empty -> <empty>','empty',0,'p_empty','main.py',61),
+  ('sentencia -> estructurasProgram','sentencia',1,'p_sentencia','main.py',13),
+  ('asignacion -> VARIABLE EQUALS operaArit SEMICOLON','asignacion',4,'p_asignacion','main.py',18),
+  ('impresion -> ECHO imprimir SEMICOLON','impresion',3,'p_impresion','main.py',23),
+  ('impresion -> PRINT imprimir SEMICOLON','impresion',3,'p_impresion','main.py',24),
+  ('estructurasProgram -> controlStructure','estructurasProgram',1,'p_estructurasProgram','main.py',28),
+  ('estructurasProgram -> dataStructure','estructurasProgram',1,'p_estructurasProgram','main.py',29),
+  ('controlStructure -> if','controlStructure',1,'p_controlStructure','main.py',32),
+  ('controlStructure -> for','controlStructure',1,'p_controlStructure','main.py',33),
+  ('controlStructure -> while','controlStructure',1,'p_controlStructure','main.py',34),
+  ('controlStructure -> switch','controlStructure',1,'p_controlStructure','main.py',35),
+  ('dataStructure -> array','dataStructure',1,'p_dataStructure','main.py',38),
+  ('dataStructure -> <empty>','dataStructure',0,'p_dataStructure','main.py',39),
+  ('array -> VARIABLE EQUALS LBRACKET elementos RBRACKET SEMICOLON','array',6,'p_array','main.py',42),
+  ('array -> VARIABLE EQUALS ARRAY LPAREN elementos RPAREN SEMICOLON','array',7,'p_array','main.py',43),
+  ('elementos -> valor COMMA elementos','elementos',3,'p_elementos','main.py',46),
+  ('elementos -> valor','elementos',1,'p_elementos','main.py',47),
+  ('elementos -> empty','elementos',1,'p_elementos','main.py',48),
+  ('funcionDeclarate -> <empty>','funcionDeclarate',0,'p_funcionDeclarate','main.py',52),
+  ('classDeclarate -> <empty>','classDeclarate',0,'p_classDeclarate','main.py',55),
+  ('condition -> IF LPAREN valor RPAREN LBRACE RBRACE','condition',6,'p_condition','main.py',58),
+  ('if -> IF','if',1,'p_if','main.py',61),
+  ('for -> FOR','for',1,'p_for','main.py',64),
+  ('while -> WHILE','while',1,'p_while','main.py',67),
+  ('switch -> SWITCH','switch',1,'p_switch','main.py',70),
+  ('imprimir -> LPAREN repiteValores RPAREN','imprimir',3,'p_imprimir','main.py',73),
+  ('imprimir -> LPAREN RPAREN','imprimir',2,'p_imprimir','main.py',74),
+  ('imprimir -> repiteValores','imprimir',1,'p_imprimir','main.py',75),
+  ('imprimir -> empty','imprimir',1,'p_imprimir','main.py',76),
+  ('valor -> INT','valor',1,'p_valor','main.py',79),
+  ('valor -> FLOAT','valor',1,'p_valor','main.py',80),
+  ('valor -> VARIABLE','valor',1,'p_valor','main.py',81),
+  ('valor -> STRING','valor',1,'p_valor','main.py',82),
+  ('comparacion -> INT operador INT','comparacion',3,'p_comparacion','main.py',85),
+  ('comparacion -> FLOAT operador FLOAT','comparacion',3,'p_comparacion','main.py',86),
+  ('comparacion -> INT operador FLOAT','comparacion',3,'p_comparacion','main.py',87),
+  ('comparacion -> FLOAT operador INT','comparacion',3,'p_comparacion','main.py',88),
+  ('valor -> TRUE','valor',1,'p_valorBool','main.py',92),
+  ('valor -> FALSE','valor',1,'p_valorBool','main.py',93),
+  ('repiteValores -> valor COMMA repiteValores','repiteValores',3,'p_repiteValores','main.py',96),
+  ('repiteValores -> valor','repiteValores',1,'p_repiteValores','main.py',97),
+  ('operaArit -> valor','operaArit',1,'p_operaArit','main.py',100),
+  ('operaArit -> valor operador operaArit','operaArit',3,'p_operaArit','main.py',101),
+  ('operador -> PLUS','operador',1,'p_operador','main.py',104),
+  ('operador -> MINUS','operador',1,'p_operador','main.py',105),
+  ('operador -> TIMES','operador',1,'p_operador','main.py',106),
+  ('operador -> DIVIDE','operador',1,'p_operador','main.py',107),
+  ('operador -> MODULO','operador',1,'p_operador','main.py',108),
+  ('empty -> <empty>','empty',0,'p_empty','main.py',111),
 ]

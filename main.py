@@ -9,7 +9,8 @@ def p_programa(p):
 def p_sentencia(p):
     '''sentencia : asignacion
                 | impresion
-                | comparacion'''
+                | comparacion
+                | estructurasProgram'''
 
 
 #asignacion de variable
@@ -35,47 +36,74 @@ def p_controlStructure(p):
                         | while
                         | switch'''
 
-def p_dataStructure(p):
-    '''dataStructure : array
-                    | '''
-
-def p_funcionDeclarate(p):
-    '''funcionDeclarate : '''
-
-def p_classDeclarate(p):
-    '''classDeclarate : '''
-
-def p_condition(p):
-    '''condition : IF LPAREN valor RPAREN LBRACE RBRACE'''
-
 def p_if(p):
-    '''if : IF'''
+    '''if : '''
 
 def p_for(p):
-    '''for : FOR'''
+    '''for : '''
 
 def p_while(p):
-    '''while : WHILE'''
+    '''while : '''
 
 def p_switch(p):
-    '''switch: SWITCH'''
+    '''switch : '''
+
+def p_dataStructure(p):
+    '''dataStructure : array
+                    | map'''
+
+def p_funcionDeclarate(p):
+    '''funcionDeclarate : FUNCTION funcionParen brace
+                        | FUNCTION funcionParen DOUBLEDOT dataType brace
+                        | '''
+def p_arrowfunction(p):
+    '''arrowfunction : FN LPAREN repiteValores RPAREN ARROWMAP operaArit SEMICOLON body'''
+
+def p_brace(p):
+    '''brace : LBRACE body RBRACE'''
+
+def p_funcionParen(p):
+    '''funcionParen : ID LPAREN repiteValores RPAREN'''
+
+def classDeclarate(p):
+    '''classDeclarate : '''
+
+def p_array(p):
+    '''array : VARIABLE EQUALS LBRACKET repiteValores RBRACKET SEMICOLON
+             | VARIABLE EQUALS ARRAY LPAREN repiteValores RPAREN SEMICOLON '''
+
+def p_map(p):
+    '''map : VARIABLE EQUALS LBRACKET mapProduc RBRACKET SEMICOLON
+            | VARIABLE EQUALS ARRAY LPAREN mapProduc RPAREN SEMICOLON'''
+
+def p_mapProduc(p):
+    '''mapProduc : mapProduct
+            | mapProudct COMMA map'''
+
+def p_mapArrow(p):
+    '''mapArrow : valor ARROWMAP valor'''
+#definir body
+def p_body(p):
+    '''body : '''
 
 def p_imprimir(p):
     '''imprimir : LPAREN repiteValores RPAREN
                 | LPAREN RPAREN
-                | repiteValores
-                | empty'''
+                | repiteValores'''
 
 def p_valor(t):
     '''valor : INT
             | FLOAT
             | VARIABLE
-            | STRING'''
+            | STRING
+            | funcionParen'''
 
-#para declaracion de clases o funciones
 def p_dataType(p):
-    '''dataType : VOID
-                | '''
+    '''dataType : INTEGER
+                | FLOATING
+                | STRINGS
+                | BOOLEAN
+                | VOID'''
 
 def p_comparacion(p):
     '''comparacion : INT operador INT
@@ -83,14 +111,14 @@ def p_comparacion(p):
                     | INT operador FLOAT
                     | FLOAT operador INT'''
 
-
 def p_valorBool(p):
     '''valor : TRUE
             | FALSE'''
 
 def p_repiteValores(p):
     '''repiteValores : valor COMMA repiteValores
-                | valor'''
+                | valor
+                | empty'''
 
 def p_operaArit(p):
     '''operaArit : valor
