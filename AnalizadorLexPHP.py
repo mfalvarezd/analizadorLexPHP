@@ -113,7 +113,9 @@ tokens=(
     'LEQ',
     'GEQ',
     'MODULO',
-    'DOUBLEDOT'
+    'DOUBLEDOT',
+    'FGETS',
+    'STDIN'
 )+ tuple(reserved.values())
 
 #REGULAR EXPRESSIONS
@@ -152,6 +154,8 @@ t_CLOSETAG = r'\?>'
 _ARROW = r'\->'
 t_ARROWMAP=r'\=>'
 t_DOUBLEDOT= r'\:'
+t_FGETS=r'\fgets'
+t_STDIN=r'\STDIN'
 
 
 
@@ -170,14 +174,14 @@ def t_VARIABLE(t):
     r'\$[a-zA-Z_][a-zA-Z_0-9]*'
     return t
 
-def t_INT(t):
-    r'\d+'
-    t.value = int(t.value)
-    return t
-
 def t_FLOAT(t):
     r'\d+\.\d+'
     t.value = float(t.value)
+    return t
+
+def t_INT(t):
+    r'\d+'
+    t.value = int(t.value)
     return t
 
 def t_BOOL(t):

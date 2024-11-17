@@ -11,13 +11,54 @@ def p_sentencia(p):
                 | impresion
                 | comparacion'''
 
+
+#asignacion de variable
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUALS operaArit SEMICOLON'''
+
 
 #Imprimir uno o mas valores con echo y print
 def p_impresion(p):
     '''impresion : ECHO imprimir SEMICOLON
                 | PRINT imprimir SEMICOLON'''
+
+#estructurasPrograma
+def p_estructurasProgram(p):
+    '''estructurasProgram : controlStructure
+                            | dataStructure
+                            | funcionDeclarate
+                            | classDeclarate'''
+
+def p_controlStructure(p):
+    '''controlStructure : if
+                        | for
+                        | while
+                        | switch'''
+
+def p_dataStructure(p):
+    '''dataStructure : array
+                    | '''
+
+def p_funcionDeclarate(p):
+    '''funcionDeclarate : '''
+
+def p_classDeclarate(p):
+    '''classDeclarate : '''
+
+def p_condition(p):
+    '''condition : IF LPAREN valor RPAREN LBRACE RBRACE'''
+
+def p_if(p):
+    '''if : IF'''
+
+def p_for(p):
+    '''for : FOR'''
+
+def p_while(p):
+    '''while : WHILE'''
+
+def p_switch(p):
+    '''switch: SWITCH'''
 
 def p_imprimir(p):
     '''imprimir : LPAREN repiteValores RPAREN
@@ -31,14 +72,17 @@ def p_valor(t):
             | VARIABLE
             | STRING'''
 
-def p_comparacion(p):
-    '''comparacion : INT comparador INT'''
+#para declaracion de clases o funciones
+def p_dataType(p):
+    '''dataType : VOID
+                | '''
 
-def p_comparador(p):
-    '''comparador : LT
-                | GT
-                | LEQ
-                | GEQ'''
+def p_comparacion(p):
+    '''comparacion : INT operador INT
+                    | FLOAT operador FLOAT
+                    | INT operador FLOAT
+                    | FLOAT operador INT'''
+
 
 def p_valorBool(p):
     '''valor : TRUE
