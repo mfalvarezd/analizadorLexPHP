@@ -47,7 +47,7 @@ def p_if(p):
         | statementif'''
 
 def p_statementif(p):
-    '''statementif : IF LPAREN p_conditionProdu RPAREN LBRACE body RBRACE'''
+    '''statementif : IF LPAREN conditionProdu RPAREN LBRACE body RBRACE'''
 ##coregio la produccion de condicion porque despues de condicion debi ir un operador logico
 def p_conditionProdu(p):
     '''conditionProdu : condition
@@ -71,8 +71,8 @@ def p_opLogic(p):
                 | NOT'''
 
 #SECCION DEL FOR
-def p_for_loop(p):
-    '''for_loop : forStatement'''
+def p_for(p):
+    '''for : forStatement'''
 
 def p_forStatement(p):
     '''forStatement : FOR LPAREN forcondition RPAREN LBRACE body RBRACE'''
@@ -90,7 +90,7 @@ def p_switch(p):
     '''switch : SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
               | SWITCH LPAREN condition RPAREN LBRACE RBRACE'''
 def p_caseLists(p):
-    '''caseLists: cases default
+    '''caseLists : cases default
                 | cases
                 | default
                 | empty'''
@@ -98,9 +98,9 @@ def p_cases(p):
     '''cases : case cases
              | case'''            
 def p_case(p):
-    '''case: CASE valor COLON body BREAK SEMICOLON'''
+    '''case : CASE valor COLON body BREAK SEMICOLON'''
 def p_default(p):
-    '''default: DEFAULT COLON body BREAK SEMICOLON'''
+    '''default : DEFAULT COLON body BREAK SEMICOLON'''
 
 def p_dataStructure(p):
     '''dataStructure : array
@@ -114,11 +114,11 @@ def p_funcionBody(p):
                    | RETURN expresion SEMICOLON'''
                         
 def p_parametros(p):
-    '''parametros: parametro
+    '''parametros : parametro
                  | parametro COMMA parametros
                  | empty'''  
 def p_parametro(p):
-    '''parametro: ID
+    '''parametro : ID
                 | dataType ID
                 | ID EQUALS valor
                 | dataType ID EQUALS valor'''                                   
@@ -192,9 +192,7 @@ def p_comparacion(p):
                     | INT operador FLOAT
                     | FLOAT operador INT'''
 
-def p_valorBool(p):
-    '''valor : TRUE
-            | FALSE'''
+
 
 def p_repiteValores(p):
     '''repiteValores : valor COMMA repiteValores
@@ -204,7 +202,7 @@ def p_repiteValores(p):
 def p_operaArit(p):
     '''operaArit : valor
                 |  valor operador operaArit
-                | valor DOT VALOR'''
+                | valor DOT valor'''
 def p_expresion(p):
     '''expresion : valor
                  | operaArit
