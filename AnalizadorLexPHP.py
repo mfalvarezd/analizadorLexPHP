@@ -121,7 +121,9 @@ tokens=(
     'MODULO',
     'DOUBLEDOT',
     'FGETS',
-    'STDIN'
+    'STDIN',
+    'QUESTION',
+    'COLON'
 )+ tuple(reserved.values())
 
 #REGULAR EXPRESSIONS
@@ -164,6 +166,8 @@ t_FGETS=r'\fgets'
 t_STDIN=r'\STDIN'
 t_DOUBLEPLUS=r'\+\+'
 t_DOUBLEMINUS=r'--'
+t_QUESTION = r'\?'
+t_COLON = r':'
 
 
 
