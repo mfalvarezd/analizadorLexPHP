@@ -25,6 +25,8 @@ def p_asignacion(p):
 def p_impresion(p):
     '''impresion : ECHO imprimir SEMICOLON
                 | PRINT imprimir SEMICOLON'''
+    
+    
 
 #estructurasPrograma
 def p_estructurasProgram(p):
@@ -165,11 +167,12 @@ def p_body(p):
             | empty'''
 
 def p_imprimir(p):
+    
     '''imprimir : LPAREN repiteValores RPAREN
                 | LPAREN RPAREN
                 | repiteValores'''
 
-def p_valor(t):
+def p_valor(p):
     '''valor : INT
             | FLOAT
             | VARIABLE
@@ -178,6 +181,7 @@ def p_valor(t):
             | FALSE
             | THIS
             | funcionParen'''
+    p[0]=p[1]
 
 def p_dataType(p):
     '''dataType : INTEGER
@@ -196,9 +200,7 @@ def p_comparacion(p):
 
 def p_repiteValores(p):
     '''repiteValores : valor COMMA repiteValores
-                | valor
-                '''
-
+                     | valor'''
 def p_operaArit(p):
     '''operaArit : valor
                 |  valor operador operaArit
