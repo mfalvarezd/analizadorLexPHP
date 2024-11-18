@@ -37,7 +37,7 @@ reserved={
     'empty':'EMPTY',
     'endswitch':'ENDSWITCH',
     'extends': 'EXTENDS',
-    'exception':'EXCEPTION',
+    'Exception':'EXCEPTION',
     'false':'FALSE',
 #inicio contribuciones Fernando
     'finally': 'FINALLY',
@@ -71,8 +71,6 @@ reserved={
     'try':'TRY',
     'while': 'WHILE',
     'final':'FINAL',
-    'include':'INCLUDE',
-    'interface':'INTERFACE',
     'int': 'INTEGER',
     'float': 'FLOATING',
     'string': 'STRINGS',
@@ -163,7 +161,7 @@ _ARROW = r'\->'
 t_ARROWMAP=r'\=>'
 t_DOUBLEDOT= r'\:'
 t_FGETS=r'\fgets'
-t_STDIN=r'\STDIN',
+t_STDIN=r'\STDIN'
 t_DOUBLEPLUS=r'\+\+'
 t_DOUBLEMINUS=r'--'
 
