@@ -44,9 +44,9 @@ def p_controlStructure(p):
 ## corregi lo que deberia ir despues de cada else simplemente, creo que asi queda bien
 def p_if(p):
     '''if : statementif ELSE body
-        | statementif ELSE if
-        | statementif ELSEIF if
-        | statementif'''
+          | statementif ELSE if
+          | statementif ELSEIF if
+          | statementif'''
 
 def p_statementif(p):
     '''statementif : IF LPAREN conditionProdu RPAREN LBRACE body RBRACE'''
@@ -132,6 +132,10 @@ def p_brace(p):
 
 def p_funcionParen(p):
     '''funcionParen : ID LPAREN parametros RPAREN'''
+
+def p_funcionAnonima(p):
+    '''funcionAnonima : VARIABLE EQUALS FUNCTION LPAREN parametros RPAREN LBRACE RETURN expresion SEMICOLON RBRACE SEMICOLON'''
+
 #moises Alvarez
 def p_classDeclarate(p):
     '''classDeclarate : CLASS ID LBRACE classBody RBRACE
