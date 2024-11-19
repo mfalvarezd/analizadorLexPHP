@@ -148,7 +148,9 @@ def p_accessMember(p):
 
 def p_array(p):
     '''array : VARIABLE EQUALS LBRACKET repiteValores RBRACKET SEMICOLON
-             | VARIABLE EQUALS ARRAY LPAREN repiteValores RPAREN SEMICOLON '''
+             | VARIABLE EQUALS ARRAY LPAREN repiteValores RPAREN SEMICOLON
+             | VARIABLE EQUALS ARRAY LPAREN mapProduc RPAREN SEMICOLON
+             | VARIABLE EQUALS LBRACKET mapProduc RBRACKET SEMICOLON'''
 
 def p_map(p):
     '''map : VARIABLE EQUALS LBRACKET mapProduc RBRACKET SEMICOLON
