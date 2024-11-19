@@ -89,7 +89,7 @@ def p_for(p):
 
 def p_forStatement(p):
     '''forStatement : FOR LPAREN forcondition RPAREN LBRACE body RBRACE
-                    | FOREACH LPAREN forcondition RPAREN LBRACE body break SEMICOLON RBRACE'''
+                    | FOREACH LPAREN forcondition RPAREN LBRACE body BREAK SEMICOLON RBRACE'''
 
 def p_forcondition(p):
     '''forcondition : VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
@@ -166,7 +166,13 @@ def p_accessMember(p):
                     | VARIABLE ARROW funcionParen'''
 
 def p_objectInstantiation(p):
-    '''objectInstantiation : NEW ID LPAREN argumentos RPAREN'''
+    '''objectInstantiation : NEW ID LPAREN argumentos RPAREN
+                           | NEW ID LPAREN RPAREN'''
+def p_argumentos(p):
+    '''argumentos : expresion
+                 | expresion COMMA argumentos
+                 | empty'''
+
 
 def p_array(p):
     '''array : VARIABLE EQUALS LBRACKET repiteValores RBRACKET SEMICOLON
