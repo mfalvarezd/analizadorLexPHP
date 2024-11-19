@@ -4,8 +4,6 @@ import os
 import time
 from AnalizadorLexPHP import tokens, lexer  # Reutilizamos el lexer definido en AnalizadorLexPHP
 
-
-
 def p_programa(p):
     '''programa : sentencia
                 | sentencia programa'''
@@ -14,31 +12,40 @@ def p_sentencia(p):
     '''sentencia : asignacion
                 | impresion
                 | comparacion
-                | estructurasProgram'''
+                | estructurasProgram
+                | asignacion_fgets'''
+
+
+#Jair Chaguay - Entrada de datos
+def p_asignacion_fgets(p):
+    '''asignacion_fgets : VARIABLE EQUALS FGETS LPAREN STDIN RPAREN SEMICOLON'''
+    variable = p[1]  # Nombre de la variable
+    print(f"Asigna a {variable} el valor ingresado por el usuario.")
+
 
 def p_sentencias(p):
     '''sentencias : sentencia
                   | sentencia sentencias
                   | empty'''
-#asignacion de variable
+
+# Jair Chaguay asignacion de variable
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUALS operaArit SEMICOLON'''
 
 
-#Imprimir uno o mas valores con echo y print
+#Jair Chaguay Imprimir uno o mas valores con echo y print
 def p_impresion(p):
     '''impresion : ECHO imprimir SEMICOLON
                 | PRINT imprimir SEMICOLON'''
-    
-    
 
-#estructurasPrograma
+#Jair Chaguay estructurasPrograma
 def p_estructurasProgram(p):
     '''estructurasProgram : controlStructure
                             | dataStructure
                             | funcionDeclarate
                             | classDeclarate'''
 
+#Jair Chaguay Estructuras de Control
 def p_controlStructure(p):
     '''controlStructure : if
                         | for
@@ -57,7 +64,7 @@ def p_statementif(p):
 ##coregio la produccion de condicion porque despues de condicion debi ir un operador logico
 def p_conditionProdu(p):
     '''conditionProdu : condition
-                    | condition opLogic conditionProdu'''
+                    | condition opLogic condition conditionProdu'''
 def p_condition(p):
     '''condition : valor opSymbol valor
                  | LPAREN conditionProdu RPAREN'''
@@ -81,7 +88,8 @@ def p_for(p):
     '''for : forStatement'''
 
 def p_forStatement(p):
-    '''forStatement : FOR LPAREN forcondition RPAREN LBRACE body RBRACE'''
+    '''forStatement : FOR LPAREN forcondition RPAREN LBRACE body RBRACE
+                    | FOREACH LPAREN forcondition RPAREN LBRACE body break SEMICOLON RBRACE'''
 
 def p_forcondition(p):
     '''forcondition : VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
@@ -95,16 +103,20 @@ def p_while(p):
 def p_switch(p):
     '''switch : SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
               | SWITCH LPAREN condition RPAREN LBRACE RBRACE'''
+
 def p_caseLists(p):
     '''caseLists : cases default
                 | cases
                 | default
                 | empty'''
+
 def p_cases(p):
     '''cases : case cases
-             | case'''            
+             | case'''
+
 def p_case(p):
     '''case : CASE valor COLON body BREAK SEMICOLON'''
+
 def p_default(p):
     '''default : DEFAULT COLON body BREAK SEMICOLON'''
 
@@ -127,9 +139,7 @@ def p_parametro(p):
     '''parametro : ID
                 | dataType ID
                 | ID EQUALS valor
-                | dataType ID EQUALS valor'''                                   
-def p_arrowfunction(p):
-    '''arrowfunction : FN LPAREN parametros RPAREN ARROWMAP expresion SEMICOLON'''
+                | dataType ID EQUALS valor'''
 
 def p_brace(p):
     '''brace : LBRACE body RBRACE'''
@@ -149,10 +159,14 @@ def p_classBody(p):
                  | empty'''   
 def p_classMember(p):
     '''classMember : dataType VARIABLE SEMICOLON
-                   | dataType FUNCTION ID LPAREN parametros RPAREN brace'''                                         
+                   | dataType FUNCTION ID LPAREN parametros RPAREN brace
+                   | objectInstantiation'''
 def p_accessMember(p):
     '''accessMember : VARIABLE ARROW ID
                     | VARIABLE ARROW funcionParen'''
+
+def p_objectInstantiation(p):
+    '''objectInstantiation : NEW ID LPAREN argumentos RPAREN'''
 
 def p_array(p):
     '''array : VARIABLE EQUALS LBRACKET repiteValores RBRACKET SEMICOLON
