@@ -13,7 +13,9 @@ def p_sentencia(p):
                 | impresion
                 | comparacion
                 | estructurasProgram
-                | asignacion_fgets'''
+                | asignacion_fgets
+                | sentenceTryCatch
+                | namespace'''
 
 
 #Jair Chaguay - Entrada de datos
@@ -50,7 +52,8 @@ def p_controlStructure(p):
     '''controlStructure : if
                         | for
                         | while
-                        | switch'''
+                        | switch
+                        | dowhile'''
 #SECCION DEL IF
 ## corregi lo que deberia ir despues de cada else simplemente, creo que asi queda bien
 def p_if(p):
@@ -85,21 +88,32 @@ def p_opLogic(p):
 
 #SECCION DEL FOR
 def p_for(p):
-    '''for : forStatement'''
+    '''for : forStatement
+            | forEachStatement'''
 
 def p_forStatement(p):
     '''forStatement : FOR LPAREN forcondition RPAREN LBRACE body RBRACE
                     | FOREACH LPAREN forcondition RPAREN LBRACE body BREAK SEMICOLON RBRACE'''
 
+def p_forEachStatement(p):
+    '''forEachStatement : FOREACH LPAREN VARIABLE AS VARIABLE RPAREN LBRACE body RBRACE
+                        | FOREACH LPAREN VARIABLE AS VARIABLE DOUBLEARROW VARIABLE RPAREN LBRACE body RBRACE'''
+
 def p_forcondition(p):
     '''forcondition : VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
                     | VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS'''
 
+def p_namespace(p):
+    '''namespace : NAMESPACE ID SEMICOLON'''
 ##moises Alvarez
 def p_while(p):
     '''while : WHILE LPAREN condition RPAREN LBRACE body RBRACE
              | WHILE LPAREN condition RPAREN LBRACE RBRACE'''
 
+def dowhile(p):
+    '''dowhile : DO LBRACE body RBRACE WHILE LPAREN condition RPAREN SEMICOLON'''
+
+#Corregir SWITCH NO ES ASI LA ESTRUCUTRA DEL SWITCH
 def p_switch(p):
     '''switch : SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
               | SWITCH LPAREN condition RPAREN LBRACE RBRACE'''
@@ -113,6 +127,24 @@ def p_caseLists(p):
 def p_cases(p):
     '''cases : case cases
              | case'''
+
+def p_exception(p):
+    '''exception : '''
+
+def p_sentenceTryCatch(p):
+    '''sentenceTryCatch : TRY LBRACE body RBRACE catchBlocks finallyBlock
+                        | TRY LBRACE body RBRACE catchBlocks'''
+
+def p_catchBlocks(p):
+    '''catchBlocks : CATCH LPAREN EXCEPTION ID RPAREN LBRACE body RBRACE catchBlocks
+                    | CATCH LPAREN EXCEPTION ID RPAREN LBRACE body RBRACE
+                    | empty'''
+
+def p_finallyBlock(p):
+    '''finallyBlock : FINALLY LBRACE body RBRACE'''
+
+def p_catchs(p):
+    '''catchs : CATCH LPAREN EXCEPTION ID RPAREN LBRACE RBRACE'''
 
 def p_case(p):
     '''case : CASE valor COLON body BREAK SEMICOLON'''
@@ -153,7 +185,8 @@ def p_funcionAnonima(p):
 #moises Alvarez
 def p_classDeclarate(p):
     '''classDeclarate : CLASS ID LBRACE classBody RBRACE
-                      | CLASS ID EXTENDS ID LBRACE classBody RBRACE'''
+                      | CLASS ID EXTENDS ID LBRACE classBody RBRACE
+                      | ABSTRACT CLASS ID LBRACE classBody RBRACE'''
 def p_classBody(p):
     '''classBody : classMember classBody
                  | empty'''   
