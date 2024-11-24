@@ -47,8 +47,6 @@ reserved={
     'include':'INCLUDE',
     'instanceof':'INSTANCEOF',
     'interface': 'INTERFACE',
-    'isset':'ISSET',
-    'list':'LIST',
     'namespace':'NAMESPACE',
     'new':'NEW',
     'not': 'NOT',

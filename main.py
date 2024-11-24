@@ -11,19 +11,22 @@ def p_programa(p):
 def p_sentencia(p):
     '''sentencia : asignacion
                 | impresion
+                | includes
                 | comparacion
                 | estructurasProgram
                 | asignacion_fgets
                 | sentenceTryCatch
                 | namespace'''
 
+def p_includes(p):
+    '''includes : INCLUDE STRING SEMICOLON
+                | | INCLUDE STRING DOT STRING SEMICOLON'''
 
 #Jair Chaguay - Entrada de datos
 def p_asignacion_fgets(p):
     '''asignacion_fgets : VARIABLE EQUALS FGETS LPAREN STDIN RPAREN SEMICOLON'''
     variable = p[1]  # Nombre de la variable
     print(f"Asigna a {variable} el valor ingresado por el usuario.")
-
 
 def p_sentencias(p):
     '''sentencias : sentencia
@@ -33,7 +36,6 @@ def p_sentencias(p):
 # Jair Chaguay asignacion de variable
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUALS operaArit SEMICOLON'''
-
 
 #Jair Chaguay Imprimir uno o mas valores con echo y print
 def p_impresion(p):
@@ -54,6 +56,7 @@ def p_controlStructure(p):
                         | while
                         | switch
                         | dowhile'''
+
 #SECCION DEL IF
 ## corregi lo que deberia ir despues de cada else simplemente, creo que asi queda bien
 def p_if(p):
@@ -64,10 +67,12 @@ def p_if(p):
 
 def p_statementif(p):
     '''statementif : IF LPAREN conditionProdu RPAREN LBRACE body RBRACE'''
+
 ##coregio la produccion de condicion porque despues de condicion debi ir un operador logico
 def p_conditionProdu(p):
     '''conditionProdu : condition
                     | condition opLogic condition conditionProdu'''
+
 def p_condition(p):
     '''condition : valor opSymbol valor
                  | LPAREN conditionProdu RPAREN'''
@@ -105,6 +110,7 @@ def p_forcondition(p):
 
 def p_namespace(p):
     '''namespace : NAMESPACE ID SEMICOLON'''
+
 ##moises Alvarez
 def p_while(p):
     '''while : WHILE LPAREN condition RPAREN LBRACE body RBRACE
@@ -116,7 +122,8 @@ def dowhile(p):
 #Corregir SWITCH NO ES ASI LA ESTRUCUTRA DEL SWITCH
 def p_switch(p):
     '''switch : SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
-              | SWITCH LPAREN condition RPAREN LBRACE RBRACE'''
+              | SWITCH LPAREN condition RPAREN LBRACE caseLists endswitch
+              | SWITCH LPAREN condition RPAREN LBRACE endswitch'''
 
 def p_caseLists(p):
     '''caseLists : cases default
@@ -127,6 +134,9 @@ def p_caseLists(p):
 def p_cases(p):
     '''cases : case cases
              | case'''
+
+def p_endswitch(p):
+    '''endswitch : ENDSWITCH SEMICOLON'''
 
 def p_exception(p):
     '''exception : '''
@@ -159,6 +169,7 @@ def p_dataStructure(p):
 def p_funcionDeclarate(p):
     '''funcionDeclarate : FUNCTION ID LPAREN parametros RPAREN LBRACE funcionBody RBRACE
                         | FUNCTION ID LPAREN parametros RPAREN DOUBLEDOT dataType LBRACE funcionBody RBRACE'''
+
 def p_funcionBody(p):
     '''funcionBody : body
                    | RETURN expresion SEMICOLON'''
@@ -166,7 +177,8 @@ def p_funcionBody(p):
 def p_parametros(p):
     '''parametros : parametro
                  | parametro COMMA parametros
-                 | empty'''  
+                 | empty'''
+
 def p_parametro(p):
     '''parametro : ID
                 | dataType ID
@@ -186,14 +198,31 @@ def p_funcionAnonima(p):
 def p_classDeclarate(p):
     '''classDeclarate : CLASS ID LBRACE classBody RBRACE
                       | CLASS ID EXTENDS ID LBRACE classBody RBRACE
-                      | ABSTRACT CLASS ID LBRACE classBody RBRACE'''
+                      | ABSTRACT CLASS ID LBRACE classBody RBRACE
+                      | classInterface'''
+
+def p_classInterface(p):
+    '''classInterface : CLASS ID IMPLEMENTS impInterface LBRACE classBody RBRACE
+                        | CLASS ID EXTENDS ID IMPLEMENTS impInterface LBRACE classBody RBRACE
+                        | ABSTRACT CLASS ID IMPLEMENTS impInterface LBRACE classBody RBRACE
+                        | ABSTRACT CLASS ID EXTENDS ID IMPLEMENTS impInterface LBRACE classBody RBRACE'''
+
+def p_interface(p):
+    '''interface :  INTERFACE ID LBRACE classBody RBRACE'''
+
+def p_impInterface(p):
+    '''impInterface : ID
+                    | ID COMMA impInterface'''
+
 def p_classBody(p):
     '''classBody : classMember classBody
-                 | empty'''   
+                 | empty'''
+
 def p_classMember(p):
     '''classMember : dataType VARIABLE SEMICOLON
                    | dataType FUNCTION ID LPAREN parametros RPAREN brace
                    | objectInstantiation'''
+
 def p_accessMember(p):
     '''accessMember : VARIABLE ARROW ID
                     | VARIABLE ARROW funcionParen'''
@@ -205,7 +234,6 @@ def p_argumentos(p):
     '''argumentos : expresion
                  | expresion COMMA argumentos
                  | empty'''
-
 
 def p_array(p):
     '''array : VARIABLE EQUALS LBRACKET repiteValores RBRACKET SEMICOLON
@@ -223,6 +251,7 @@ def p_mapProduc(p):
 
 def p_mapArrow(p):
     '''mapArrow : valor ARROWMAP valor'''
+
 #definir body
 def p_body(p):
     '''body : sentencia
@@ -230,7 +259,6 @@ def p_body(p):
             | empty'''
 
 def p_imprimir(p):
-    
     '''imprimir : LPAREN repiteValores RPAREN
                 | LPAREN RPAREN
                 | repiteValores'''
@@ -260,30 +288,31 @@ def p_comparacion(p):
                     | INT operador FLOAT
                     | FLOAT operador INT'''
 
-
-
 def p_repiteValores(p):
     '''repiteValores : valor COMMA repiteValores
                      | valor'''
+
 def p_operaArit(p):
     '''operaArit : valor
                 |  valor operador operaArit
                 | valor DOT valor'''
+
 def p_expresion(p):
     '''expresion : valor
                  | operaArit
                  | conditionProdu
                  | ternario
                  | accessMember'''
+
 def p_operador(p):
     '''operador :  PLUS
                 | MINUS
                 | TIMES
                 | DIVIDE
                 | MODULO'''
+
 def p_ternario(p):
     '''ternario : conditionProdu QUESTION expresion COLON expresion'''
-                
 
 def p_empty(p):
     '''empty :'''
