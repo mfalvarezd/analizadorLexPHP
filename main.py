@@ -49,6 +49,13 @@ def p_estructurasProgram(p):
                             | funcionDeclarate
                             | classDeclarate'''
 
+def p_data(p):
+    '''data : ABSTRACT
+            | PRIVATE
+            | PROTECTED
+            | PUBLIC
+            | STATIC'''
+
 #Jair Chaguay Estructuras de Control
 def p_controlStructure(p):
     '''controlStructure : if
@@ -198,14 +205,14 @@ def p_funcionAnonima(p):
 def p_classDeclarate(p):
     '''classDeclarate : CLASS ID LBRACE classBody RBRACE
                       | CLASS ID EXTENDS ID LBRACE classBody RBRACE
-                      | ABSTRACT CLASS ID LBRACE classBody RBRACE
+                      | data CLASS ID LBRACE classBody RBRACE
                       | classInterface'''
 
 def p_classInterface(p):
     '''classInterface : CLASS ID IMPLEMENTS impInterface LBRACE classBody RBRACE
                         | CLASS ID EXTENDS ID IMPLEMENTS impInterface LBRACE classBody RBRACE
-                        | ABSTRACT CLASS ID IMPLEMENTS impInterface LBRACE classBody RBRACE
-                        | ABSTRACT CLASS ID EXTENDS ID IMPLEMENTS impInterface LBRACE classBody RBRACE'''
+                        | data CLASS ID IMPLEMENTS impInterface LBRACE classBody RBRACE
+                        | data CLASS ID EXTENDS ID IMPLEMENTS impInterface LBRACE classBody RBRACE'''
 
 def p_interface(p):
     '''interface :  INTERFACE ID LBRACE classBody RBRACE'''
