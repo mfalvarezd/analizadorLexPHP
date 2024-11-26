@@ -229,12 +229,15 @@ lexer = lex.lex()
 
 # Test it out
 data = '''
-$a = true;
-$b = True;
-$c = TRUE;
-break
-Break
-BREAK
+
+
+  function __construct($marca, $modelo) { 
+
+        $this->marca = $marca; 
+
+        $this->modelo = $modelo; 
+
+    } 
 
 '''
 
