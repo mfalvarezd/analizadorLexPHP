@@ -9,7 +9,7 @@
 import logging
 import os
 import time
-
+import re
 import ply.lex as lex
 
 ##Analizador Lexico PHP
@@ -34,8 +34,7 @@ reserved={
     'empty':'EMPTY',
     'endswitch':'ENDSWITCH',
     'extends': 'EXTENDS',
-    'Exception':'EXCEPTION',
-    'false':'FALSE',
+    'exception':'EXCEPTION',
 #inicio contribuciones Fernando
     'finally': 'FINALLY',
     'for': 'FOR',
@@ -61,15 +60,11 @@ reserved={
     'switch': 'SWITCH',
     'this':'THIS',
     'throw':'THROW',
-    'true':'TRUE',
     'try':'TRY',
     'while': 'WHILE',
     'final':'FINAL',
-    'int': 'INTEGER',
-    'float': 'FLOATING',
-    'string': 'STRINGS',
-    'bool':'BOOLEAN',
-    'void' : 'VOID'
+    'void' : 'VOID',
+    'null' :'NULL'
 }
 
 #List of token names
@@ -117,7 +112,10 @@ tokens=(
     'FGETS',
     'STDIN',
     'QUESTION',
-    'COLON'
+    'COLON',
+     'LOGICAL_AND',
+       'LOGICAL_OR',
+       'LOGICAL_NOT'
 )+ tuple(reserved.values())
 
 #REGULAR EXPRESSIONS
@@ -140,9 +138,9 @@ t_POTENCIA = r'\*\*'
 t_PLUSEQUAL = r'\+='
 t_MINUSEQUAL = r'-='
 t_CONCATENATEEQUAL = r'\.='
-t_AND = r'&&'
-t_OR = r'\|\|'
-t_NOT = r'!'
+t_LOGICAL_AND = r'&&'
+t_LOGICAL_OR = r'\|\|'
+t_LOGICAL_NOT = r'!'
 t_EQ = r'=='
 t_STRICTEQ = r'==='
 t_NEQ = r'!='
@@ -166,9 +164,19 @@ t_COLON = r':'
 
 
 ##MOISES ALVAREZ
+
+def t_NULL(t):
+    r'null'  # Detecta la palabra null
+    t.type = 'NULL'
+    return t
+def t_BOOL(t):
+    r'\b(true|false)\b'
+    t.value = t.value.lower() == 'true'
+    t.type = 'BOOL'
+    return t
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reserved.get(t.value, 'ID')
+    t.type = reserved.get(t.value.lower(), 'ID')
     return t
 
 def t_STRING(t):
@@ -190,10 +198,6 @@ def t_INT(t):
     t.value = int(t.value)
     return t
 
-def t_BOOL(t):
-    r'true|false'
-    t.value = True if t.value == 'true' else False
-    return t
 
 ##detecta solo palabras reservadas
 
@@ -207,8 +211,9 @@ t_ignore  = ' \t'
 
 # Error handling rule
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    print(f"Caracter ilegal '{t.value[0]}' en la línea {t.lineno}, columna {t.lexpos}")
     t.lexer.skip(1)
+
 
 def t_COMMENT(t):
     r'//.*'
@@ -224,20 +229,13 @@ lexer = lex.lex()
 
 # Test it out
 data = '''
-    $variable = 10 + 20.5;
-    $booleano = true;
-    array
-    switch
-    for
-    if
-    while
-    $if = "String"
-    $string1 = "Hello\\nWorld!";
-    $string2 = 'This is a \\ttab.';
-    $escaped = "She said, \\"Hello!\\"";
-    $newLine = "First Line\nSecond Line";
-    4 >=5
-    5> 2
+$a = true;
+$b = True;
+$c = TRUE;
+break
+Break
+BREAK
+
 '''
 
 # Give the lexer some input
