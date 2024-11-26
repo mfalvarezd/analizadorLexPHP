@@ -3,7 +3,63 @@ import os
 import time
 from AnalizadorLexPHP import tokens, lexer  # Reutilizamos el lexer definido en AnalizadorLexPHP
 
+def p_inicio(p):
+    '''inicio : OPENTAG programa CLOSETAG'''
 
+def p_programa(p):
+    '''programa : sentencia
+                | sentencia programa'''
+
+def p_sentencia(p):
+    '''sentencia : asignacion
+                | comparacion
+                | impresion'''
+
+def p_asignacion(p):
+    '''asignacion : VARIABLE EQUALS operaArit SEMICOLON'''
+
+def p_operaArit(p):
+    '''operaArit : valor
+                | valor operador operaArit'''
+
+def p_valor(p):
+    '''valor : INT
+            | FLOAT
+            | VARIABLE
+            | STRING'''
+
+def p_operador(p):
+    '''operador : PLUS
+                | MINUS
+                | TIMES
+                | DIVIDE
+                | MODULO'''
+
+def p_comparacion(p):
+    '''comparacion : INT comparador INT'''
+    
+def p_comparador(p):
+    '''comparador : LT
+                | GT
+                | LEQ
+                | GEQ'''
+
+def p_impresion(p):
+    '''impresion : ECHO imprimir SEMICOLON
+                | PRINT imprimir SEMICOLON'''
+
+def p_imprimir(p):
+    '''imprimir : LPAREN repiteValores RPAREN
+                | LPAREN RPAREN
+                | repiteValores
+                | empty'''
+
+def p_repiteValores(p):
+    '''repiteValores : valor
+                    | valor COMMA repiteValores'''
+
+def p_empty(p):
+    '''empty :'''
 
 # Función para manejar errores de sintaxis
 def p_error(p):

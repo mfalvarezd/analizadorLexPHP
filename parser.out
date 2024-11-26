@@ -1,1 +1,780 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ABSTRACT
+    AND
+    ARRAY
+    ARROW
+    ARROWMAP
+    AS
+    BOOL
+    BREAK
+    CASE
+    CATCH
+    CLASS
+    COLON
+    CONCATENATEEQUAL
+    CONST
+    DEFAULT
+    DO
+    DOT
+    DOUBLEDOT
+    DOUBLEMINUS
+    DOUBLEPLUS
+    ELSE
+    ELSEIF
+    EMPTY
+    ENDSWITCH
+    EQ
+    EXCEPTION
+    EXTENDS
+    FGETS
+    FINAL
+    FINALLY
+    FN
+    FOR
+    FOREACH
+    FUNCTION
+    ID
+    IF
+    IMPLEMENTS
+    INCLUDE
+    INSTANCEOF
+    INTERFACE
+    LBRACE
+    LBRACKET
+    LOGICAL_AND
+    LOGICAL_NOT
+    LOGICAL_OR
+    MINUSEQUAL
+    NAMESPACE
+    NEQ
+    NEW
+    NOT
+    NULL
+    OR
+    PLUSEQUAL
+    POTENCIA
+    PRIVATE
+    PROTECTED
+    PUBLIC
+    QUESTION
+    RBRACE
+    RBRACKET
+    RETURN
+    STATIC
+    STDIN
+    STRICTEQ
+    STRICTNEQ
+    SWITCH
+    THIS
+    THROW
+    TRY
+    VOID
+    WHILE
+
+Grammar
+
+Rule 0     S' -> inicio
+Rule 1     inicio -> OPENTAG programa CLOSETAG
+Rule 2     programa -> sentencia
+Rule 3     programa -> sentencia programa
+Rule 4     sentencia -> asignacion
+Rule 5     sentencia -> comparacion
+Rule 6     sentencia -> impresion
+Rule 7     asignacion -> VARIABLE EQUALS operaArit SEMICOLON
+Rule 8     operaArit -> valor
+Rule 9     operaArit -> valor operador operaArit
+Rule 10    valor -> INT
+Rule 11    valor -> FLOAT
+Rule 12    valor -> VARIABLE
+Rule 13    valor -> STRING
+Rule 14    operador -> PLUS
+Rule 15    operador -> MINUS
+Rule 16    operador -> TIMES
+Rule 17    operador -> DIVIDE
+Rule 18    operador -> MODULO
+Rule 19    comparacion -> INT comparador INT
+Rule 20    comparador -> LT
+Rule 21    comparador -> GT
+Rule 22    comparador -> LEQ
+Rule 23    comparador -> GEQ
+Rule 24    impresion -> ECHO imprimir SEMICOLON
+Rule 25    impresion -> PRINT imprimir SEMICOLON
+Rule 26    imprimir -> LPAREN repiteValores RPAREN
+Rule 27    imprimir -> LPAREN RPAREN
+Rule 28    imprimir -> repiteValores
+Rule 29    imprimir -> empty
+Rule 30    repiteValores -> valor
+Rule 31    repiteValores -> valor COMMA repiteValores
+Rule 32    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ABSTRACT             : 
+AND                  : 
+ARRAY                : 
+ARROW                : 
+ARROWMAP             : 
+AS                   : 
+BOOL                 : 
+BREAK                : 
+CASE                 : 
+CATCH                : 
+CLASS                : 
+CLOSETAG             : 1
+COLON                : 
+COMMA                : 31
+CONCATENATEEQUAL     : 
+CONST                : 
+DEFAULT              : 
+DIVIDE               : 17
+DO                   : 
+DOT                  : 
+DOUBLEDOT            : 
+DOUBLEMINUS          : 
+DOUBLEPLUS           : 
+ECHO                 : 24
+ELSE                 : 
+ELSEIF               : 
+EMPTY                : 
+ENDSWITCH            : 
+EQ                   : 
+EQUALS               : 7
+EXCEPTION            : 
+EXTENDS              : 
+FGETS                : 
+FINAL                : 
+FINALLY              : 
+FLOAT                : 11
+FN                   : 
+FOR                  : 
+FOREACH              : 
+FUNCTION             : 
+GEQ                  : 23
+GT                   : 21
+ID                   : 
+IF                   : 
+IMPLEMENTS           : 
+INCLUDE              : 
+INSTANCEOF           : 
+INT                  : 10 19 19
+INTERFACE            : 
+LBRACE               : 
+LBRACKET             : 
+LEQ                  : 22
+LOGICAL_AND          : 
+LOGICAL_NOT          : 
+LOGICAL_OR           : 
+LPAREN               : 26 27
+LT                   : 20
+MINUS                : 15
+MINUSEQUAL           : 
+MODULO               : 18
+NAMESPACE            : 
+NEQ                  : 
+NEW                  : 
+NOT                  : 
+NULL                 : 
+OPENTAG              : 1
+OR                   : 
+PLUS                 : 14
+PLUSEQUAL            : 
+POTENCIA             : 
+PRINT                : 25
+PRIVATE              : 
+PROTECTED            : 
+PUBLIC               : 
+QUESTION             : 
+RBRACE               : 
+RBRACKET             : 
+RETURN               : 
+RPAREN               : 26 27
+SEMICOLON            : 7 24 25
+STATIC               : 
+STDIN                : 
+STRICTEQ             : 
+STRICTNEQ            : 
+STRING               : 13
+SWITCH               : 
+THIS                 : 
+THROW                : 
+TIMES                : 16
+TRY                  : 
+VARIABLE             : 7 12
+VOID                 : 
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+asignacion           : 4
+comparacion          : 5
+comparador           : 19
+empty                : 29
+impresion            : 6
+imprimir             : 24 25
+inicio               : 0
+operaArit            : 7 9
+operador             : 9
+programa             : 1 3
+repiteValores        : 26 28 31
+sentencia            : 2 3
+valor                : 8 9 30 31
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . inicio
+    (1) inicio -> . OPENTAG programa CLOSETAG
+
+    OPENTAG         shift and go to state 2
+
+    inicio                         shift and go to state 1
+
+state 1
+
+    (0) S' -> inicio .
+
+
+
+state 2
+
+    (1) inicio -> OPENTAG . programa CLOSETAG
+    (2) programa -> . sentencia
+    (3) programa -> . sentencia programa
+    (4) sentencia -> . asignacion
+    (5) sentencia -> . comparacion
+    (6) sentencia -> . impresion
+    (7) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (19) comparacion -> . INT comparador INT
+    (24) impresion -> . ECHO imprimir SEMICOLON
+    (25) impresion -> . PRINT imprimir SEMICOLON
+
+    VARIABLE        shift and go to state 8
+    INT             shift and go to state 9
+    ECHO            shift and go to state 10
+    PRINT           shift and go to state 11
+
+    programa                       shift and go to state 3
+    sentencia                      shift and go to state 4
+    asignacion                     shift and go to state 5
+    comparacion                    shift and go to state 6
+    impresion                      shift and go to state 7
+
+state 3
+
+    (1) inicio -> OPENTAG programa . CLOSETAG
+
+    CLOSETAG        shift and go to state 12
+
+
+state 4
+
+    (2) programa -> sentencia .
+    (3) programa -> sentencia . programa
+    (2) programa -> . sentencia
+    (3) programa -> . sentencia programa
+    (4) sentencia -> . asignacion
+    (5) sentencia -> . comparacion
+    (6) sentencia -> . impresion
+    (7) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (19) comparacion -> . INT comparador INT
+    (24) impresion -> . ECHO imprimir SEMICOLON
+    (25) impresion -> . PRINT imprimir SEMICOLON
+
+    CLOSETAG        reduce using rule 2 (programa -> sentencia .)
+    VARIABLE        shift and go to state 8
+    INT             shift and go to state 9
+    ECHO            shift and go to state 10
+    PRINT           shift and go to state 11
+
+    sentencia                      shift and go to state 4
+    programa                       shift and go to state 13
+    asignacion                     shift and go to state 5
+    comparacion                    shift and go to state 6
+    impresion                      shift and go to state 7
+
+state 5
+
+    (4) sentencia -> asignacion .
+
+    VARIABLE        reduce using rule 4 (sentencia -> asignacion .)
+    INT             reduce using rule 4 (sentencia -> asignacion .)
+    ECHO            reduce using rule 4 (sentencia -> asignacion .)
+    PRINT           reduce using rule 4 (sentencia -> asignacion .)
+    CLOSETAG        reduce using rule 4 (sentencia -> asignacion .)
+
+
+state 6
+
+    (5) sentencia -> comparacion .
+
+    VARIABLE        reduce using rule 5 (sentencia -> comparacion .)
+    INT             reduce using rule 5 (sentencia -> comparacion .)
+    ECHO            reduce using rule 5 (sentencia -> comparacion .)
+    PRINT           reduce using rule 5 (sentencia -> comparacion .)
+    CLOSETAG        reduce using rule 5 (sentencia -> comparacion .)
+
+
+state 7
+
+    (6) sentencia -> impresion .
+
+    VARIABLE        reduce using rule 6 (sentencia -> impresion .)
+    INT             reduce using rule 6 (sentencia -> impresion .)
+    ECHO            reduce using rule 6 (sentencia -> impresion .)
+    PRINT           reduce using rule 6 (sentencia -> impresion .)
+    CLOSETAG        reduce using rule 6 (sentencia -> impresion .)
+
+
+state 8
+
+    (7) asignacion -> VARIABLE . EQUALS operaArit SEMICOLON
+
+    EQUALS          shift and go to state 14
+
+
+state 9
+
+    (19) comparacion -> INT . comparador INT
+    (20) comparador -> . LT
+    (21) comparador -> . GT
+    (22) comparador -> . LEQ
+    (23) comparador -> . GEQ
+
+    LT              shift and go to state 16
+    GT              shift and go to state 17
+    LEQ             shift and go to state 18
+    GEQ             shift and go to state 19
+
+    comparador                     shift and go to state 15
+
+state 10
+
+    (24) impresion -> ECHO . imprimir SEMICOLON
+    (26) imprimir -> . LPAREN repiteValores RPAREN
+    (27) imprimir -> . LPAREN RPAREN
+    (28) imprimir -> . repiteValores
+    (29) imprimir -> . empty
+    (30) repiteValores -> . valor
+    (31) repiteValores -> . valor COMMA repiteValores
+    (32) empty -> .
+    (10) valor -> . INT
+    (11) valor -> . FLOAT
+    (12) valor -> . VARIABLE
+    (13) valor -> . STRING
+
+    LPAREN          shift and go to state 21
+    SEMICOLON       reduce using rule 32 (empty -> .)
+    INT             shift and go to state 25
+    FLOAT           shift and go to state 26
+    VARIABLE        shift and go to state 27
+    STRING          shift and go to state 28
+
+    imprimir                       shift and go to state 20
+    repiteValores                  shift and go to state 22
+    empty                          shift and go to state 23
+    valor                          shift and go to state 24
+
+state 11
+
+    (25) impresion -> PRINT . imprimir SEMICOLON
+    (26) imprimir -> . LPAREN repiteValores RPAREN
+    (27) imprimir -> . LPAREN RPAREN
+    (28) imprimir -> . repiteValores
+    (29) imprimir -> . empty
+    (30) repiteValores -> . valor
+    (31) repiteValores -> . valor COMMA repiteValores
+    (32) empty -> .
+    (10) valor -> . INT
+    (11) valor -> . FLOAT
+    (12) valor -> . VARIABLE
+    (13) valor -> . STRING
+
+    LPAREN          shift and go to state 21
+    SEMICOLON       reduce using rule 32 (empty -> .)
+    INT             shift and go to state 25
+    FLOAT           shift and go to state 26
+    VARIABLE        shift and go to state 27
+    STRING          shift and go to state 28
+
+    imprimir                       shift and go to state 29
+    repiteValores                  shift and go to state 22
+    empty                          shift and go to state 23
+    valor                          shift and go to state 24
+
+state 12
+
+    (1) inicio -> OPENTAG programa CLOSETAG .
+
+    $end            reduce using rule 1 (inicio -> OPENTAG programa CLOSETAG .)
+
+
+state 13
+
+    (3) programa -> sentencia programa .
+
+    CLOSETAG        reduce using rule 3 (programa -> sentencia programa .)
+
+
+state 14
+
+    (7) asignacion -> VARIABLE EQUALS . operaArit SEMICOLON
+    (8) operaArit -> . valor
+    (9) operaArit -> . valor operador operaArit
+    (10) valor -> . INT
+    (11) valor -> . FLOAT
+    (12) valor -> . VARIABLE
+    (13) valor -> . STRING
+
+    INT             shift and go to state 25
+    FLOAT           shift and go to state 26
+    VARIABLE        shift and go to state 27
+    STRING          shift and go to state 28
+
+    operaArit                      shift and go to state 30
+    valor                          shift and go to state 31
+
+state 15
+
+    (19) comparacion -> INT comparador . INT
+
+    INT             shift and go to state 32
+
+
+state 16
+
+    (20) comparador -> LT .
+
+    INT             reduce using rule 20 (comparador -> LT .)
+
+
+state 17
+
+    (21) comparador -> GT .
+
+    INT             reduce using rule 21 (comparador -> GT .)
+
+
+state 18
+
+    (22) comparador -> LEQ .
+
+    INT             reduce using rule 22 (comparador -> LEQ .)
+
+
+state 19
+
+    (23) comparador -> GEQ .
+
+    INT             reduce using rule 23 (comparador -> GEQ .)
+
+
+state 20
+
+    (24) impresion -> ECHO imprimir . SEMICOLON
+
+    SEMICOLON       shift and go to state 33
+
+
+state 21
+
+    (26) imprimir -> LPAREN . repiteValores RPAREN
+    (27) imprimir -> LPAREN . RPAREN
+    (30) repiteValores -> . valor
+    (31) repiteValores -> . valor COMMA repiteValores
+    (10) valor -> . INT
+    (11) valor -> . FLOAT
+    (12) valor -> . VARIABLE
+    (13) valor -> . STRING
+
+    RPAREN          shift and go to state 35
+    INT             shift and go to state 25
+    FLOAT           shift and go to state 26
+    VARIABLE        shift and go to state 27
+    STRING          shift and go to state 28
+
+    repiteValores                  shift and go to state 34
+    valor                          shift and go to state 24
+
+state 22
+
+    (28) imprimir -> repiteValores .
+
+    SEMICOLON       reduce using rule 28 (imprimir -> repiteValores .)
+
+
+state 23
+
+    (29) imprimir -> empty .
+
+    SEMICOLON       reduce using rule 29 (imprimir -> empty .)
+
+
+state 24
+
+    (30) repiteValores -> valor .
+    (31) repiteValores -> valor . COMMA repiteValores
+
+    SEMICOLON       reduce using rule 30 (repiteValores -> valor .)
+    RPAREN          reduce using rule 30 (repiteValores -> valor .)
+    COMMA           shift and go to state 36
+
+
+state 25
+
+    (10) valor -> INT .
+
+    COMMA           reduce using rule 10 (valor -> INT .)
+    SEMICOLON       reduce using rule 10 (valor -> INT .)
+    PLUS            reduce using rule 10 (valor -> INT .)
+    MINUS           reduce using rule 10 (valor -> INT .)
+    TIMES           reduce using rule 10 (valor -> INT .)
+    DIVIDE          reduce using rule 10 (valor -> INT .)
+    MODULO          reduce using rule 10 (valor -> INT .)
+    RPAREN          reduce using rule 10 (valor -> INT .)
+
+
+state 26
+
+    (11) valor -> FLOAT .
+
+    COMMA           reduce using rule 11 (valor -> FLOAT .)
+    SEMICOLON       reduce using rule 11 (valor -> FLOAT .)
+    PLUS            reduce using rule 11 (valor -> FLOAT .)
+    MINUS           reduce using rule 11 (valor -> FLOAT .)
+    TIMES           reduce using rule 11 (valor -> FLOAT .)
+    DIVIDE          reduce using rule 11 (valor -> FLOAT .)
+    MODULO          reduce using rule 11 (valor -> FLOAT .)
+    RPAREN          reduce using rule 11 (valor -> FLOAT .)
+
+
+state 27
+
+    (12) valor -> VARIABLE .
+
+    COMMA           reduce using rule 12 (valor -> VARIABLE .)
+    SEMICOLON       reduce using rule 12 (valor -> VARIABLE .)
+    PLUS            reduce using rule 12 (valor -> VARIABLE .)
+    MINUS           reduce using rule 12 (valor -> VARIABLE .)
+    TIMES           reduce using rule 12 (valor -> VARIABLE .)
+    DIVIDE          reduce using rule 12 (valor -> VARIABLE .)
+    MODULO          reduce using rule 12 (valor -> VARIABLE .)
+    RPAREN          reduce using rule 12 (valor -> VARIABLE .)
+
+
+state 28
+
+    (13) valor -> STRING .
+
+    COMMA           reduce using rule 13 (valor -> STRING .)
+    SEMICOLON       reduce using rule 13 (valor -> STRING .)
+    PLUS            reduce using rule 13 (valor -> STRING .)
+    MINUS           reduce using rule 13 (valor -> STRING .)
+    TIMES           reduce using rule 13 (valor -> STRING .)
+    DIVIDE          reduce using rule 13 (valor -> STRING .)
+    MODULO          reduce using rule 13 (valor -> STRING .)
+    RPAREN          reduce using rule 13 (valor -> STRING .)
+
+
+state 29
+
+    (25) impresion -> PRINT imprimir . SEMICOLON
+
+    SEMICOLON       shift and go to state 37
+
+
+state 30
+
+    (7) asignacion -> VARIABLE EQUALS operaArit . SEMICOLON
+
+    SEMICOLON       shift and go to state 38
+
+
+state 31
+
+    (8) operaArit -> valor .
+    (9) operaArit -> valor . operador operaArit
+    (14) operador -> . PLUS
+    (15) operador -> . MINUS
+    (16) operador -> . TIMES
+    (17) operador -> . DIVIDE
+    (18) operador -> . MODULO
+
+    SEMICOLON       reduce using rule 8 (operaArit -> valor .)
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 41
+    TIMES           shift and go to state 42
+    DIVIDE          shift and go to state 43
+    MODULO          shift and go to state 44
+
+    operador                       shift and go to state 39
+
+state 32
+
+    (19) comparacion -> INT comparador INT .
+
+    VARIABLE        reduce using rule 19 (comparacion -> INT comparador INT .)
+    INT             reduce using rule 19 (comparacion -> INT comparador INT .)
+    ECHO            reduce using rule 19 (comparacion -> INT comparador INT .)
+    PRINT           reduce using rule 19 (comparacion -> INT comparador INT .)
+    CLOSETAG        reduce using rule 19 (comparacion -> INT comparador INT .)
+
+
+state 33
+
+    (24) impresion -> ECHO imprimir SEMICOLON .
+
+    VARIABLE        reduce using rule 24 (impresion -> ECHO imprimir SEMICOLON .)
+    INT             reduce using rule 24 (impresion -> ECHO imprimir SEMICOLON .)
+    ECHO            reduce using rule 24 (impresion -> ECHO imprimir SEMICOLON .)
+    PRINT           reduce using rule 24 (impresion -> ECHO imprimir SEMICOLON .)
+    CLOSETAG        reduce using rule 24 (impresion -> ECHO imprimir SEMICOLON .)
+
+
+state 34
+
+    (26) imprimir -> LPAREN repiteValores . RPAREN
+
+    RPAREN          shift and go to state 45
+
+
+state 35
+
+    (27) imprimir -> LPAREN RPAREN .
+
+    SEMICOLON       reduce using rule 27 (imprimir -> LPAREN RPAREN .)
+
+
+state 36
+
+    (31) repiteValores -> valor COMMA . repiteValores
+    (30) repiteValores -> . valor
+    (31) repiteValores -> . valor COMMA repiteValores
+    (10) valor -> . INT
+    (11) valor -> . FLOAT
+    (12) valor -> . VARIABLE
+    (13) valor -> . STRING
+
+    INT             shift and go to state 25
+    FLOAT           shift and go to state 26
+    VARIABLE        shift and go to state 27
+    STRING          shift and go to state 28
+
+    valor                          shift and go to state 24
+    repiteValores                  shift and go to state 46
+
+state 37
+
+    (25) impresion -> PRINT imprimir SEMICOLON .
+
+    VARIABLE        reduce using rule 25 (impresion -> PRINT imprimir SEMICOLON .)
+    INT             reduce using rule 25 (impresion -> PRINT imprimir SEMICOLON .)
+    ECHO            reduce using rule 25 (impresion -> PRINT imprimir SEMICOLON .)
+    PRINT           reduce using rule 25 (impresion -> PRINT imprimir SEMICOLON .)
+    CLOSETAG        reduce using rule 25 (impresion -> PRINT imprimir SEMICOLON .)
+
+
+state 38
+
+    (7) asignacion -> VARIABLE EQUALS operaArit SEMICOLON .
+
+    VARIABLE        reduce using rule 7 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    INT             reduce using rule 7 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    ECHO            reduce using rule 7 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    PRINT           reduce using rule 7 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    CLOSETAG        reduce using rule 7 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+
+
+state 39
+
+    (9) operaArit -> valor operador . operaArit
+    (8) operaArit -> . valor
+    (9) operaArit -> . valor operador operaArit
+    (10) valor -> . INT
+    (11) valor -> . FLOAT
+    (12) valor -> . VARIABLE
+    (13) valor -> . STRING
+
+    INT             shift and go to state 25
+    FLOAT           shift and go to state 26
+    VARIABLE        shift and go to state 27
+    STRING          shift and go to state 28
+
+    valor                          shift and go to state 31
+    operaArit                      shift and go to state 47
+
+state 40
+
+    (14) operador -> PLUS .
+
+    INT             reduce using rule 14 (operador -> PLUS .)
+    FLOAT           reduce using rule 14 (operador -> PLUS .)
+    VARIABLE        reduce using rule 14 (operador -> PLUS .)
+    STRING          reduce using rule 14 (operador -> PLUS .)
+
+
+state 41
+
+    (15) operador -> MINUS .
+
+    INT             reduce using rule 15 (operador -> MINUS .)
+    FLOAT           reduce using rule 15 (operador -> MINUS .)
+    VARIABLE        reduce using rule 15 (operador -> MINUS .)
+    STRING          reduce using rule 15 (operador -> MINUS .)
+
+
+state 42
+
+    (16) operador -> TIMES .
+
+    INT             reduce using rule 16 (operador -> TIMES .)
+    FLOAT           reduce using rule 16 (operador -> TIMES .)
+    VARIABLE        reduce using rule 16 (operador -> TIMES .)
+    STRING          reduce using rule 16 (operador -> TIMES .)
+
+
+state 43
+
+    (17) operador -> DIVIDE .
+
+    INT             reduce using rule 17 (operador -> DIVIDE .)
+    FLOAT           reduce using rule 17 (operador -> DIVIDE .)
+    VARIABLE        reduce using rule 17 (operador -> DIVIDE .)
+    STRING          reduce using rule 17 (operador -> DIVIDE .)
+
+
+state 44
+
+    (18) operador -> MODULO .
+
+    INT             reduce using rule 18 (operador -> MODULO .)
+    FLOAT           reduce using rule 18 (operador -> MODULO .)
+    VARIABLE        reduce using rule 18 (operador -> MODULO .)
+    STRING          reduce using rule 18 (operador -> MODULO .)
+
+
+state 45
+
+    (26) imprimir -> LPAREN repiteValores RPAREN .
+
+    SEMICOLON       reduce using rule 26 (imprimir -> LPAREN repiteValores RPAREN .)
+
+
+state 46
+
+    (31) repiteValores -> valor COMMA repiteValores .
+
+    SEMICOLON       reduce using rule 31 (repiteValores -> valor COMMA repiteValores .)
+    RPAREN          reduce using rule 31 (repiteValores -> valor COMMA repiteValores .)
+
+
+state 47
+
+    (9) operaArit -> valor operador operaArit .
+
+    SEMICOLON       reduce using rule 9 (operaArit -> valor operador operaArit .)
+
