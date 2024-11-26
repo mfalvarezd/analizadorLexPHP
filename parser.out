@@ -3,76 +3,52 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Unused terminals:
 
     ABSTRACT
-    AND
     ARRAY
     ARROW
     ARROWMAP
     AS
     BOOL
-    BREAK
-    CASE
     CATCH
     CLASS
-    COLON
     CONCATENATEEQUAL
     CONST
-    DEFAULT
     DO
     DOT
     DOUBLEDOT
-    DOUBLEMINUS
-    DOUBLEPLUS
-    ELSE
-    ELSEIF
     EMPTY
     ENDSWITCH
-    EQ
     EXCEPTION
     EXTENDS
     FGETS
     FINAL
     FINALLY
     FN
-    FOR
     FOREACH
     FUNCTION
     ID
-    IF
     IMPLEMENTS
     INCLUDE
     INSTANCEOF
     INTERFACE
-    LBRACE
     LBRACKET
-    LOGICAL_AND
-    LOGICAL_NOT
-    LOGICAL_OR
     MINUSEQUAL
     NAMESPACE
-    NEQ
     NEW
-    NOT
     NULL
-    OR
     PLUSEQUAL
     POTENCIA
     PRIVATE
     PROTECTED
     PUBLIC
     QUESTION
-    RBRACE
     RBRACKET
     RETURN
     STATIC
     STDIN
-    STRICTEQ
-    STRICTNEQ
-    SWITCH
     THIS
     THROW
     TRY
     VOID
-    WHILE
 
 Grammar
 
@@ -83,145 +59,211 @@ Rule 3     programa -> sentencia programa
 Rule 4     sentencia -> asignacion
 Rule 5     sentencia -> comparacion
 Rule 6     sentencia -> impresion
-Rule 7     asignacion -> VARIABLE EQUALS operaArit SEMICOLON
-Rule 8     operaArit -> valor
-Rule 9     operaArit -> valor operador operaArit
-Rule 10    valor -> INT
-Rule 11    valor -> FLOAT
-Rule 12    valor -> VARIABLE
-Rule 13    valor -> STRING
-Rule 14    operador -> PLUS
-Rule 15    operador -> MINUS
-Rule 16    operador -> TIMES
-Rule 17    operador -> DIVIDE
-Rule 18    operador -> MODULO
-Rule 19    comparacion -> INT comparador INT
-Rule 20    comparador -> LT
-Rule 21    comparador -> GT
-Rule 22    comparador -> LEQ
-Rule 23    comparador -> GEQ
-Rule 24    impresion -> ECHO imprimir SEMICOLON
-Rule 25    impresion -> PRINT imprimir SEMICOLON
-Rule 26    imprimir -> LPAREN repiteValores RPAREN
-Rule 27    imprimir -> LPAREN RPAREN
-Rule 28    imprimir -> repiteValores
-Rule 29    imprimir -> empty
-Rule 30    repiteValores -> valor
-Rule 31    repiteValores -> valor COMMA repiteValores
-Rule 32    empty -> <empty>
+Rule 7     sentencia -> estructurasPrograma
+Rule 8     asignacion -> VARIABLE EQUALS operaArit SEMICOLON
+Rule 9     operaArit -> valor
+Rule 10    operaArit -> valor operador operaArit
+Rule 11    valor -> INT
+Rule 12    valor -> FLOAT
+Rule 13    valor -> VARIABLE
+Rule 14    valor -> STRING
+Rule 15    operador -> PLUS
+Rule 16    operador -> MINUS
+Rule 17    operador -> TIMES
+Rule 18    operador -> DIVIDE
+Rule 19    operador -> MODULO
+Rule 20    comparacion -> valor comparador valor
+Rule 21    comparador -> LT
+Rule 22    comparador -> GT
+Rule 23    comparador -> LEQ
+Rule 24    comparador -> GEQ
+Rule 25    impresion -> ECHO imprimir SEMICOLON
+Rule 26    impresion -> PRINT imprimir SEMICOLON
+Rule 27    imprimir -> LPAREN repiteValores RPAREN
+Rule 28    imprimir -> LPAREN RPAREN
+Rule 29    imprimir -> repiteValores
+Rule 30    imprimir -> empty
+Rule 31    repiteValores -> valor
+Rule 32    repiteValores -> valor COMMA repiteValores
+Rule 33    empty -> <empty>
+Rule 34    estructurasPrograma -> controlStructure
+Rule 35    controlStructure -> if
+Rule 36    controlStructure -> for
+Rule 37    controlStructure -> while
+Rule 38    controlStructure -> switch
+Rule 39    if -> IF LPAREN conditions RPAREN LBRACE body RBRACE
+Rule 40    if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+Rule 41    else_blocks -> ELSE LBRACE body RBRACE
+Rule 42    else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+Rule 43    conditions -> condition
+Rule 44    conditions -> condition opLogic conditions
+Rule 45    condition -> valor opSymbol valor
+Rule 46    opSymbol -> EQ
+Rule 47    opSymbol -> NEQ
+Rule 48    opSymbol -> STRICTEQ
+Rule 49    opSymbol -> STRICTNEQ
+Rule 50    opSymbol -> LT
+Rule 51    opSymbol -> GT
+Rule 52    opSymbol -> LEQ
+Rule 53    opSymbol -> GEQ
+Rule 54    opLogic -> AND
+Rule 55    opLogic -> LOGICAL_AND
+Rule 56    opLogic -> OR
+Rule 57    opLogic -> LOGICAL_OR
+Rule 58    opLogic -> NOT
+Rule 59    opLogic -> LOGICAL_NOT
+Rule 60    body -> sentenciaList
+Rule 61    body -> empty
+Rule 62    sentenciaList -> sentencia
+Rule 63    sentenciaList -> sentencia sentenciaList
+Rule 64    for -> forStatement
+Rule 65    forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE
+Rule 66    forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
+Rule 67    forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS
+Rule 68    while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE
+Rule 69    while -> WHILE LPAREN condition RPAREN LBRACE RBRACE
+Rule 70    switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+Rule 71    switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE
+Rule 72    caseLists -> cases default
+Rule 73    caseLists -> cases
+Rule 74    caseLists -> default
+Rule 75    caseLists -> empty
+Rule 76    cases -> case
+Rule 77    cases -> case cases
+Rule 78    case -> CASE valor COLON body BREAK SEMICOLON
+Rule 79    default -> DEFAULT COLON body BREAK SEMICOLON
 
 Terminals, with rules where they appear
 
 ABSTRACT             : 
-AND                  : 
+AND                  : 54
 ARRAY                : 
 ARROW                : 
 ARROWMAP             : 
 AS                   : 
 BOOL                 : 
-BREAK                : 
-CASE                 : 
+BREAK                : 78 79
+CASE                 : 78
 CATCH                : 
 CLASS                : 
 CLOSETAG             : 1
-COLON                : 
-COMMA                : 31
+COLON                : 78 79
+COMMA                : 32
 CONCATENATEEQUAL     : 
 CONST                : 
-DEFAULT              : 
-DIVIDE               : 17
+DEFAULT              : 79
+DIVIDE               : 18
 DO                   : 
 DOT                  : 
 DOUBLEDOT            : 
-DOUBLEMINUS          : 
-DOUBLEPLUS           : 
-ECHO                 : 24
-ELSE                 : 
-ELSEIF               : 
+DOUBLEMINUS          : 67
+DOUBLEPLUS           : 66
+ECHO                 : 25
+ELSE                 : 41
+ELSEIF               : 42
 EMPTY                : 
 ENDSWITCH            : 
-EQ                   : 
-EQUALS               : 7
+EQ                   : 46
+EQUALS               : 8 66 67
 EXCEPTION            : 
 EXTENDS              : 
 FGETS                : 
 FINAL                : 
 FINALLY              : 
-FLOAT                : 11
+FLOAT                : 12
 FN                   : 
-FOR                  : 
+FOR                  : 65
 FOREACH              : 
 FUNCTION             : 
-GEQ                  : 23
-GT                   : 21
+GEQ                  : 24 53
+GT                   : 22 51
 ID                   : 
-IF                   : 
+IF                   : 39 40
 IMPLEMENTS           : 
 INCLUDE              : 
 INSTANCEOF           : 
-INT                  : 10 19 19
+INT                  : 11 66 66 67 67
 INTERFACE            : 
-LBRACE               : 
+LBRACE               : 39 40 41 42 65 68 69 70 71
 LBRACKET             : 
-LEQ                  : 22
-LOGICAL_AND          : 
-LOGICAL_NOT          : 
-LOGICAL_OR           : 
-LPAREN               : 26 27
-LT                   : 20
-MINUS                : 15
+LEQ                  : 23 52
+LOGICAL_AND          : 55
+LOGICAL_NOT          : 59
+LOGICAL_OR           : 57
+LPAREN               : 27 28 39 40 42 65 68 69 70 71
+LT                   : 21 50
+MINUS                : 16
 MINUSEQUAL           : 
-MODULO               : 18
+MODULO               : 19
 NAMESPACE            : 
-NEQ                  : 
+NEQ                  : 47
 NEW                  : 
-NOT                  : 
+NOT                  : 58
 NULL                 : 
 OPENTAG              : 1
-OR                   : 
-PLUS                 : 14
+OR                   : 56
+PLUS                 : 15
 PLUSEQUAL            : 
 POTENCIA             : 
-PRINT                : 25
+PRINT                : 26
 PRIVATE              : 
 PROTECTED            : 
 PUBLIC               : 
 QUESTION             : 
-RBRACE               : 
+RBRACE               : 39 40 41 42 65 68 69 70 71
 RBRACKET             : 
 RETURN               : 
-RPAREN               : 26 27
-SEMICOLON            : 7 24 25
+RPAREN               : 27 28 39 40 42 65 68 69 70 71
+SEMICOLON            : 8 25 26 66 66 67 67 78 79
 STATIC               : 
 STDIN                : 
-STRICTEQ             : 
-STRICTNEQ            : 
-STRING               : 13
-SWITCH               : 
+STRICTEQ             : 48
+STRICTNEQ            : 49
+STRING               : 14
+SWITCH               : 70 71
 THIS                 : 
 THROW                : 
-TIMES                : 16
+TIMES                : 17
 TRY                  : 
-VARIABLE             : 7 12
+VARIABLE             : 8 13 66 66 66 67 67 67
 VOID                 : 
-WHILE                : 
+WHILE                : 68 69
 error                : 
 
 Nonterminals, with rules where they appear
 
 asignacion           : 4
+body                 : 39 40 41 42 65 68 78 79
+case                 : 76 77
+caseLists            : 70
+cases                : 72 73 77
 comparacion          : 5
-comparador           : 19
-empty                : 29
+comparador           : 20
+condition            : 43 44 68 69 70 71
+conditions           : 39 40 42 44
+controlStructure     : 34
+default              : 72 74
+else_blocks          : 40 42
+empty                : 30 61 75
+estructurasPrograma  : 7
+for                  : 36
+forStatement         : 64
+forcondition         : 65
+if                   : 35
 impresion            : 6
-imprimir             : 24 25
+imprimir             : 25 26
 inicio               : 0
-operaArit            : 7 9
-operador             : 9
+opLogic              : 44
+opSymbol             : 45 66 67
+operaArit            : 8 10
+operador             : 10
 programa             : 1 3
-repiteValores        : 26 28 31
-sentencia            : 2 3
-valor                : 8 9 30 31
+repiteValores        : 27 29 32
+sentencia            : 2 3 62 63
+sentenciaList        : 60 63
+switch               : 38
+valor                : 9 10 20 20 31 32 45 45 78
+while                : 37
 
 Parsing method: LALR
 
@@ -248,27 +290,59 @@ state 2
     (4) sentencia -> . asignacion
     (5) sentencia -> . comparacion
     (6) sentencia -> . impresion
-    (7) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
-    (19) comparacion -> . INT comparador INT
-    (24) impresion -> . ECHO imprimir SEMICOLON
-    (25) impresion -> . PRINT imprimir SEMICOLON
+    (7) sentencia -> . estructurasPrograma
+    (8) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (20) comparacion -> . valor comparador valor
+    (25) impresion -> . ECHO imprimir SEMICOLON
+    (26) impresion -> . PRINT imprimir SEMICOLON
+    (34) estructurasPrograma -> . controlStructure
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+    (35) controlStructure -> . if
+    (36) controlStructure -> . for
+    (37) controlStructure -> . while
+    (38) controlStructure -> . switch
+    (39) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE
+    (40) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+    (64) for -> . forStatement
+    (68) while -> . WHILE LPAREN condition RPAREN LBRACE body RBRACE
+    (69) while -> . WHILE LPAREN condition RPAREN LBRACE RBRACE
+    (70) switch -> . SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> . SWITCH LPAREN condition RPAREN LBRACE RBRACE
+    (65) forStatement -> . FOR LPAREN forcondition RPAREN LBRACE body RBRACE
 
-    VARIABLE        shift and go to state 8
-    INT             shift and go to state 9
-    ECHO            shift and go to state 10
-    PRINT           shift and go to state 11
+    VARIABLE        shift and go to state 9
+    ECHO            shift and go to state 11
+    PRINT           shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    STRING          shift and go to state 16
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    FOR             shift and go to state 25
 
     programa                       shift and go to state 3
     sentencia                      shift and go to state 4
     asignacion                     shift and go to state 5
     comparacion                    shift and go to state 6
     impresion                      shift and go to state 7
+    estructurasPrograma            shift and go to state 8
+    valor                          shift and go to state 10
+    controlStructure               shift and go to state 13
+    if                             shift and go to state 17
+    for                            shift and go to state 18
+    while                          shift and go to state 19
+    switch                         shift and go to state 20
+    forStatement                   shift and go to state 22
 
 state 3
 
     (1) inicio -> OPENTAG programa . CLOSETAG
 
-    CLOSETAG        shift and go to state 12
+    CLOSETAG        shift and go to state 26
 
 
 state 4
@@ -280,32 +354,72 @@ state 4
     (4) sentencia -> . asignacion
     (5) sentencia -> . comparacion
     (6) sentencia -> . impresion
-    (7) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
-    (19) comparacion -> . INT comparador INT
-    (24) impresion -> . ECHO imprimir SEMICOLON
-    (25) impresion -> . PRINT imprimir SEMICOLON
+    (7) sentencia -> . estructurasPrograma
+    (8) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (20) comparacion -> . valor comparador valor
+    (25) impresion -> . ECHO imprimir SEMICOLON
+    (26) impresion -> . PRINT imprimir SEMICOLON
+    (34) estructurasPrograma -> . controlStructure
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+    (35) controlStructure -> . if
+    (36) controlStructure -> . for
+    (37) controlStructure -> . while
+    (38) controlStructure -> . switch
+    (39) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE
+    (40) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+    (64) for -> . forStatement
+    (68) while -> . WHILE LPAREN condition RPAREN LBRACE body RBRACE
+    (69) while -> . WHILE LPAREN condition RPAREN LBRACE RBRACE
+    (70) switch -> . SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> . SWITCH LPAREN condition RPAREN LBRACE RBRACE
+    (65) forStatement -> . FOR LPAREN forcondition RPAREN LBRACE body RBRACE
 
     CLOSETAG        reduce using rule 2 (programa -> sentencia .)
-    VARIABLE        shift and go to state 8
-    INT             shift and go to state 9
-    ECHO            shift and go to state 10
-    PRINT           shift and go to state 11
+    VARIABLE        shift and go to state 9
+    ECHO            shift and go to state 11
+    PRINT           shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    STRING          shift and go to state 16
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    FOR             shift and go to state 25
 
     sentencia                      shift and go to state 4
-    programa                       shift and go to state 13
+    programa                       shift and go to state 27
     asignacion                     shift and go to state 5
     comparacion                    shift and go to state 6
     impresion                      shift and go to state 7
+    estructurasPrograma            shift and go to state 8
+    valor                          shift and go to state 10
+    controlStructure               shift and go to state 13
+    if                             shift and go to state 17
+    for                            shift and go to state 18
+    while                          shift and go to state 19
+    switch                         shift and go to state 20
+    forStatement                   shift and go to state 22
 
 state 5
 
     (4) sentencia -> asignacion .
 
     VARIABLE        reduce using rule 4 (sentencia -> asignacion .)
-    INT             reduce using rule 4 (sentencia -> asignacion .)
     ECHO            reduce using rule 4 (sentencia -> asignacion .)
     PRINT           reduce using rule 4 (sentencia -> asignacion .)
+    INT             reduce using rule 4 (sentencia -> asignacion .)
+    FLOAT           reduce using rule 4 (sentencia -> asignacion .)
+    STRING          reduce using rule 4 (sentencia -> asignacion .)
+    IF              reduce using rule 4 (sentencia -> asignacion .)
+    WHILE           reduce using rule 4 (sentencia -> asignacion .)
+    SWITCH          reduce using rule 4 (sentencia -> asignacion .)
+    FOR             reduce using rule 4 (sentencia -> asignacion .)
     CLOSETAG        reduce using rule 4 (sentencia -> asignacion .)
+    RBRACE          reduce using rule 4 (sentencia -> asignacion .)
+    BREAK           reduce using rule 4 (sentencia -> asignacion .)
 
 
 state 6
@@ -313,10 +427,18 @@ state 6
     (5) sentencia -> comparacion .
 
     VARIABLE        reduce using rule 5 (sentencia -> comparacion .)
-    INT             reduce using rule 5 (sentencia -> comparacion .)
     ECHO            reduce using rule 5 (sentencia -> comparacion .)
     PRINT           reduce using rule 5 (sentencia -> comparacion .)
+    INT             reduce using rule 5 (sentencia -> comparacion .)
+    FLOAT           reduce using rule 5 (sentencia -> comparacion .)
+    STRING          reduce using rule 5 (sentencia -> comparacion .)
+    IF              reduce using rule 5 (sentencia -> comparacion .)
+    WHILE           reduce using rule 5 (sentencia -> comparacion .)
+    SWITCH          reduce using rule 5 (sentencia -> comparacion .)
+    FOR             reduce using rule 5 (sentencia -> comparacion .)
     CLOSETAG        reduce using rule 5 (sentencia -> comparacion .)
+    RBRACE          reduce using rule 5 (sentencia -> comparacion .)
+    BREAK           reduce using rule 5 (sentencia -> comparacion .)
 
 
 state 7
@@ -324,457 +446,2230 @@ state 7
     (6) sentencia -> impresion .
 
     VARIABLE        reduce using rule 6 (sentencia -> impresion .)
-    INT             reduce using rule 6 (sentencia -> impresion .)
     ECHO            reduce using rule 6 (sentencia -> impresion .)
     PRINT           reduce using rule 6 (sentencia -> impresion .)
+    INT             reduce using rule 6 (sentencia -> impresion .)
+    FLOAT           reduce using rule 6 (sentencia -> impresion .)
+    STRING          reduce using rule 6 (sentencia -> impresion .)
+    IF              reduce using rule 6 (sentencia -> impresion .)
+    WHILE           reduce using rule 6 (sentencia -> impresion .)
+    SWITCH          reduce using rule 6 (sentencia -> impresion .)
+    FOR             reduce using rule 6 (sentencia -> impresion .)
     CLOSETAG        reduce using rule 6 (sentencia -> impresion .)
+    RBRACE          reduce using rule 6 (sentencia -> impresion .)
+    BREAK           reduce using rule 6 (sentencia -> impresion .)
 
 
 state 8
 
-    (7) asignacion -> VARIABLE . EQUALS operaArit SEMICOLON
+    (7) sentencia -> estructurasPrograma .
 
-    EQUALS          shift and go to state 14
+    VARIABLE        reduce using rule 7 (sentencia -> estructurasPrograma .)
+    ECHO            reduce using rule 7 (sentencia -> estructurasPrograma .)
+    PRINT           reduce using rule 7 (sentencia -> estructurasPrograma .)
+    INT             reduce using rule 7 (sentencia -> estructurasPrograma .)
+    FLOAT           reduce using rule 7 (sentencia -> estructurasPrograma .)
+    STRING          reduce using rule 7 (sentencia -> estructurasPrograma .)
+    IF              reduce using rule 7 (sentencia -> estructurasPrograma .)
+    WHILE           reduce using rule 7 (sentencia -> estructurasPrograma .)
+    SWITCH          reduce using rule 7 (sentencia -> estructurasPrograma .)
+    FOR             reduce using rule 7 (sentencia -> estructurasPrograma .)
+    CLOSETAG        reduce using rule 7 (sentencia -> estructurasPrograma .)
+    RBRACE          reduce using rule 7 (sentencia -> estructurasPrograma .)
+    BREAK           reduce using rule 7 (sentencia -> estructurasPrograma .)
 
 
 state 9
 
-    (19) comparacion -> INT . comparador INT
-    (20) comparador -> . LT
-    (21) comparador -> . GT
-    (22) comparador -> . LEQ
-    (23) comparador -> . GEQ
+    (8) asignacion -> VARIABLE . EQUALS operaArit SEMICOLON
+    (13) valor -> VARIABLE .
 
-    LT              shift and go to state 16
-    GT              shift and go to state 17
-    LEQ             shift and go to state 18
-    GEQ             shift and go to state 19
+    EQUALS          shift and go to state 28
+    LT              reduce using rule 13 (valor -> VARIABLE .)
+    GT              reduce using rule 13 (valor -> VARIABLE .)
+    LEQ             reduce using rule 13 (valor -> VARIABLE .)
+    GEQ             reduce using rule 13 (valor -> VARIABLE .)
 
-    comparador                     shift and go to state 15
 
 state 10
 
-    (24) impresion -> ECHO . imprimir SEMICOLON
-    (26) imprimir -> . LPAREN repiteValores RPAREN
-    (27) imprimir -> . LPAREN RPAREN
-    (28) imprimir -> . repiteValores
-    (29) imprimir -> . empty
-    (30) repiteValores -> . valor
-    (31) repiteValores -> . valor COMMA repiteValores
-    (32) empty -> .
-    (10) valor -> . INT
-    (11) valor -> . FLOAT
-    (12) valor -> . VARIABLE
-    (13) valor -> . STRING
+    (20) comparacion -> valor . comparador valor
+    (21) comparador -> . LT
+    (22) comparador -> . GT
+    (23) comparador -> . LEQ
+    (24) comparador -> . GEQ
 
-    LPAREN          shift and go to state 21
-    SEMICOLON       reduce using rule 32 (empty -> .)
-    INT             shift and go to state 25
-    FLOAT           shift and go to state 26
-    VARIABLE        shift and go to state 27
-    STRING          shift and go to state 28
+    LT              shift and go to state 30
+    GT              shift and go to state 31
+    LEQ             shift and go to state 32
+    GEQ             shift and go to state 33
 
-    imprimir                       shift and go to state 20
-    repiteValores                  shift and go to state 22
-    empty                          shift and go to state 23
-    valor                          shift and go to state 24
+    comparador                     shift and go to state 29
 
 state 11
 
-    (25) impresion -> PRINT . imprimir SEMICOLON
-    (26) imprimir -> . LPAREN repiteValores RPAREN
-    (27) imprimir -> . LPAREN RPAREN
-    (28) imprimir -> . repiteValores
-    (29) imprimir -> . empty
-    (30) repiteValores -> . valor
-    (31) repiteValores -> . valor COMMA repiteValores
-    (32) empty -> .
-    (10) valor -> . INT
-    (11) valor -> . FLOAT
-    (12) valor -> . VARIABLE
-    (13) valor -> . STRING
+    (25) impresion -> ECHO . imprimir SEMICOLON
+    (27) imprimir -> . LPAREN repiteValores RPAREN
+    (28) imprimir -> . LPAREN RPAREN
+    (29) imprimir -> . repiteValores
+    (30) imprimir -> . empty
+    (31) repiteValores -> . valor
+    (32) repiteValores -> . valor COMMA repiteValores
+    (33) empty -> .
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
 
-    LPAREN          shift and go to state 21
-    SEMICOLON       reduce using rule 32 (empty -> .)
-    INT             shift and go to state 25
-    FLOAT           shift and go to state 26
-    VARIABLE        shift and go to state 27
-    STRING          shift and go to state 28
+    LPAREN          shift and go to state 35
+    SEMICOLON       reduce using rule 33 (empty -> .)
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
 
-    imprimir                       shift and go to state 29
-    repiteValores                  shift and go to state 22
-    empty                          shift and go to state 23
-    valor                          shift and go to state 24
+    imprimir                       shift and go to state 34
+    repiteValores                  shift and go to state 36
+    empty                          shift and go to state 37
+    valor                          shift and go to state 38
 
 state 12
+
+    (26) impresion -> PRINT . imprimir SEMICOLON
+    (27) imprimir -> . LPAREN repiteValores RPAREN
+    (28) imprimir -> . LPAREN RPAREN
+    (29) imprimir -> . repiteValores
+    (30) imprimir -> . empty
+    (31) repiteValores -> . valor
+    (32) repiteValores -> . valor COMMA repiteValores
+    (33) empty -> .
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+
+    LPAREN          shift and go to state 35
+    SEMICOLON       reduce using rule 33 (empty -> .)
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
+
+    imprimir                       shift and go to state 40
+    repiteValores                  shift and go to state 36
+    empty                          shift and go to state 37
+    valor                          shift and go to state 38
+
+state 13
+
+    (34) estructurasPrograma -> controlStructure .
+
+    VARIABLE        reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    ECHO            reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    PRINT           reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    INT             reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    FLOAT           reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    STRING          reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    IF              reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    WHILE           reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    SWITCH          reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    FOR             reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    CLOSETAG        reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    RBRACE          reduce using rule 34 (estructurasPrograma -> controlStructure .)
+    BREAK           reduce using rule 34 (estructurasPrograma -> controlStructure .)
+
+
+state 14
+
+    (11) valor -> INT .
+
+    LT              reduce using rule 11 (valor -> INT .)
+    GT              reduce using rule 11 (valor -> INT .)
+    LEQ             reduce using rule 11 (valor -> INT .)
+    GEQ             reduce using rule 11 (valor -> INT .)
+    COMMA           reduce using rule 11 (valor -> INT .)
+    SEMICOLON       reduce using rule 11 (valor -> INT .)
+    PLUS            reduce using rule 11 (valor -> INT .)
+    MINUS           reduce using rule 11 (valor -> INT .)
+    TIMES           reduce using rule 11 (valor -> INT .)
+    DIVIDE          reduce using rule 11 (valor -> INT .)
+    MODULO          reduce using rule 11 (valor -> INT .)
+    VARIABLE        reduce using rule 11 (valor -> INT .)
+    ECHO            reduce using rule 11 (valor -> INT .)
+    PRINT           reduce using rule 11 (valor -> INT .)
+    INT             reduce using rule 11 (valor -> INT .)
+    FLOAT           reduce using rule 11 (valor -> INT .)
+    STRING          reduce using rule 11 (valor -> INT .)
+    IF              reduce using rule 11 (valor -> INT .)
+    WHILE           reduce using rule 11 (valor -> INT .)
+    SWITCH          reduce using rule 11 (valor -> INT .)
+    FOR             reduce using rule 11 (valor -> INT .)
+    CLOSETAG        reduce using rule 11 (valor -> INT .)
+    RBRACE          reduce using rule 11 (valor -> INT .)
+    BREAK           reduce using rule 11 (valor -> INT .)
+    RPAREN          reduce using rule 11 (valor -> INT .)
+    EQ              reduce using rule 11 (valor -> INT .)
+    NEQ             reduce using rule 11 (valor -> INT .)
+    STRICTEQ        reduce using rule 11 (valor -> INT .)
+    STRICTNEQ       reduce using rule 11 (valor -> INT .)
+    AND             reduce using rule 11 (valor -> INT .)
+    LOGICAL_AND     reduce using rule 11 (valor -> INT .)
+    OR              reduce using rule 11 (valor -> INT .)
+    LOGICAL_OR      reduce using rule 11 (valor -> INT .)
+    NOT             reduce using rule 11 (valor -> INT .)
+    LOGICAL_NOT     reduce using rule 11 (valor -> INT .)
+    COLON           reduce using rule 11 (valor -> INT .)
+
+
+state 15
+
+    (12) valor -> FLOAT .
+
+    LT              reduce using rule 12 (valor -> FLOAT .)
+    GT              reduce using rule 12 (valor -> FLOAT .)
+    LEQ             reduce using rule 12 (valor -> FLOAT .)
+    GEQ             reduce using rule 12 (valor -> FLOAT .)
+    COMMA           reduce using rule 12 (valor -> FLOAT .)
+    SEMICOLON       reduce using rule 12 (valor -> FLOAT .)
+    PLUS            reduce using rule 12 (valor -> FLOAT .)
+    MINUS           reduce using rule 12 (valor -> FLOAT .)
+    TIMES           reduce using rule 12 (valor -> FLOAT .)
+    DIVIDE          reduce using rule 12 (valor -> FLOAT .)
+    MODULO          reduce using rule 12 (valor -> FLOAT .)
+    VARIABLE        reduce using rule 12 (valor -> FLOAT .)
+    ECHO            reduce using rule 12 (valor -> FLOAT .)
+    PRINT           reduce using rule 12 (valor -> FLOAT .)
+    INT             reduce using rule 12 (valor -> FLOAT .)
+    FLOAT           reduce using rule 12 (valor -> FLOAT .)
+    STRING          reduce using rule 12 (valor -> FLOAT .)
+    IF              reduce using rule 12 (valor -> FLOAT .)
+    WHILE           reduce using rule 12 (valor -> FLOAT .)
+    SWITCH          reduce using rule 12 (valor -> FLOAT .)
+    FOR             reduce using rule 12 (valor -> FLOAT .)
+    CLOSETAG        reduce using rule 12 (valor -> FLOAT .)
+    RBRACE          reduce using rule 12 (valor -> FLOAT .)
+    BREAK           reduce using rule 12 (valor -> FLOAT .)
+    RPAREN          reduce using rule 12 (valor -> FLOAT .)
+    EQ              reduce using rule 12 (valor -> FLOAT .)
+    NEQ             reduce using rule 12 (valor -> FLOAT .)
+    STRICTEQ        reduce using rule 12 (valor -> FLOAT .)
+    STRICTNEQ       reduce using rule 12 (valor -> FLOAT .)
+    AND             reduce using rule 12 (valor -> FLOAT .)
+    LOGICAL_AND     reduce using rule 12 (valor -> FLOAT .)
+    OR              reduce using rule 12 (valor -> FLOAT .)
+    LOGICAL_OR      reduce using rule 12 (valor -> FLOAT .)
+    NOT             reduce using rule 12 (valor -> FLOAT .)
+    LOGICAL_NOT     reduce using rule 12 (valor -> FLOAT .)
+    COLON           reduce using rule 12 (valor -> FLOAT .)
+
+
+state 16
+
+    (14) valor -> STRING .
+
+    LT              reduce using rule 14 (valor -> STRING .)
+    GT              reduce using rule 14 (valor -> STRING .)
+    LEQ             reduce using rule 14 (valor -> STRING .)
+    GEQ             reduce using rule 14 (valor -> STRING .)
+    COMMA           reduce using rule 14 (valor -> STRING .)
+    SEMICOLON       reduce using rule 14 (valor -> STRING .)
+    PLUS            reduce using rule 14 (valor -> STRING .)
+    MINUS           reduce using rule 14 (valor -> STRING .)
+    TIMES           reduce using rule 14 (valor -> STRING .)
+    DIVIDE          reduce using rule 14 (valor -> STRING .)
+    MODULO          reduce using rule 14 (valor -> STRING .)
+    VARIABLE        reduce using rule 14 (valor -> STRING .)
+    ECHO            reduce using rule 14 (valor -> STRING .)
+    PRINT           reduce using rule 14 (valor -> STRING .)
+    INT             reduce using rule 14 (valor -> STRING .)
+    FLOAT           reduce using rule 14 (valor -> STRING .)
+    STRING          reduce using rule 14 (valor -> STRING .)
+    IF              reduce using rule 14 (valor -> STRING .)
+    WHILE           reduce using rule 14 (valor -> STRING .)
+    SWITCH          reduce using rule 14 (valor -> STRING .)
+    FOR             reduce using rule 14 (valor -> STRING .)
+    CLOSETAG        reduce using rule 14 (valor -> STRING .)
+    RBRACE          reduce using rule 14 (valor -> STRING .)
+    BREAK           reduce using rule 14 (valor -> STRING .)
+    RPAREN          reduce using rule 14 (valor -> STRING .)
+    EQ              reduce using rule 14 (valor -> STRING .)
+    NEQ             reduce using rule 14 (valor -> STRING .)
+    STRICTEQ        reduce using rule 14 (valor -> STRING .)
+    STRICTNEQ       reduce using rule 14 (valor -> STRING .)
+    AND             reduce using rule 14 (valor -> STRING .)
+    LOGICAL_AND     reduce using rule 14 (valor -> STRING .)
+    OR              reduce using rule 14 (valor -> STRING .)
+    LOGICAL_OR      reduce using rule 14 (valor -> STRING .)
+    NOT             reduce using rule 14 (valor -> STRING .)
+    LOGICAL_NOT     reduce using rule 14 (valor -> STRING .)
+    COLON           reduce using rule 14 (valor -> STRING .)
+
+
+state 17
+
+    (35) controlStructure -> if .
+
+    VARIABLE        reduce using rule 35 (controlStructure -> if .)
+    ECHO            reduce using rule 35 (controlStructure -> if .)
+    PRINT           reduce using rule 35 (controlStructure -> if .)
+    INT             reduce using rule 35 (controlStructure -> if .)
+    FLOAT           reduce using rule 35 (controlStructure -> if .)
+    STRING          reduce using rule 35 (controlStructure -> if .)
+    IF              reduce using rule 35 (controlStructure -> if .)
+    WHILE           reduce using rule 35 (controlStructure -> if .)
+    SWITCH          reduce using rule 35 (controlStructure -> if .)
+    FOR             reduce using rule 35 (controlStructure -> if .)
+    CLOSETAG        reduce using rule 35 (controlStructure -> if .)
+    RBRACE          reduce using rule 35 (controlStructure -> if .)
+    BREAK           reduce using rule 35 (controlStructure -> if .)
+
+
+state 18
+
+    (36) controlStructure -> for .
+
+    VARIABLE        reduce using rule 36 (controlStructure -> for .)
+    ECHO            reduce using rule 36 (controlStructure -> for .)
+    PRINT           reduce using rule 36 (controlStructure -> for .)
+    INT             reduce using rule 36 (controlStructure -> for .)
+    FLOAT           reduce using rule 36 (controlStructure -> for .)
+    STRING          reduce using rule 36 (controlStructure -> for .)
+    IF              reduce using rule 36 (controlStructure -> for .)
+    WHILE           reduce using rule 36 (controlStructure -> for .)
+    SWITCH          reduce using rule 36 (controlStructure -> for .)
+    FOR             reduce using rule 36 (controlStructure -> for .)
+    CLOSETAG        reduce using rule 36 (controlStructure -> for .)
+    RBRACE          reduce using rule 36 (controlStructure -> for .)
+    BREAK           reduce using rule 36 (controlStructure -> for .)
+
+
+state 19
+
+    (37) controlStructure -> while .
+
+    VARIABLE        reduce using rule 37 (controlStructure -> while .)
+    ECHO            reduce using rule 37 (controlStructure -> while .)
+    PRINT           reduce using rule 37 (controlStructure -> while .)
+    INT             reduce using rule 37 (controlStructure -> while .)
+    FLOAT           reduce using rule 37 (controlStructure -> while .)
+    STRING          reduce using rule 37 (controlStructure -> while .)
+    IF              reduce using rule 37 (controlStructure -> while .)
+    WHILE           reduce using rule 37 (controlStructure -> while .)
+    SWITCH          reduce using rule 37 (controlStructure -> while .)
+    FOR             reduce using rule 37 (controlStructure -> while .)
+    CLOSETAG        reduce using rule 37 (controlStructure -> while .)
+    RBRACE          reduce using rule 37 (controlStructure -> while .)
+    BREAK           reduce using rule 37 (controlStructure -> while .)
+
+
+state 20
+
+    (38) controlStructure -> switch .
+
+    VARIABLE        reduce using rule 38 (controlStructure -> switch .)
+    ECHO            reduce using rule 38 (controlStructure -> switch .)
+    PRINT           reduce using rule 38 (controlStructure -> switch .)
+    INT             reduce using rule 38 (controlStructure -> switch .)
+    FLOAT           reduce using rule 38 (controlStructure -> switch .)
+    STRING          reduce using rule 38 (controlStructure -> switch .)
+    IF              reduce using rule 38 (controlStructure -> switch .)
+    WHILE           reduce using rule 38 (controlStructure -> switch .)
+    SWITCH          reduce using rule 38 (controlStructure -> switch .)
+    FOR             reduce using rule 38 (controlStructure -> switch .)
+    CLOSETAG        reduce using rule 38 (controlStructure -> switch .)
+    RBRACE          reduce using rule 38 (controlStructure -> switch .)
+    BREAK           reduce using rule 38 (controlStructure -> switch .)
+
+
+state 21
+
+    (39) if -> IF . LPAREN conditions RPAREN LBRACE body RBRACE
+    (40) if -> IF . LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+
+    LPAREN          shift and go to state 41
+
+
+state 22
+
+    (64) for -> forStatement .
+
+    VARIABLE        reduce using rule 64 (for -> forStatement .)
+    ECHO            reduce using rule 64 (for -> forStatement .)
+    PRINT           reduce using rule 64 (for -> forStatement .)
+    INT             reduce using rule 64 (for -> forStatement .)
+    FLOAT           reduce using rule 64 (for -> forStatement .)
+    STRING          reduce using rule 64 (for -> forStatement .)
+    IF              reduce using rule 64 (for -> forStatement .)
+    WHILE           reduce using rule 64 (for -> forStatement .)
+    SWITCH          reduce using rule 64 (for -> forStatement .)
+    FOR             reduce using rule 64 (for -> forStatement .)
+    CLOSETAG        reduce using rule 64 (for -> forStatement .)
+    RBRACE          reduce using rule 64 (for -> forStatement .)
+    BREAK           reduce using rule 64 (for -> forStatement .)
+
+
+state 23
+
+    (68) while -> WHILE . LPAREN condition RPAREN LBRACE body RBRACE
+    (69) while -> WHILE . LPAREN condition RPAREN LBRACE RBRACE
+
+    LPAREN          shift and go to state 42
+
+
+state 24
+
+    (70) switch -> SWITCH . LPAREN condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> SWITCH . LPAREN condition RPAREN LBRACE RBRACE
+
+    LPAREN          shift and go to state 43
+
+
+state 25
+
+    (65) forStatement -> FOR . LPAREN forcondition RPAREN LBRACE body RBRACE
+
+    LPAREN          shift and go to state 44
+
+
+state 26
 
     (1) inicio -> OPENTAG programa CLOSETAG .
 
     $end            reduce using rule 1 (inicio -> OPENTAG programa CLOSETAG .)
 
 
-state 13
+state 27
 
     (3) programa -> sentencia programa .
 
     CLOSETAG        reduce using rule 3 (programa -> sentencia programa .)
 
 
-state 14
-
-    (7) asignacion -> VARIABLE EQUALS . operaArit SEMICOLON
-    (8) operaArit -> . valor
-    (9) operaArit -> . valor operador operaArit
-    (10) valor -> . INT
-    (11) valor -> . FLOAT
-    (12) valor -> . VARIABLE
-    (13) valor -> . STRING
-
-    INT             shift and go to state 25
-    FLOAT           shift and go to state 26
-    VARIABLE        shift and go to state 27
-    STRING          shift and go to state 28
-
-    operaArit                      shift and go to state 30
-    valor                          shift and go to state 31
-
-state 15
-
-    (19) comparacion -> INT comparador . INT
-
-    INT             shift and go to state 32
-
-
-state 16
-
-    (20) comparador -> LT .
-
-    INT             reduce using rule 20 (comparador -> LT .)
-
-
-state 17
-
-    (21) comparador -> GT .
-
-    INT             reduce using rule 21 (comparador -> GT .)
-
-
-state 18
-
-    (22) comparador -> LEQ .
-
-    INT             reduce using rule 22 (comparador -> LEQ .)
-
-
-state 19
-
-    (23) comparador -> GEQ .
-
-    INT             reduce using rule 23 (comparador -> GEQ .)
-
-
-state 20
-
-    (24) impresion -> ECHO imprimir . SEMICOLON
-
-    SEMICOLON       shift and go to state 33
-
-
-state 21
-
-    (26) imprimir -> LPAREN . repiteValores RPAREN
-    (27) imprimir -> LPAREN . RPAREN
-    (30) repiteValores -> . valor
-    (31) repiteValores -> . valor COMMA repiteValores
-    (10) valor -> . INT
-    (11) valor -> . FLOAT
-    (12) valor -> . VARIABLE
-    (13) valor -> . STRING
-
-    RPAREN          shift and go to state 35
-    INT             shift and go to state 25
-    FLOAT           shift and go to state 26
-    VARIABLE        shift and go to state 27
-    STRING          shift and go to state 28
-
-    repiteValores                  shift and go to state 34
-    valor                          shift and go to state 24
-
-state 22
-
-    (28) imprimir -> repiteValores .
-
-    SEMICOLON       reduce using rule 28 (imprimir -> repiteValores .)
-
-
-state 23
-
-    (29) imprimir -> empty .
-
-    SEMICOLON       reduce using rule 29 (imprimir -> empty .)
-
-
-state 24
-
-    (30) repiteValores -> valor .
-    (31) repiteValores -> valor . COMMA repiteValores
-
-    SEMICOLON       reduce using rule 30 (repiteValores -> valor .)
-    RPAREN          reduce using rule 30 (repiteValores -> valor .)
-    COMMA           shift and go to state 36
-
-
-state 25
-
-    (10) valor -> INT .
-
-    COMMA           reduce using rule 10 (valor -> INT .)
-    SEMICOLON       reduce using rule 10 (valor -> INT .)
-    PLUS            reduce using rule 10 (valor -> INT .)
-    MINUS           reduce using rule 10 (valor -> INT .)
-    TIMES           reduce using rule 10 (valor -> INT .)
-    DIVIDE          reduce using rule 10 (valor -> INT .)
-    MODULO          reduce using rule 10 (valor -> INT .)
-    RPAREN          reduce using rule 10 (valor -> INT .)
-
-
-state 26
-
-    (11) valor -> FLOAT .
-
-    COMMA           reduce using rule 11 (valor -> FLOAT .)
-    SEMICOLON       reduce using rule 11 (valor -> FLOAT .)
-    PLUS            reduce using rule 11 (valor -> FLOAT .)
-    MINUS           reduce using rule 11 (valor -> FLOAT .)
-    TIMES           reduce using rule 11 (valor -> FLOAT .)
-    DIVIDE          reduce using rule 11 (valor -> FLOAT .)
-    MODULO          reduce using rule 11 (valor -> FLOAT .)
-    RPAREN          reduce using rule 11 (valor -> FLOAT .)
-
-
-state 27
-
-    (12) valor -> VARIABLE .
-
-    COMMA           reduce using rule 12 (valor -> VARIABLE .)
-    SEMICOLON       reduce using rule 12 (valor -> VARIABLE .)
-    PLUS            reduce using rule 12 (valor -> VARIABLE .)
-    MINUS           reduce using rule 12 (valor -> VARIABLE .)
-    TIMES           reduce using rule 12 (valor -> VARIABLE .)
-    DIVIDE          reduce using rule 12 (valor -> VARIABLE .)
-    MODULO          reduce using rule 12 (valor -> VARIABLE .)
-    RPAREN          reduce using rule 12 (valor -> VARIABLE .)
-
-
 state 28
 
-    (13) valor -> STRING .
+    (8) asignacion -> VARIABLE EQUALS . operaArit SEMICOLON
+    (9) operaArit -> . valor
+    (10) operaArit -> . valor operador operaArit
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
 
-    COMMA           reduce using rule 13 (valor -> STRING .)
-    SEMICOLON       reduce using rule 13 (valor -> STRING .)
-    PLUS            reduce using rule 13 (valor -> STRING .)
-    MINUS           reduce using rule 13 (valor -> STRING .)
-    TIMES           reduce using rule 13 (valor -> STRING .)
-    DIVIDE          reduce using rule 13 (valor -> STRING .)
-    MODULO          reduce using rule 13 (valor -> STRING .)
-    RPAREN          reduce using rule 13 (valor -> STRING .)
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
 
+    operaArit                      shift and go to state 45
+    valor                          shift and go to state 46
 
 state 29
 
-    (25) impresion -> PRINT imprimir . SEMICOLON
+    (20) comparacion -> valor comparador . valor
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
 
-    SEMICOLON       shift and go to state 37
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
 
+    valor                          shift and go to state 47
 
 state 30
 
-    (7) asignacion -> VARIABLE EQUALS operaArit . SEMICOLON
+    (21) comparador -> LT .
 
-    SEMICOLON       shift and go to state 38
+    INT             reduce using rule 21 (comparador -> LT .)
+    FLOAT           reduce using rule 21 (comparador -> LT .)
+    VARIABLE        reduce using rule 21 (comparador -> LT .)
+    STRING          reduce using rule 21 (comparador -> LT .)
 
 
 state 31
 
-    (8) operaArit -> valor .
-    (9) operaArit -> valor . operador operaArit
-    (14) operador -> . PLUS
-    (15) operador -> . MINUS
-    (16) operador -> . TIMES
-    (17) operador -> . DIVIDE
-    (18) operador -> . MODULO
+    (22) comparador -> GT .
 
-    SEMICOLON       reduce using rule 8 (operaArit -> valor .)
-    PLUS            shift and go to state 40
-    MINUS           shift and go to state 41
-    TIMES           shift and go to state 42
-    DIVIDE          shift and go to state 43
-    MODULO          shift and go to state 44
+    INT             reduce using rule 22 (comparador -> GT .)
+    FLOAT           reduce using rule 22 (comparador -> GT .)
+    VARIABLE        reduce using rule 22 (comparador -> GT .)
+    STRING          reduce using rule 22 (comparador -> GT .)
 
-    operador                       shift and go to state 39
 
 state 32
 
-    (19) comparacion -> INT comparador INT .
+    (23) comparador -> LEQ .
 
-    VARIABLE        reduce using rule 19 (comparacion -> INT comparador INT .)
-    INT             reduce using rule 19 (comparacion -> INT comparador INT .)
-    ECHO            reduce using rule 19 (comparacion -> INT comparador INT .)
-    PRINT           reduce using rule 19 (comparacion -> INT comparador INT .)
-    CLOSETAG        reduce using rule 19 (comparacion -> INT comparador INT .)
+    INT             reduce using rule 23 (comparador -> LEQ .)
+    FLOAT           reduce using rule 23 (comparador -> LEQ .)
+    VARIABLE        reduce using rule 23 (comparador -> LEQ .)
+    STRING          reduce using rule 23 (comparador -> LEQ .)
 
 
 state 33
 
-    (24) impresion -> ECHO imprimir SEMICOLON .
+    (24) comparador -> GEQ .
 
-    VARIABLE        reduce using rule 24 (impresion -> ECHO imprimir SEMICOLON .)
-    INT             reduce using rule 24 (impresion -> ECHO imprimir SEMICOLON .)
-    ECHO            reduce using rule 24 (impresion -> ECHO imprimir SEMICOLON .)
-    PRINT           reduce using rule 24 (impresion -> ECHO imprimir SEMICOLON .)
-    CLOSETAG        reduce using rule 24 (impresion -> ECHO imprimir SEMICOLON .)
+    INT             reduce using rule 24 (comparador -> GEQ .)
+    FLOAT           reduce using rule 24 (comparador -> GEQ .)
+    VARIABLE        reduce using rule 24 (comparador -> GEQ .)
+    STRING          reduce using rule 24 (comparador -> GEQ .)
 
 
 state 34
 
-    (26) imprimir -> LPAREN repiteValores . RPAREN
+    (25) impresion -> ECHO imprimir . SEMICOLON
 
-    RPAREN          shift and go to state 45
+    SEMICOLON       shift and go to state 48
 
 
 state 35
 
-    (27) imprimir -> LPAREN RPAREN .
+    (27) imprimir -> LPAREN . repiteValores RPAREN
+    (28) imprimir -> LPAREN . RPAREN
+    (31) repiteValores -> . valor
+    (32) repiteValores -> . valor COMMA repiteValores
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
 
-    SEMICOLON       reduce using rule 27 (imprimir -> LPAREN RPAREN .)
+    RPAREN          shift and go to state 50
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
 
+    repiteValores                  shift and go to state 49
+    valor                          shift and go to state 38
 
 state 36
 
-    (31) repiteValores -> valor COMMA . repiteValores
-    (30) repiteValores -> . valor
-    (31) repiteValores -> . valor COMMA repiteValores
-    (10) valor -> . INT
-    (11) valor -> . FLOAT
-    (12) valor -> . VARIABLE
-    (13) valor -> . STRING
+    (29) imprimir -> repiteValores .
 
-    INT             shift and go to state 25
-    FLOAT           shift and go to state 26
-    VARIABLE        shift and go to state 27
-    STRING          shift and go to state 28
+    SEMICOLON       reduce using rule 29 (imprimir -> repiteValores .)
 
-    valor                          shift and go to state 24
-    repiteValores                  shift and go to state 46
 
 state 37
 
-    (25) impresion -> PRINT imprimir SEMICOLON .
+    (30) imprimir -> empty .
 
-    VARIABLE        reduce using rule 25 (impresion -> PRINT imprimir SEMICOLON .)
-    INT             reduce using rule 25 (impresion -> PRINT imprimir SEMICOLON .)
-    ECHO            reduce using rule 25 (impresion -> PRINT imprimir SEMICOLON .)
-    PRINT           reduce using rule 25 (impresion -> PRINT imprimir SEMICOLON .)
-    CLOSETAG        reduce using rule 25 (impresion -> PRINT imprimir SEMICOLON .)
+    SEMICOLON       reduce using rule 30 (imprimir -> empty .)
 
 
 state 38
 
-    (7) asignacion -> VARIABLE EQUALS operaArit SEMICOLON .
+    (31) repiteValores -> valor .
+    (32) repiteValores -> valor . COMMA repiteValores
 
-    VARIABLE        reduce using rule 7 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
-    INT             reduce using rule 7 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
-    ECHO            reduce using rule 7 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
-    PRINT           reduce using rule 7 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
-    CLOSETAG        reduce using rule 7 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    SEMICOLON       reduce using rule 31 (repiteValores -> valor .)
+    RPAREN          reduce using rule 31 (repiteValores -> valor .)
+    COMMA           shift and go to state 51
 
 
 state 39
 
-    (9) operaArit -> valor operador . operaArit
-    (8) operaArit -> . valor
-    (9) operaArit -> . valor operador operaArit
-    (10) valor -> . INT
-    (11) valor -> . FLOAT
-    (12) valor -> . VARIABLE
-    (13) valor -> . STRING
+    (13) valor -> VARIABLE .
 
-    INT             shift and go to state 25
-    FLOAT           shift and go to state 26
-    VARIABLE        shift and go to state 27
-    STRING          shift and go to state 28
+    COMMA           reduce using rule 13 (valor -> VARIABLE .)
+    SEMICOLON       reduce using rule 13 (valor -> VARIABLE .)
+    PLUS            reduce using rule 13 (valor -> VARIABLE .)
+    MINUS           reduce using rule 13 (valor -> VARIABLE .)
+    TIMES           reduce using rule 13 (valor -> VARIABLE .)
+    DIVIDE          reduce using rule 13 (valor -> VARIABLE .)
+    MODULO          reduce using rule 13 (valor -> VARIABLE .)
+    VARIABLE        reduce using rule 13 (valor -> VARIABLE .)
+    ECHO            reduce using rule 13 (valor -> VARIABLE .)
+    PRINT           reduce using rule 13 (valor -> VARIABLE .)
+    INT             reduce using rule 13 (valor -> VARIABLE .)
+    FLOAT           reduce using rule 13 (valor -> VARIABLE .)
+    STRING          reduce using rule 13 (valor -> VARIABLE .)
+    IF              reduce using rule 13 (valor -> VARIABLE .)
+    WHILE           reduce using rule 13 (valor -> VARIABLE .)
+    SWITCH          reduce using rule 13 (valor -> VARIABLE .)
+    FOR             reduce using rule 13 (valor -> VARIABLE .)
+    CLOSETAG        reduce using rule 13 (valor -> VARIABLE .)
+    RBRACE          reduce using rule 13 (valor -> VARIABLE .)
+    BREAK           reduce using rule 13 (valor -> VARIABLE .)
+    RPAREN          reduce using rule 13 (valor -> VARIABLE .)
+    EQ              reduce using rule 13 (valor -> VARIABLE .)
+    NEQ             reduce using rule 13 (valor -> VARIABLE .)
+    STRICTEQ        reduce using rule 13 (valor -> VARIABLE .)
+    STRICTNEQ       reduce using rule 13 (valor -> VARIABLE .)
+    LT              reduce using rule 13 (valor -> VARIABLE .)
+    GT              reduce using rule 13 (valor -> VARIABLE .)
+    LEQ             reduce using rule 13 (valor -> VARIABLE .)
+    GEQ             reduce using rule 13 (valor -> VARIABLE .)
+    AND             reduce using rule 13 (valor -> VARIABLE .)
+    LOGICAL_AND     reduce using rule 13 (valor -> VARIABLE .)
+    OR              reduce using rule 13 (valor -> VARIABLE .)
+    LOGICAL_OR      reduce using rule 13 (valor -> VARIABLE .)
+    NOT             reduce using rule 13 (valor -> VARIABLE .)
+    LOGICAL_NOT     reduce using rule 13 (valor -> VARIABLE .)
+    COLON           reduce using rule 13 (valor -> VARIABLE .)
 
-    valor                          shift and go to state 31
-    operaArit                      shift and go to state 47
 
 state 40
 
-    (14) operador -> PLUS .
+    (26) impresion -> PRINT imprimir . SEMICOLON
 
-    INT             reduce using rule 14 (operador -> PLUS .)
-    FLOAT           reduce using rule 14 (operador -> PLUS .)
-    VARIABLE        reduce using rule 14 (operador -> PLUS .)
-    STRING          reduce using rule 14 (operador -> PLUS .)
+    SEMICOLON       shift and go to state 52
 
 
 state 41
 
-    (15) operador -> MINUS .
+    (39) if -> IF LPAREN . conditions RPAREN LBRACE body RBRACE
+    (40) if -> IF LPAREN . conditions RPAREN LBRACE body RBRACE else_blocks
+    (43) conditions -> . condition
+    (44) conditions -> . condition opLogic conditions
+    (45) condition -> . valor opSymbol valor
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
 
-    INT             reduce using rule 15 (operador -> MINUS .)
-    FLOAT           reduce using rule 15 (operador -> MINUS .)
-    VARIABLE        reduce using rule 15 (operador -> MINUS .)
-    STRING          reduce using rule 15 (operador -> MINUS .)
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
 
+    conditions                     shift and go to state 53
+    condition                      shift and go to state 54
+    valor                          shift and go to state 55
 
 state 42
 
-    (16) operador -> TIMES .
+    (68) while -> WHILE LPAREN . condition RPAREN LBRACE body RBRACE
+    (69) while -> WHILE LPAREN . condition RPAREN LBRACE RBRACE
+    (45) condition -> . valor opSymbol valor
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
 
-    INT             reduce using rule 16 (operador -> TIMES .)
-    FLOAT           reduce using rule 16 (operador -> TIMES .)
-    VARIABLE        reduce using rule 16 (operador -> TIMES .)
-    STRING          reduce using rule 16 (operador -> TIMES .)
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
 
+    condition                      shift and go to state 56
+    valor                          shift and go to state 55
 
 state 43
 
-    (17) operador -> DIVIDE .
+    (70) switch -> SWITCH LPAREN . condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> SWITCH LPAREN . condition RPAREN LBRACE RBRACE
+    (45) condition -> . valor opSymbol valor
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
 
-    INT             reduce using rule 17 (operador -> DIVIDE .)
-    FLOAT           reduce using rule 17 (operador -> DIVIDE .)
-    VARIABLE        reduce using rule 17 (operador -> DIVIDE .)
-    STRING          reduce using rule 17 (operador -> DIVIDE .)
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
 
+    condition                      shift and go to state 57
+    valor                          shift and go to state 55
 
 state 44
 
-    (18) operador -> MODULO .
+    (65) forStatement -> FOR LPAREN . forcondition RPAREN LBRACE body RBRACE
+    (66) forcondition -> . VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
+    (67) forcondition -> . VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS
 
-    INT             reduce using rule 18 (operador -> MODULO .)
-    FLOAT           reduce using rule 18 (operador -> MODULO .)
-    VARIABLE        reduce using rule 18 (operador -> MODULO .)
-    STRING          reduce using rule 18 (operador -> MODULO .)
+    VARIABLE        shift and go to state 59
 
+    forcondition                   shift and go to state 58
 
 state 45
 
-    (26) imprimir -> LPAREN repiteValores RPAREN .
+    (8) asignacion -> VARIABLE EQUALS operaArit . SEMICOLON
 
-    SEMICOLON       reduce using rule 26 (imprimir -> LPAREN repiteValores RPAREN .)
+    SEMICOLON       shift and go to state 60
 
 
 state 46
 
-    (31) repiteValores -> valor COMMA repiteValores .
+    (9) operaArit -> valor .
+    (10) operaArit -> valor . operador operaArit
+    (15) operador -> . PLUS
+    (16) operador -> . MINUS
+    (17) operador -> . TIMES
+    (18) operador -> . DIVIDE
+    (19) operador -> . MODULO
 
-    SEMICOLON       reduce using rule 31 (repiteValores -> valor COMMA repiteValores .)
-    RPAREN          reduce using rule 31 (repiteValores -> valor COMMA repiteValores .)
+    SEMICOLON       reduce using rule 9 (operaArit -> valor .)
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    TIMES           shift and go to state 64
+    DIVIDE          shift and go to state 65
+    MODULO          shift and go to state 66
 
+    operador                       shift and go to state 61
 
 state 47
 
-    (9) operaArit -> valor operador operaArit .
+    (20) comparacion -> valor comparador valor .
 
-    SEMICOLON       reduce using rule 9 (operaArit -> valor operador operaArit .)
+    VARIABLE        reduce using rule 20 (comparacion -> valor comparador valor .)
+    ECHO            reduce using rule 20 (comparacion -> valor comparador valor .)
+    PRINT           reduce using rule 20 (comparacion -> valor comparador valor .)
+    INT             reduce using rule 20 (comparacion -> valor comparador valor .)
+    FLOAT           reduce using rule 20 (comparacion -> valor comparador valor .)
+    STRING          reduce using rule 20 (comparacion -> valor comparador valor .)
+    IF              reduce using rule 20 (comparacion -> valor comparador valor .)
+    WHILE           reduce using rule 20 (comparacion -> valor comparador valor .)
+    SWITCH          reduce using rule 20 (comparacion -> valor comparador valor .)
+    FOR             reduce using rule 20 (comparacion -> valor comparador valor .)
+    CLOSETAG        reduce using rule 20 (comparacion -> valor comparador valor .)
+    RBRACE          reduce using rule 20 (comparacion -> valor comparador valor .)
+    BREAK           reduce using rule 20 (comparacion -> valor comparador valor .)
 
+
+state 48
+
+    (25) impresion -> ECHO imprimir SEMICOLON .
+
+    VARIABLE        reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    ECHO            reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    PRINT           reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    INT             reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    FLOAT           reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    STRING          reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    IF              reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    WHILE           reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    SWITCH          reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    FOR             reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    CLOSETAG        reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    RBRACE          reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+    BREAK           reduce using rule 25 (impresion -> ECHO imprimir SEMICOLON .)
+
+
+state 49
+
+    (27) imprimir -> LPAREN repiteValores . RPAREN
+
+    RPAREN          shift and go to state 67
+
+
+state 50
+
+    (28) imprimir -> LPAREN RPAREN .
+
+    SEMICOLON       reduce using rule 28 (imprimir -> LPAREN RPAREN .)
+
+
+state 51
+
+    (32) repiteValores -> valor COMMA . repiteValores
+    (31) repiteValores -> . valor
+    (32) repiteValores -> . valor COMMA repiteValores
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
+
+    valor                          shift and go to state 38
+    repiteValores                  shift and go to state 68
+
+state 52
+
+    (26) impresion -> PRINT imprimir SEMICOLON .
+
+    VARIABLE        reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    ECHO            reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    PRINT           reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    INT             reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    FLOAT           reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    STRING          reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    IF              reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    WHILE           reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    SWITCH          reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    FOR             reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    CLOSETAG        reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    RBRACE          reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+    BREAK           reduce using rule 26 (impresion -> PRINT imprimir SEMICOLON .)
+
+
+state 53
+
+    (39) if -> IF LPAREN conditions . RPAREN LBRACE body RBRACE
+    (40) if -> IF LPAREN conditions . RPAREN LBRACE body RBRACE else_blocks
+
+    RPAREN          shift and go to state 69
+
+
+state 54
+
+    (43) conditions -> condition .
+    (44) conditions -> condition . opLogic conditions
+    (54) opLogic -> . AND
+    (55) opLogic -> . LOGICAL_AND
+    (56) opLogic -> . OR
+    (57) opLogic -> . LOGICAL_OR
+    (58) opLogic -> . NOT
+    (59) opLogic -> . LOGICAL_NOT
+
+    RPAREN          reduce using rule 43 (conditions -> condition .)
+    AND             shift and go to state 71
+    LOGICAL_AND     shift and go to state 72
+    OR              shift and go to state 73
+    LOGICAL_OR      shift and go to state 74
+    NOT             shift and go to state 75
+    LOGICAL_NOT     shift and go to state 76
+
+    opLogic                        shift and go to state 70
+
+state 55
+
+    (45) condition -> valor . opSymbol valor
+    (46) opSymbol -> . EQ
+    (47) opSymbol -> . NEQ
+    (48) opSymbol -> . STRICTEQ
+    (49) opSymbol -> . STRICTNEQ
+    (50) opSymbol -> . LT
+    (51) opSymbol -> . GT
+    (52) opSymbol -> . LEQ
+    (53) opSymbol -> . GEQ
+
+    EQ              shift and go to state 78
+    NEQ             shift and go to state 79
+    STRICTEQ        shift and go to state 80
+    STRICTNEQ       shift and go to state 81
+    LT              shift and go to state 82
+    GT              shift and go to state 83
+    LEQ             shift and go to state 84
+    GEQ             shift and go to state 85
+
+    opSymbol                       shift and go to state 77
+
+state 56
+
+    (68) while -> WHILE LPAREN condition . RPAREN LBRACE body RBRACE
+    (69) while -> WHILE LPAREN condition . RPAREN LBRACE RBRACE
+
+    RPAREN          shift and go to state 86
+
+
+state 57
+
+    (70) switch -> SWITCH LPAREN condition . RPAREN LBRACE caseLists RBRACE
+    (71) switch -> SWITCH LPAREN condition . RPAREN LBRACE RBRACE
+
+    RPAREN          shift and go to state 87
+
+
+state 58
+
+    (65) forStatement -> FOR LPAREN forcondition . RPAREN LBRACE body RBRACE
+
+    RPAREN          shift and go to state 88
+
+
+state 59
+
+    (66) forcondition -> VARIABLE . EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
+    (67) forcondition -> VARIABLE . EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS
+
+    EQUALS          shift and go to state 89
+
+
+state 60
+
+    (8) asignacion -> VARIABLE EQUALS operaArit SEMICOLON .
+
+    VARIABLE        reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    ECHO            reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    PRINT           reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    INT             reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    FLOAT           reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    STRING          reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    IF              reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    WHILE           reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    SWITCH          reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    FOR             reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    CLOSETAG        reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    RBRACE          reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+    BREAK           reduce using rule 8 (asignacion -> VARIABLE EQUALS operaArit SEMICOLON .)
+
+
+state 61
+
+    (10) operaArit -> valor operador . operaArit
+    (9) operaArit -> . valor
+    (10) operaArit -> . valor operador operaArit
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
+
+    valor                          shift and go to state 46
+    operaArit                      shift and go to state 90
+
+state 62
+
+    (15) operador -> PLUS .
+
+    INT             reduce using rule 15 (operador -> PLUS .)
+    FLOAT           reduce using rule 15 (operador -> PLUS .)
+    VARIABLE        reduce using rule 15 (operador -> PLUS .)
+    STRING          reduce using rule 15 (operador -> PLUS .)
+
+
+state 63
+
+    (16) operador -> MINUS .
+
+    INT             reduce using rule 16 (operador -> MINUS .)
+    FLOAT           reduce using rule 16 (operador -> MINUS .)
+    VARIABLE        reduce using rule 16 (operador -> MINUS .)
+    STRING          reduce using rule 16 (operador -> MINUS .)
+
+
+state 64
+
+    (17) operador -> TIMES .
+
+    INT             reduce using rule 17 (operador -> TIMES .)
+    FLOAT           reduce using rule 17 (operador -> TIMES .)
+    VARIABLE        reduce using rule 17 (operador -> TIMES .)
+    STRING          reduce using rule 17 (operador -> TIMES .)
+
+
+state 65
+
+    (18) operador -> DIVIDE .
+
+    INT             reduce using rule 18 (operador -> DIVIDE .)
+    FLOAT           reduce using rule 18 (operador -> DIVIDE .)
+    VARIABLE        reduce using rule 18 (operador -> DIVIDE .)
+    STRING          reduce using rule 18 (operador -> DIVIDE .)
+
+
+state 66
+
+    (19) operador -> MODULO .
+
+    INT             reduce using rule 19 (operador -> MODULO .)
+    FLOAT           reduce using rule 19 (operador -> MODULO .)
+    VARIABLE        reduce using rule 19 (operador -> MODULO .)
+    STRING          reduce using rule 19 (operador -> MODULO .)
+
+
+state 67
+
+    (27) imprimir -> LPAREN repiteValores RPAREN .
+
+    SEMICOLON       reduce using rule 27 (imprimir -> LPAREN repiteValores RPAREN .)
+
+
+state 68
+
+    (32) repiteValores -> valor COMMA repiteValores .
+
+    SEMICOLON       reduce using rule 32 (repiteValores -> valor COMMA repiteValores .)
+    RPAREN          reduce using rule 32 (repiteValores -> valor COMMA repiteValores .)
+
+
+state 69
+
+    (39) if -> IF LPAREN conditions RPAREN . LBRACE body RBRACE
+    (40) if -> IF LPAREN conditions RPAREN . LBRACE body RBRACE else_blocks
+
+    LBRACE          shift and go to state 91
+
+
+state 70
+
+    (44) conditions -> condition opLogic . conditions
+    (43) conditions -> . condition
+    (44) conditions -> . condition opLogic conditions
+    (45) condition -> . valor opSymbol valor
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
+
+    condition                      shift and go to state 54
+    conditions                     shift and go to state 92
+    valor                          shift and go to state 55
+
+state 71
+
+    (54) opLogic -> AND .
+
+    INT             reduce using rule 54 (opLogic -> AND .)
+    FLOAT           reduce using rule 54 (opLogic -> AND .)
+    VARIABLE        reduce using rule 54 (opLogic -> AND .)
+    STRING          reduce using rule 54 (opLogic -> AND .)
+
+
+state 72
+
+    (55) opLogic -> LOGICAL_AND .
+
+    INT             reduce using rule 55 (opLogic -> LOGICAL_AND .)
+    FLOAT           reduce using rule 55 (opLogic -> LOGICAL_AND .)
+    VARIABLE        reduce using rule 55 (opLogic -> LOGICAL_AND .)
+    STRING          reduce using rule 55 (opLogic -> LOGICAL_AND .)
+
+
+state 73
+
+    (56) opLogic -> OR .
+
+    INT             reduce using rule 56 (opLogic -> OR .)
+    FLOAT           reduce using rule 56 (opLogic -> OR .)
+    VARIABLE        reduce using rule 56 (opLogic -> OR .)
+    STRING          reduce using rule 56 (opLogic -> OR .)
+
+
+state 74
+
+    (57) opLogic -> LOGICAL_OR .
+
+    INT             reduce using rule 57 (opLogic -> LOGICAL_OR .)
+    FLOAT           reduce using rule 57 (opLogic -> LOGICAL_OR .)
+    VARIABLE        reduce using rule 57 (opLogic -> LOGICAL_OR .)
+    STRING          reduce using rule 57 (opLogic -> LOGICAL_OR .)
+
+
+state 75
+
+    (58) opLogic -> NOT .
+
+    INT             reduce using rule 58 (opLogic -> NOT .)
+    FLOAT           reduce using rule 58 (opLogic -> NOT .)
+    VARIABLE        reduce using rule 58 (opLogic -> NOT .)
+    STRING          reduce using rule 58 (opLogic -> NOT .)
+
+
+state 76
+
+    (59) opLogic -> LOGICAL_NOT .
+
+    INT             reduce using rule 59 (opLogic -> LOGICAL_NOT .)
+    FLOAT           reduce using rule 59 (opLogic -> LOGICAL_NOT .)
+    VARIABLE        reduce using rule 59 (opLogic -> LOGICAL_NOT .)
+    STRING          reduce using rule 59 (opLogic -> LOGICAL_NOT .)
+
+
+state 77
+
+    (45) condition -> valor opSymbol . valor
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
+
+    valor                          shift and go to state 93
+
+state 78
+
+    (46) opSymbol -> EQ .
+
+    INT             reduce using rule 46 (opSymbol -> EQ .)
+    FLOAT           reduce using rule 46 (opSymbol -> EQ .)
+    VARIABLE        reduce using rule 46 (opSymbol -> EQ .)
+    STRING          reduce using rule 46 (opSymbol -> EQ .)
+
+
+state 79
+
+    (47) opSymbol -> NEQ .
+
+    INT             reduce using rule 47 (opSymbol -> NEQ .)
+    FLOAT           reduce using rule 47 (opSymbol -> NEQ .)
+    VARIABLE        reduce using rule 47 (opSymbol -> NEQ .)
+    STRING          reduce using rule 47 (opSymbol -> NEQ .)
+
+
+state 80
+
+    (48) opSymbol -> STRICTEQ .
+
+    INT             reduce using rule 48 (opSymbol -> STRICTEQ .)
+    FLOAT           reduce using rule 48 (opSymbol -> STRICTEQ .)
+    VARIABLE        reduce using rule 48 (opSymbol -> STRICTEQ .)
+    STRING          reduce using rule 48 (opSymbol -> STRICTEQ .)
+
+
+state 81
+
+    (49) opSymbol -> STRICTNEQ .
+
+    INT             reduce using rule 49 (opSymbol -> STRICTNEQ .)
+    FLOAT           reduce using rule 49 (opSymbol -> STRICTNEQ .)
+    VARIABLE        reduce using rule 49 (opSymbol -> STRICTNEQ .)
+    STRING          reduce using rule 49 (opSymbol -> STRICTNEQ .)
+
+
+state 82
+
+    (50) opSymbol -> LT .
+
+    INT             reduce using rule 50 (opSymbol -> LT .)
+    FLOAT           reduce using rule 50 (opSymbol -> LT .)
+    VARIABLE        reduce using rule 50 (opSymbol -> LT .)
+    STRING          reduce using rule 50 (opSymbol -> LT .)
+
+
+state 83
+
+    (51) opSymbol -> GT .
+
+    INT             reduce using rule 51 (opSymbol -> GT .)
+    FLOAT           reduce using rule 51 (opSymbol -> GT .)
+    VARIABLE        reduce using rule 51 (opSymbol -> GT .)
+    STRING          reduce using rule 51 (opSymbol -> GT .)
+
+
+state 84
+
+    (52) opSymbol -> LEQ .
+
+    INT             reduce using rule 52 (opSymbol -> LEQ .)
+    FLOAT           reduce using rule 52 (opSymbol -> LEQ .)
+    VARIABLE        reduce using rule 52 (opSymbol -> LEQ .)
+    STRING          reduce using rule 52 (opSymbol -> LEQ .)
+
+
+state 85
+
+    (53) opSymbol -> GEQ .
+
+    INT             reduce using rule 53 (opSymbol -> GEQ .)
+    FLOAT           reduce using rule 53 (opSymbol -> GEQ .)
+    VARIABLE        reduce using rule 53 (opSymbol -> GEQ .)
+    STRING          reduce using rule 53 (opSymbol -> GEQ .)
+
+
+state 86
+
+    (68) while -> WHILE LPAREN condition RPAREN . LBRACE body RBRACE
+    (69) while -> WHILE LPAREN condition RPAREN . LBRACE RBRACE
+
+    LBRACE          shift and go to state 94
+
+
+state 87
+
+    (70) switch -> SWITCH LPAREN condition RPAREN . LBRACE caseLists RBRACE
+    (71) switch -> SWITCH LPAREN condition RPAREN . LBRACE RBRACE
+
+    LBRACE          shift and go to state 95
+
+
+state 88
+
+    (65) forStatement -> FOR LPAREN forcondition RPAREN . LBRACE body RBRACE
+
+    LBRACE          shift and go to state 96
+
+
+state 89
+
+    (66) forcondition -> VARIABLE EQUALS . INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
+    (67) forcondition -> VARIABLE EQUALS . INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS
+
+    INT             shift and go to state 97
+
+
+state 90
+
+    (10) operaArit -> valor operador operaArit .
+
+    SEMICOLON       reduce using rule 10 (operaArit -> valor operador operaArit .)
+
+
+state 91
+
+    (39) if -> IF LPAREN conditions RPAREN LBRACE . body RBRACE
+    (40) if -> IF LPAREN conditions RPAREN LBRACE . body RBRACE else_blocks
+    (60) body -> . sentenciaList
+    (61) body -> . empty
+    (62) sentenciaList -> . sentencia
+    (63) sentenciaList -> . sentencia sentenciaList
+    (33) empty -> .
+    (4) sentencia -> . asignacion
+    (5) sentencia -> . comparacion
+    (6) sentencia -> . impresion
+    (7) sentencia -> . estructurasPrograma
+    (8) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (20) comparacion -> . valor comparador valor
+    (25) impresion -> . ECHO imprimir SEMICOLON
+    (26) impresion -> . PRINT imprimir SEMICOLON
+    (34) estructurasPrograma -> . controlStructure
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+    (35) controlStructure -> . if
+    (36) controlStructure -> . for
+    (37) controlStructure -> . while
+    (38) controlStructure -> . switch
+    (39) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE
+    (40) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+    (64) for -> . forStatement
+    (68) while -> . WHILE LPAREN condition RPAREN LBRACE body RBRACE
+    (69) while -> . WHILE LPAREN condition RPAREN LBRACE RBRACE
+    (70) switch -> . SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> . SWITCH LPAREN condition RPAREN LBRACE RBRACE
+    (65) forStatement -> . FOR LPAREN forcondition RPAREN LBRACE body RBRACE
+
+    RBRACE          reduce using rule 33 (empty -> .)
+    VARIABLE        shift and go to state 9
+    ECHO            shift and go to state 11
+    PRINT           shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    STRING          shift and go to state 16
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    FOR             shift and go to state 25
+
+    body                           shift and go to state 98
+    sentenciaList                  shift and go to state 99
+    empty                          shift and go to state 100
+    sentencia                      shift and go to state 101
+    asignacion                     shift and go to state 5
+    comparacion                    shift and go to state 6
+    impresion                      shift and go to state 7
+    estructurasPrograma            shift and go to state 8
+    valor                          shift and go to state 10
+    controlStructure               shift and go to state 13
+    if                             shift and go to state 17
+    for                            shift and go to state 18
+    while                          shift and go to state 19
+    switch                         shift and go to state 20
+    forStatement                   shift and go to state 22
+
+state 92
+
+    (44) conditions -> condition opLogic conditions .
+
+    RPAREN          reduce using rule 44 (conditions -> condition opLogic conditions .)
+
+
+state 93
+
+    (45) condition -> valor opSymbol valor .
+
+    AND             reduce using rule 45 (condition -> valor opSymbol valor .)
+    LOGICAL_AND     reduce using rule 45 (condition -> valor opSymbol valor .)
+    OR              reduce using rule 45 (condition -> valor opSymbol valor .)
+    LOGICAL_OR      reduce using rule 45 (condition -> valor opSymbol valor .)
+    NOT             reduce using rule 45 (condition -> valor opSymbol valor .)
+    LOGICAL_NOT     reduce using rule 45 (condition -> valor opSymbol valor .)
+    RPAREN          reduce using rule 45 (condition -> valor opSymbol valor .)
+
+
+state 94
+
+    (68) while -> WHILE LPAREN condition RPAREN LBRACE . body RBRACE
+    (69) while -> WHILE LPAREN condition RPAREN LBRACE . RBRACE
+    (60) body -> . sentenciaList
+    (61) body -> . empty
+    (62) sentenciaList -> . sentencia
+    (63) sentenciaList -> . sentencia sentenciaList
+    (33) empty -> .
+    (4) sentencia -> . asignacion
+    (5) sentencia -> . comparacion
+    (6) sentencia -> . impresion
+    (7) sentencia -> . estructurasPrograma
+    (8) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (20) comparacion -> . valor comparador valor
+    (25) impresion -> . ECHO imprimir SEMICOLON
+    (26) impresion -> . PRINT imprimir SEMICOLON
+    (34) estructurasPrograma -> . controlStructure
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+    (35) controlStructure -> . if
+    (36) controlStructure -> . for
+    (37) controlStructure -> . while
+    (38) controlStructure -> . switch
+    (39) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE
+    (40) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+    (64) for -> . forStatement
+    (68) while -> . WHILE LPAREN condition RPAREN LBRACE body RBRACE
+    (69) while -> . WHILE LPAREN condition RPAREN LBRACE RBRACE
+    (70) switch -> . SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> . SWITCH LPAREN condition RPAREN LBRACE RBRACE
+    (65) forStatement -> . FOR LPAREN forcondition RPAREN LBRACE body RBRACE
+
+  ! shift/reduce conflict for RBRACE resolved as shift
+    RBRACE          shift and go to state 103
+    VARIABLE        shift and go to state 9
+    ECHO            shift and go to state 11
+    PRINT           shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    STRING          shift and go to state 16
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    FOR             shift and go to state 25
+
+  ! RBRACE          [ reduce using rule 33 (empty -> .) ]
+
+    body                           shift and go to state 102
+    sentenciaList                  shift and go to state 99
+    empty                          shift and go to state 100
+    sentencia                      shift and go to state 101
+    asignacion                     shift and go to state 5
+    comparacion                    shift and go to state 6
+    impresion                      shift and go to state 7
+    estructurasPrograma            shift and go to state 8
+    valor                          shift and go to state 10
+    controlStructure               shift and go to state 13
+    if                             shift and go to state 17
+    for                            shift and go to state 18
+    while                          shift and go to state 19
+    switch                         shift and go to state 20
+    forStatement                   shift and go to state 22
+
+state 95
+
+    (70) switch -> SWITCH LPAREN condition RPAREN LBRACE . caseLists RBRACE
+    (71) switch -> SWITCH LPAREN condition RPAREN LBRACE . RBRACE
+    (72) caseLists -> . cases default
+    (73) caseLists -> . cases
+    (74) caseLists -> . default
+    (75) caseLists -> . empty
+    (76) cases -> . case
+    (77) cases -> . case cases
+    (79) default -> . DEFAULT COLON body BREAK SEMICOLON
+    (33) empty -> .
+    (78) case -> . CASE valor COLON body BREAK SEMICOLON
+
+  ! shift/reduce conflict for RBRACE resolved as shift
+    RBRACE          shift and go to state 105
+    DEFAULT         shift and go to state 110
+    CASE            shift and go to state 111
+
+  ! RBRACE          [ reduce using rule 33 (empty -> .) ]
+
+    caseLists                      shift and go to state 104
+    cases                          shift and go to state 106
+    default                        shift and go to state 107
+    empty                          shift and go to state 108
+    case                           shift and go to state 109
+
+state 96
+
+    (65) forStatement -> FOR LPAREN forcondition RPAREN LBRACE . body RBRACE
+    (60) body -> . sentenciaList
+    (61) body -> . empty
+    (62) sentenciaList -> . sentencia
+    (63) sentenciaList -> . sentencia sentenciaList
+    (33) empty -> .
+    (4) sentencia -> . asignacion
+    (5) sentencia -> . comparacion
+    (6) sentencia -> . impresion
+    (7) sentencia -> . estructurasPrograma
+    (8) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (20) comparacion -> . valor comparador valor
+    (25) impresion -> . ECHO imprimir SEMICOLON
+    (26) impresion -> . PRINT imprimir SEMICOLON
+    (34) estructurasPrograma -> . controlStructure
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+    (35) controlStructure -> . if
+    (36) controlStructure -> . for
+    (37) controlStructure -> . while
+    (38) controlStructure -> . switch
+    (39) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE
+    (40) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+    (64) for -> . forStatement
+    (68) while -> . WHILE LPAREN condition RPAREN LBRACE body RBRACE
+    (69) while -> . WHILE LPAREN condition RPAREN LBRACE RBRACE
+    (70) switch -> . SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> . SWITCH LPAREN condition RPAREN LBRACE RBRACE
+    (65) forStatement -> . FOR LPAREN forcondition RPAREN LBRACE body RBRACE
+
+    RBRACE          reduce using rule 33 (empty -> .)
+    VARIABLE        shift and go to state 9
+    ECHO            shift and go to state 11
+    PRINT           shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    STRING          shift and go to state 16
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    FOR             shift and go to state 25
+
+    body                           shift and go to state 112
+    sentenciaList                  shift and go to state 99
+    empty                          shift and go to state 100
+    sentencia                      shift and go to state 101
+    asignacion                     shift and go to state 5
+    comparacion                    shift and go to state 6
+    impresion                      shift and go to state 7
+    estructurasPrograma            shift and go to state 8
+    valor                          shift and go to state 10
+    controlStructure               shift and go to state 13
+    if                             shift and go to state 17
+    for                            shift and go to state 18
+    while                          shift and go to state 19
+    switch                         shift and go to state 20
+    forStatement                   shift and go to state 22
+
+state 97
+
+    (66) forcondition -> VARIABLE EQUALS INT . SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
+    (67) forcondition -> VARIABLE EQUALS INT . SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS
+
+    SEMICOLON       shift and go to state 113
+
+
+state 98
+
+    (39) if -> IF LPAREN conditions RPAREN LBRACE body . RBRACE
+    (40) if -> IF LPAREN conditions RPAREN LBRACE body . RBRACE else_blocks
+
+    RBRACE          shift and go to state 114
+
+
+state 99
+
+    (60) body -> sentenciaList .
+
+    RBRACE          reduce using rule 60 (body -> sentenciaList .)
+    BREAK           reduce using rule 60 (body -> sentenciaList .)
+
+
+state 100
+
+    (61) body -> empty .
+
+    RBRACE          reduce using rule 61 (body -> empty .)
+    BREAK           reduce using rule 61 (body -> empty .)
+
+
+state 101
+
+    (62) sentenciaList -> sentencia .
+    (63) sentenciaList -> sentencia . sentenciaList
+    (62) sentenciaList -> . sentencia
+    (63) sentenciaList -> . sentencia sentenciaList
+    (4) sentencia -> . asignacion
+    (5) sentencia -> . comparacion
+    (6) sentencia -> . impresion
+    (7) sentencia -> . estructurasPrograma
+    (8) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (20) comparacion -> . valor comparador valor
+    (25) impresion -> . ECHO imprimir SEMICOLON
+    (26) impresion -> . PRINT imprimir SEMICOLON
+    (34) estructurasPrograma -> . controlStructure
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+    (35) controlStructure -> . if
+    (36) controlStructure -> . for
+    (37) controlStructure -> . while
+    (38) controlStructure -> . switch
+    (39) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE
+    (40) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+    (64) for -> . forStatement
+    (68) while -> . WHILE LPAREN condition RPAREN LBRACE body RBRACE
+    (69) while -> . WHILE LPAREN condition RPAREN LBRACE RBRACE
+    (70) switch -> . SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> . SWITCH LPAREN condition RPAREN LBRACE RBRACE
+    (65) forStatement -> . FOR LPAREN forcondition RPAREN LBRACE body RBRACE
+
+    RBRACE          reduce using rule 62 (sentenciaList -> sentencia .)
+    BREAK           reduce using rule 62 (sentenciaList -> sentencia .)
+    VARIABLE        shift and go to state 9
+    ECHO            shift and go to state 11
+    PRINT           shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    STRING          shift and go to state 16
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    FOR             shift and go to state 25
+
+    sentencia                      shift and go to state 101
+    sentenciaList                  shift and go to state 115
+    asignacion                     shift and go to state 5
+    comparacion                    shift and go to state 6
+    impresion                      shift and go to state 7
+    estructurasPrograma            shift and go to state 8
+    valor                          shift and go to state 10
+    controlStructure               shift and go to state 13
+    if                             shift and go to state 17
+    for                            shift and go to state 18
+    while                          shift and go to state 19
+    switch                         shift and go to state 20
+    forStatement                   shift and go to state 22
+
+state 102
+
+    (68) while -> WHILE LPAREN condition RPAREN LBRACE body . RBRACE
+
+    RBRACE          shift and go to state 116
+
+
+state 103
+
+    (69) while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .
+
+    VARIABLE        reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    ECHO            reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    PRINT           reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    INT             reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    FLOAT           reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    STRING          reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    IF              reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    WHILE           reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    SWITCH          reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    FOR             reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    CLOSETAG        reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    RBRACE          reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+    BREAK           reduce using rule 69 (while -> WHILE LPAREN condition RPAREN LBRACE RBRACE .)
+
+
+state 104
+
+    (70) switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists . RBRACE
+
+    RBRACE          shift and go to state 117
+
+
+state 105
+
+    (71) switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .
+
+    VARIABLE        reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    ECHO            reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    PRINT           reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    INT             reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    FLOAT           reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    STRING          reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    IF              reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    WHILE           reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    SWITCH          reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    FOR             reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    CLOSETAG        reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    RBRACE          reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+    BREAK           reduce using rule 71 (switch -> SWITCH LPAREN condition RPAREN LBRACE RBRACE .)
+
+
+state 106
+
+    (72) caseLists -> cases . default
+    (73) caseLists -> cases .
+    (79) default -> . DEFAULT COLON body BREAK SEMICOLON
+
+    RBRACE          reduce using rule 73 (caseLists -> cases .)
+    DEFAULT         shift and go to state 110
+
+    default                        shift and go to state 118
+
+state 107
+
+    (74) caseLists -> default .
+
+    RBRACE          reduce using rule 74 (caseLists -> default .)
+
+
+state 108
+
+    (75) caseLists -> empty .
+
+    RBRACE          reduce using rule 75 (caseLists -> empty .)
+
+
+state 109
+
+    (76) cases -> case .
+    (77) cases -> case . cases
+    (76) cases -> . case
+    (77) cases -> . case cases
+    (78) case -> . CASE valor COLON body BREAK SEMICOLON
+
+    DEFAULT         reduce using rule 76 (cases -> case .)
+    RBRACE          reduce using rule 76 (cases -> case .)
+    CASE            shift and go to state 111
+
+    case                           shift and go to state 109
+    cases                          shift and go to state 119
+
+state 110
+
+    (79) default -> DEFAULT . COLON body BREAK SEMICOLON
+
+    COLON           shift and go to state 120
+
+
+state 111
+
+    (78) case -> CASE . valor COLON body BREAK SEMICOLON
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
+
+    valor                          shift and go to state 121
+
+state 112
+
+    (65) forStatement -> FOR LPAREN forcondition RPAREN LBRACE body . RBRACE
+
+    RBRACE          shift and go to state 122
+
+
+state 113
+
+    (66) forcondition -> VARIABLE EQUALS INT SEMICOLON . VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
+    (67) forcondition -> VARIABLE EQUALS INT SEMICOLON . VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS
+
+    VARIABLE        shift and go to state 123
+
+
+state 114
+
+    (39) if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .
+    (40) if -> IF LPAREN conditions RPAREN LBRACE body RBRACE . else_blocks
+    (41) else_blocks -> . ELSE LBRACE body RBRACE
+    (42) else_blocks -> . ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+
+    VARIABLE        reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    ECHO            reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    PRINT           reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    INT             reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    FLOAT           reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    STRING          reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    IF              reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    WHILE           reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    SWITCH          reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    FOR             reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    CLOSETAG        reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    RBRACE          reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    BREAK           reduce using rule 39 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE .)
+    ELSE            shift and go to state 125
+    ELSEIF          shift and go to state 126
+
+    else_blocks                    shift and go to state 124
+
+state 115
+
+    (63) sentenciaList -> sentencia sentenciaList .
+
+    RBRACE          reduce using rule 63 (sentenciaList -> sentencia sentenciaList .)
+    BREAK           reduce using rule 63 (sentenciaList -> sentencia sentenciaList .)
+
+
+state 116
+
+    (68) while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .
+
+    VARIABLE        reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    ECHO            reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    PRINT           reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    INT             reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    FLOAT           reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    STRING          reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    IF              reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    WHILE           reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    SWITCH          reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    FOR             reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    CLOSETAG        reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    RBRACE          reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+    BREAK           reduce using rule 68 (while -> WHILE LPAREN condition RPAREN LBRACE body RBRACE .)
+
+
+state 117
+
+    (70) switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .
+
+    VARIABLE        reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    ECHO            reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    PRINT           reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    INT             reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    FLOAT           reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    STRING          reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    IF              reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    WHILE           reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    SWITCH          reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    FOR             reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    CLOSETAG        reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    RBRACE          reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+    BREAK           reduce using rule 70 (switch -> SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE .)
+
+
+state 118
+
+    (72) caseLists -> cases default .
+
+    RBRACE          reduce using rule 72 (caseLists -> cases default .)
+
+
+state 119
+
+    (77) cases -> case cases .
+
+    DEFAULT         reduce using rule 77 (cases -> case cases .)
+    RBRACE          reduce using rule 77 (cases -> case cases .)
+
+
+state 120
+
+    (79) default -> DEFAULT COLON . body BREAK SEMICOLON
+    (60) body -> . sentenciaList
+    (61) body -> . empty
+    (62) sentenciaList -> . sentencia
+    (63) sentenciaList -> . sentencia sentenciaList
+    (33) empty -> .
+    (4) sentencia -> . asignacion
+    (5) sentencia -> . comparacion
+    (6) sentencia -> . impresion
+    (7) sentencia -> . estructurasPrograma
+    (8) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (20) comparacion -> . valor comparador valor
+    (25) impresion -> . ECHO imprimir SEMICOLON
+    (26) impresion -> . PRINT imprimir SEMICOLON
+    (34) estructurasPrograma -> . controlStructure
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+    (35) controlStructure -> . if
+    (36) controlStructure -> . for
+    (37) controlStructure -> . while
+    (38) controlStructure -> . switch
+    (39) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE
+    (40) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+    (64) for -> . forStatement
+    (68) while -> . WHILE LPAREN condition RPAREN LBRACE body RBRACE
+    (69) while -> . WHILE LPAREN condition RPAREN LBRACE RBRACE
+    (70) switch -> . SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> . SWITCH LPAREN condition RPAREN LBRACE RBRACE
+    (65) forStatement -> . FOR LPAREN forcondition RPAREN LBRACE body RBRACE
+
+    BREAK           reduce using rule 33 (empty -> .)
+    VARIABLE        shift and go to state 9
+    ECHO            shift and go to state 11
+    PRINT           shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    STRING          shift and go to state 16
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    FOR             shift and go to state 25
+
+    body                           shift and go to state 127
+    sentenciaList                  shift and go to state 99
+    empty                          shift and go to state 100
+    sentencia                      shift and go to state 101
+    asignacion                     shift and go to state 5
+    comparacion                    shift and go to state 6
+    impresion                      shift and go to state 7
+    estructurasPrograma            shift and go to state 8
+    valor                          shift and go to state 10
+    controlStructure               shift and go to state 13
+    if                             shift and go to state 17
+    for                            shift and go to state 18
+    while                          shift and go to state 19
+    switch                         shift and go to state 20
+    forStatement                   shift and go to state 22
+
+state 121
+
+    (78) case -> CASE valor . COLON body BREAK SEMICOLON
+
+    COLON           shift and go to state 128
+
+
+state 122
+
+    (65) forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .
+
+    VARIABLE        reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    ECHO            reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    PRINT           reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    INT             reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    FLOAT           reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    STRING          reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    IF              reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    WHILE           reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    SWITCH          reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    FOR             reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    CLOSETAG        reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    RBRACE          reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+    BREAK           reduce using rule 65 (forStatement -> FOR LPAREN forcondition RPAREN LBRACE body RBRACE .)
+
+
+state 123
+
+    (66) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE . opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
+    (67) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE . opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS
+    (46) opSymbol -> . EQ
+    (47) opSymbol -> . NEQ
+    (48) opSymbol -> . STRICTEQ
+    (49) opSymbol -> . STRICTNEQ
+    (50) opSymbol -> . LT
+    (51) opSymbol -> . GT
+    (52) opSymbol -> . LEQ
+    (53) opSymbol -> . GEQ
+
+    EQ              shift and go to state 78
+    NEQ             shift and go to state 79
+    STRICTEQ        shift and go to state 80
+    STRICTNEQ       shift and go to state 81
+    LT              shift and go to state 82
+    GT              shift and go to state 83
+    LEQ             shift and go to state 84
+    GEQ             shift and go to state 85
+
+    opSymbol                       shift and go to state 129
+
+state 124
+
+    (40) if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .
+
+    VARIABLE        reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    ECHO            reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    PRINT           reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    INT             reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    FLOAT           reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    STRING          reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    IF              reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    WHILE           reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    SWITCH          reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    FOR             reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    CLOSETAG        reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    RBRACE          reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    BREAK           reduce using rule 40 (if -> IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+
+
+state 125
+
+    (41) else_blocks -> ELSE . LBRACE body RBRACE
+
+    LBRACE          shift and go to state 130
+
+
+state 126
+
+    (42) else_blocks -> ELSEIF . LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+
+    LPAREN          shift and go to state 131
+
+
+state 127
+
+    (79) default -> DEFAULT COLON body . BREAK SEMICOLON
+
+    BREAK           shift and go to state 132
+
+
+state 128
+
+    (78) case -> CASE valor COLON . body BREAK SEMICOLON
+    (60) body -> . sentenciaList
+    (61) body -> . empty
+    (62) sentenciaList -> . sentencia
+    (63) sentenciaList -> . sentencia sentenciaList
+    (33) empty -> .
+    (4) sentencia -> . asignacion
+    (5) sentencia -> . comparacion
+    (6) sentencia -> . impresion
+    (7) sentencia -> . estructurasPrograma
+    (8) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (20) comparacion -> . valor comparador valor
+    (25) impresion -> . ECHO imprimir SEMICOLON
+    (26) impresion -> . PRINT imprimir SEMICOLON
+    (34) estructurasPrograma -> . controlStructure
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+    (35) controlStructure -> . if
+    (36) controlStructure -> . for
+    (37) controlStructure -> . while
+    (38) controlStructure -> . switch
+    (39) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE
+    (40) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+    (64) for -> . forStatement
+    (68) while -> . WHILE LPAREN condition RPAREN LBRACE body RBRACE
+    (69) while -> . WHILE LPAREN condition RPAREN LBRACE RBRACE
+    (70) switch -> . SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> . SWITCH LPAREN condition RPAREN LBRACE RBRACE
+    (65) forStatement -> . FOR LPAREN forcondition RPAREN LBRACE body RBRACE
+
+    BREAK           reduce using rule 33 (empty -> .)
+    VARIABLE        shift and go to state 9
+    ECHO            shift and go to state 11
+    PRINT           shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    STRING          shift and go to state 16
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    FOR             shift and go to state 25
+
+    valor                          shift and go to state 10
+    body                           shift and go to state 133
+    sentenciaList                  shift and go to state 99
+    empty                          shift and go to state 100
+    sentencia                      shift and go to state 101
+    asignacion                     shift and go to state 5
+    comparacion                    shift and go to state 6
+    impresion                      shift and go to state 7
+    estructurasPrograma            shift and go to state 8
+    controlStructure               shift and go to state 13
+    if                             shift and go to state 17
+    for                            shift and go to state 18
+    while                          shift and go to state 19
+    switch                         shift and go to state 20
+    forStatement                   shift and go to state 22
+
+state 129
+
+    (66) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol . INT SEMICOLON VARIABLE DOUBLEPLUS
+    (67) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol . INT SEMICOLON VARIABLE DOUBLEMINUS
+
+    INT             shift and go to state 134
+
+
+state 130
+
+    (41) else_blocks -> ELSE LBRACE . body RBRACE
+    (60) body -> . sentenciaList
+    (61) body -> . empty
+    (62) sentenciaList -> . sentencia
+    (63) sentenciaList -> . sentencia sentenciaList
+    (33) empty -> .
+    (4) sentencia -> . asignacion
+    (5) sentencia -> . comparacion
+    (6) sentencia -> . impresion
+    (7) sentencia -> . estructurasPrograma
+    (8) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (20) comparacion -> . valor comparador valor
+    (25) impresion -> . ECHO imprimir SEMICOLON
+    (26) impresion -> . PRINT imprimir SEMICOLON
+    (34) estructurasPrograma -> . controlStructure
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+    (35) controlStructure -> . if
+    (36) controlStructure -> . for
+    (37) controlStructure -> . while
+    (38) controlStructure -> . switch
+    (39) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE
+    (40) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+    (64) for -> . forStatement
+    (68) while -> . WHILE LPAREN condition RPAREN LBRACE body RBRACE
+    (69) while -> . WHILE LPAREN condition RPAREN LBRACE RBRACE
+    (70) switch -> . SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> . SWITCH LPAREN condition RPAREN LBRACE RBRACE
+    (65) forStatement -> . FOR LPAREN forcondition RPAREN LBRACE body RBRACE
+
+    RBRACE          reduce using rule 33 (empty -> .)
+    VARIABLE        shift and go to state 9
+    ECHO            shift and go to state 11
+    PRINT           shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    STRING          shift and go to state 16
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    FOR             shift and go to state 25
+
+    body                           shift and go to state 135
+    sentenciaList                  shift and go to state 99
+    empty                          shift and go to state 100
+    sentencia                      shift and go to state 101
+    asignacion                     shift and go to state 5
+    comparacion                    shift and go to state 6
+    impresion                      shift and go to state 7
+    estructurasPrograma            shift and go to state 8
+    valor                          shift and go to state 10
+    controlStructure               shift and go to state 13
+    if                             shift and go to state 17
+    for                            shift and go to state 18
+    while                          shift and go to state 19
+    switch                         shift and go to state 20
+    forStatement                   shift and go to state 22
+
+state 131
+
+    (42) else_blocks -> ELSEIF LPAREN . conditions RPAREN LBRACE body RBRACE else_blocks
+    (43) conditions -> . condition
+    (44) conditions -> . condition opLogic conditions
+    (45) condition -> . valor opSymbol valor
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    VARIABLE        shift and go to state 39
+    STRING          shift and go to state 16
+
+    conditions                     shift and go to state 136
+    condition                      shift and go to state 54
+    valor                          shift and go to state 55
+
+state 132
+
+    (79) default -> DEFAULT COLON body BREAK . SEMICOLON
+
+    SEMICOLON       shift and go to state 137
+
+
+state 133
+
+    (78) case -> CASE valor COLON body . BREAK SEMICOLON
+
+    BREAK           shift and go to state 138
+
+
+state 134
+
+    (66) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT . SEMICOLON VARIABLE DOUBLEPLUS
+    (67) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT . SEMICOLON VARIABLE DOUBLEMINUS
+
+    SEMICOLON       shift and go to state 139
+
+
+state 135
+
+    (41) else_blocks -> ELSE LBRACE body . RBRACE
+
+    RBRACE          shift and go to state 140
+
+
+state 136
+
+    (42) else_blocks -> ELSEIF LPAREN conditions . RPAREN LBRACE body RBRACE else_blocks
+
+    RPAREN          shift and go to state 141
+
+
+state 137
+
+    (79) default -> DEFAULT COLON body BREAK SEMICOLON .
+
+    RBRACE          reduce using rule 79 (default -> DEFAULT COLON body BREAK SEMICOLON .)
+
+
+state 138
+
+    (78) case -> CASE valor COLON body BREAK . SEMICOLON
+
+    SEMICOLON       shift and go to state 142
+
+
+state 139
+
+    (66) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON . VARIABLE DOUBLEPLUS
+    (67) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON . VARIABLE DOUBLEMINUS
+
+    VARIABLE        shift and go to state 143
+
+
+state 140
+
+    (41) else_blocks -> ELSE LBRACE body RBRACE .
+
+    VARIABLE        reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    ECHO            reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    PRINT           reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    INT             reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    FLOAT           reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    STRING          reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    IF              reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    WHILE           reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    SWITCH          reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    FOR             reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    CLOSETAG        reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    RBRACE          reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+    BREAK           reduce using rule 41 (else_blocks -> ELSE LBRACE body RBRACE .)
+
+
+state 141
+
+    (42) else_blocks -> ELSEIF LPAREN conditions RPAREN . LBRACE body RBRACE else_blocks
+
+    LBRACE          shift and go to state 144
+
+
+state 142
+
+    (78) case -> CASE valor COLON body BREAK SEMICOLON .
+
+    CASE            reduce using rule 78 (case -> CASE valor COLON body BREAK SEMICOLON .)
+    DEFAULT         reduce using rule 78 (case -> CASE valor COLON body BREAK SEMICOLON .)
+    RBRACE          reduce using rule 78 (case -> CASE valor COLON body BREAK SEMICOLON .)
+
+
+state 143
+
+    (66) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE . DOUBLEPLUS
+    (67) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE . DOUBLEMINUS
+
+    DOUBLEPLUS      shift and go to state 145
+    DOUBLEMINUS     shift and go to state 146
+
+
+state 144
+
+    (42) else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE . body RBRACE else_blocks
+    (60) body -> . sentenciaList
+    (61) body -> . empty
+    (62) sentenciaList -> . sentencia
+    (63) sentenciaList -> . sentencia sentenciaList
+    (33) empty -> .
+    (4) sentencia -> . asignacion
+    (5) sentencia -> . comparacion
+    (6) sentencia -> . impresion
+    (7) sentencia -> . estructurasPrograma
+    (8) asignacion -> . VARIABLE EQUALS operaArit SEMICOLON
+    (20) comparacion -> . valor comparador valor
+    (25) impresion -> . ECHO imprimir SEMICOLON
+    (26) impresion -> . PRINT imprimir SEMICOLON
+    (34) estructurasPrograma -> . controlStructure
+    (11) valor -> . INT
+    (12) valor -> . FLOAT
+    (13) valor -> . VARIABLE
+    (14) valor -> . STRING
+    (35) controlStructure -> . if
+    (36) controlStructure -> . for
+    (37) controlStructure -> . while
+    (38) controlStructure -> . switch
+    (39) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE
+    (40) if -> . IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+    (64) for -> . forStatement
+    (68) while -> . WHILE LPAREN condition RPAREN LBRACE body RBRACE
+    (69) while -> . WHILE LPAREN condition RPAREN LBRACE RBRACE
+    (70) switch -> . SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+    (71) switch -> . SWITCH LPAREN condition RPAREN LBRACE RBRACE
+    (65) forStatement -> . FOR LPAREN forcondition RPAREN LBRACE body RBRACE
+
+    RBRACE          reduce using rule 33 (empty -> .)
+    VARIABLE        shift and go to state 9
+    ECHO            shift and go to state 11
+    PRINT           shift and go to state 12
+    INT             shift and go to state 14
+    FLOAT           shift and go to state 15
+    STRING          shift and go to state 16
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    FOR             shift and go to state 25
+
+    body                           shift and go to state 147
+    sentenciaList                  shift and go to state 99
+    empty                          shift and go to state 100
+    sentencia                      shift and go to state 101
+    asignacion                     shift and go to state 5
+    comparacion                    shift and go to state 6
+    impresion                      shift and go to state 7
+    estructurasPrograma            shift and go to state 8
+    valor                          shift and go to state 10
+    controlStructure               shift and go to state 13
+    if                             shift and go to state 17
+    for                            shift and go to state 18
+    while                          shift and go to state 19
+    switch                         shift and go to state 20
+    forStatement                   shift and go to state 22
+
+state 145
+
+    (66) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS .
+
+    RPAREN          reduce using rule 66 (forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS .)
+
+
+state 146
+
+    (67) forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS .
+
+    RPAREN          reduce using rule 67 (forcondition -> VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS .)
+
+
+state 147
+
+    (42) else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body . RBRACE else_blocks
+
+    RBRACE          shift and go to state 148
+
+
+state 148
+
+    (42) else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE . else_blocks
+    (41) else_blocks -> . ELSE LBRACE body RBRACE
+    (42) else_blocks -> . ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+
+    ELSE            shift and go to state 125
+    ELSEIF          shift and go to state 126
+
+    else_blocks                    shift and go to state 149
+
+state 149
+
+    (42) else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .
+
+    VARIABLE        reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    ECHO            reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    PRINT           reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    INT             reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    FLOAT           reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    STRING          reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    IF              reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    WHILE           reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    SWITCH          reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    FOR             reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    CLOSETAG        reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    RBRACE          reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+    BREAK           reduce using rule 42 (else_blocks -> ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for RBRACE in state 94 resolved as shift
+WARNING: shift/reduce conflict for RBRACE in state 95 resolved as shift

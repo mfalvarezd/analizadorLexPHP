@@ -13,7 +13,8 @@ def p_programa(p):
 def p_sentencia(p):
     '''sentencia : asignacion
                 | comparacion
-                | impresion'''
+                | impresion
+                | estructurasPrograma'''
 
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUALS operaArit SEMICOLON'''
@@ -36,8 +37,8 @@ def p_operador(p):
                 | MODULO'''
 
 def p_comparacion(p):
-    '''comparacion : INT comparador INT'''
-    
+    '''comparacion : valor comparador valor'''
+
 def p_comparador(p):
     '''comparador : LT
                 | GT
@@ -60,6 +61,91 @@ def p_repiteValores(p):
 
 def p_empty(p):
     '''empty :'''
+
+def p_estructurasPrograma(p):
+    '''estructurasPrograma : controlStructure'''
+
+def p_controlStructure(p):
+    '''controlStructure : if
+                        | for
+                        | while
+                        | switch'''
+
+def p_if(p):
+    '''if : IF LPAREN conditions RPAREN LBRACE body RBRACE
+         | IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks'''
+
+def p_else_blocks(p):
+    '''else_blocks : ELSE LBRACE body RBRACE
+                   | ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks'''
+
+
+def p_conditions(p):
+    '''conditions : condition
+                | condition opLogic conditions'''
+
+def p_condition(p):
+    '''condition : valor opSymbol valor'''
+
+def p_opSymbol(p):
+    '''opSymbol : EQ
+                | NEQ
+                | STRICTEQ
+                | STRICTNEQ
+                | LT
+                | GT
+                | LEQ
+                | GEQ'''
+
+def p_opLogic(p):
+    '''opLogic : AND
+                | LOGICAL_AND
+                | OR
+                | LOGICAL_OR
+                | NOT
+                | LOGICAL_NOT'''
+
+def p_body(p):
+    '''body : sentenciaList
+            | empty'''
+
+def p_sentenciaList(p):
+    '''sentenciaList : sentencia
+                    | sentencia sentenciaList'''
+
+def p_for(p):
+    '''for : forStatement'''
+
+def p_forStatement(p):
+    '''forStatement : FOR LPAREN forcondition RPAREN LBRACE body RBRACE'''
+
+def p_forcondition(p):
+    '''forcondition : VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
+                    | VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS'''
+
+def p_while(p):
+    '''while : WHILE LPAREN condition RPAREN LBRACE body RBRACE
+            | WHILE LPAREN condition RPAREN LBRACE RBRACE'''
+
+def p_switch(p):
+    '''switch : SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
+              | SWITCH LPAREN condition RPAREN LBRACE RBRACE'''
+
+def p_caseLists(p):
+    '''caseLists : cases default
+                | cases
+                | default
+                | empty'''
+
+def p_cases(p):
+    '''cases : case
+            | case cases'''
+
+def p_case(p):
+    '''case : CASE valor COLON body BREAK SEMICOLON'''
+
+def p_default(p):
+    '''default : DEFAULT COLON body BREAK SEMICOLON'''
 
 # Función para manejar errores de sintaxis
 def p_error(p):
