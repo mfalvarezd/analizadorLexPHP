@@ -128,23 +128,35 @@ def p_while(p):
             | WHILE LPAREN condition RPAREN LBRACE RBRACE'''
 
 def p_switch(p):
-    '''switch : SWITCH LPAREN valor RPAREN LBRACE caseLists RBRACE'''
+    '''switch : SWITCH LPAREN valor RPAREN LBRACE caseLists RBRACE
+              | SWITCH LPAREN valor RPAREN COLON caseLists ENDSWITCH SEMICOLON'''
+
 
 def p_caseLists(p):
     '''caseLists : cases
-                | cases default
-                | default
-                | empty'''
+                 | cases default
+                 | default
+                 | empty'''
+
 
 def p_cases(p):
     '''cases : case
-            | case cases'''
+             | case cases'''
 
 def p_case(p):
-    '''case : CASE valor COLON body BREAK SEMICOLON'''
+    '''case : CASE valor COLON body BREAK SEMICOLON
+            | CASE valor SEMICOLON body BREAK SEMICOLON
+            | CASE valor COLON body
+            | CASE valor SEMICOLON
+            | CASE valor'''
 
 def p_default(p):
-    '''default : DEFAULT COLON body BREAK SEMICOLON'''
+    '''default : DEFAULT COLON body BREAK SEMICOLON
+               | DEFAULT SEMICOLON body BREAK SEMICOLON
+               | DEFAULT COLON body
+               | DEFAULT SEMICOLON body
+               | DEFAULT'''
+
 
 # Función para manejar errores de sintaxis
 def p_error(p):

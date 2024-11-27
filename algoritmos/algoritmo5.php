@@ -32,18 +32,85 @@ for ($i = 0; $i < 5; $i++) {
 while ($var1 > 0) {
     echo "Decrementando var1:";
 }
-
-switch ($var3) {
-    case "Hola, mundo":
-        echo "Mensaje de saludo detectado";
+switch ($i) {
+    case 0:
+        echo "i es igual a 0";
         break;
-    case "Adiós":
-        echo "Mensaje de despedida detectado";
+    case 1:
+        echo "i es igual a 1";
         break;
-    default:
-        echo "Mensaje no reconocido";
+    case 2:
+        echo "i es igual a 2";
         break;
 }
 
+switch ($i) {
+    case "manzana":
+        echo "i es una manzana";
+        break;
+    case "barra":
+        echo "i es una barra";
+        break;
+    case "pastel":
+        echo "i es un pastel";
+        break;
+}
+
+switch ($i) {
+    case 0:
+        echo "i es igual a 0";
+    case 1:
+        echo "i es igual a 1";
+    case 2:
+        echo "i es igual a 2";
+}
+switch ($i) {
+    case 0:
+    case 1:
+    case 2:
+        echo "i es menor que 3 pero no negativo";
+        break;
+    case 3:
+        echo "i es 3";
+}
+
+switch ($i) {
+    case 0:
+        echo "i es igual a 0";
+        break;
+    case 1:
+        echo "i es igual a 1";
+        break;
+    case 2:
+        echo "i es igual a 2";
+        break;
+    default:
+       echo "i no es igual a 0, 1 ni 2";
+}
+switch($beer)
+{
+    case 'tuborg';
+    case 'carlsberg';
+    case 'heineken';
+        echo 'Buena elección';
+    break;
+    default;
+        echo 'Por favor haga una nueva selección...';
+    break;
+}
+
+switch ($i):
+    case 0:
+        echo "i es igual a 0";
+        break;
+    case 1:
+        echo "i es igual a 1";
+        break;
+    case 2:
+        echo "i es igual a 2";
+        break;
+    default:
+        echo "i no es igual a 0, 1 ni 2";
+endswitch;
 
 ?>
