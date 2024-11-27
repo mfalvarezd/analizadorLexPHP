@@ -48,9 +48,9 @@ reserved={
     'interface': 'INTERFACE',
     'namespace':'NAMESPACE',
     'new':'NEW',
-    'not': 'NOT',
+    'not': 'LOGICAL_NOT',
     'or': 'OR',
-    'print':'PRINT',
+    'print':'PRINT',    
 #inicio contribuciones Piero
     'private': 'PRIVATE',
     'protected':'PROTECTED',
@@ -65,8 +65,12 @@ reserved={
     'final':'FINAL',
     'void' : 'VOID',
     'null' :'NULL',
-    'fgets':'FGETS',
-    'stdin':'STDIN',
+    'int':'INT_TYPE',
+    'float':'FLOAT_TYPE',
+    'string':'STRING_TYPE',
+    'boolean': 'BOOL_TYPE',
+    'object': 'OBJECT_TYPE',
+
 }
 
 #List of token names
@@ -112,9 +116,13 @@ tokens=(
     'MODULO',
     'QUESTION',
     'COLON',
-     'LOGICAL_AND',
-       'LOGICAL_OR',
-       'LOGICAL_NOT'
+    'LOGICAL_AND',
+    'LOGICAL_OR',
+    'LOGICAL_NOT',
+    'ARRAY_TYPE',
+    'NOT'
+
+    
 )+ tuple(reserved.values())
 
 #REGULAR EXPRESSIONS
@@ -139,7 +147,7 @@ t_MINUSEQUAL = r'-='
 t_CONCATENATEEQUAL = r'\.='
 t_LOGICAL_AND = r'&&'
 t_LOGICAL_OR = r'\|\|'
-t_LOGICAL_NOT = r'!'
+t_NOT = r'!'
 t_EQ = r'=='
 t_STRICTEQ = r'==='
 t_NEQ = r'!='
@@ -161,10 +169,7 @@ t_COLON = r'\:'
 
 ##MOISES ALVAREZ
 
-def t_NULL(t):
-    r'null'  # Detecta la palabra null
-    t.type = 'NULL'
-    return t
+
 def t_BOOL(t):
     r'\b(true|false)\b'
     t.value = t.value.lower() == 'true'
@@ -227,13 +232,16 @@ lexer = lex.lex()
 data = '''
 
 
-  function __construct($marca, $modelo) { 
 
-        $this->marca = $marca; 
+array $matriz = array( 
 
-        $this->modelo = $modelo; 
+    array(1, 2, 3), 
 
-    } 
+    array(4, 5, 6), 
+
+    array(7, 8, 9) 
+
+);  
 
 '''
 
