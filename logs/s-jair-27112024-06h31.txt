@@ -1,0 +1,1 @@
+Error de sintaxis: 'fgets' en la linea 13

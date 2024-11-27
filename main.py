@@ -12,12 +12,20 @@ def p_programa(p):
 
 def p_sentencia(p):
     '''sentencia : asignacion
+                | asignacion_fgets
                 | comparacion
                 | impresion
-                | estructurasPrograma'''
+                | estructurasPrograma
+                | try'''
 
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUALS operaArit SEMICOLON'''
+
+def p_asignacion_fgets(p):
+    '''asignacion_fgets : VARIABLE EQUALS FGETS LPAREN STDIN RPAREN SEMICOLON'''
+    variable = p[1]  # Nombre de la variable
+    print(f"Asigna a {variable} el valor ingresado por el usuario.")
+
 
 def p_operaArit(p):
     '''operaArit : valor
@@ -63,7 +71,8 @@ def p_empty(p):
     '''empty :'''
 
 def p_estructurasPrograma(p):
-    '''estructurasPrograma : controlStructure'''
+    '''estructurasPrograma : controlStructure
+                        | dataStructure'''
 
 def p_controlStructure(p):
     '''controlStructure : if
@@ -140,11 +149,55 @@ def p_cases(p):
     '''cases : case
             | case cases'''
 
+def foreach(p):
+    '''foreach'''
+
 def p_case(p):
     '''case : CASE valor COLON body BREAK SEMICOLON'''
 
+def p_dataStructure(p):
+    '''dataStructure : array'''
+
+def p_array(p):
+    '''array : VARIABLE EQUALS arrays SEMICOLON
+            | VARIABLE EQUALS LBRACKET arrayAnidado RBRACKET SEMICOLON
+            | VARIABLE EQUALS ARRAY LPAREN repiteValores RPAREN SEMICOLON
+            | map'''
+
+def p_arrays(p):
+    '''arrays : LBRACKET repiteValores RBRACKET'''
+
+def p_arrayAnidado(p):
+    '''arrayAnidado : arrays
+                    | arrays COMMA arrayAnidado'''
+
+def p_map(p):
+    '''map : VARIABLE EQUALS LBRACKET maps RBRACKET SEMICOLON
+            | VARIABLE EQUALS ARRAY LPAREN maps RPAREN SEMICOLON'''
+
+def p_maps(p):
+    '''maps : mapArrow
+            | mapArrow COMMA maps'''
+
+def p_mapArrow(p):
+    '''mapArrow : valor ARROWMAP valor'''
+
 def p_default(p):
     '''default : DEFAULT COLON body BREAK SEMICOLON'''
+
+def p_try(p):
+    '''try : TRY LBRACE body RBRACE catchs
+            | TRY LBRACE body RBRACE catchs FINALLY LBRACE body RBRACE '''
+
+def p_catch(p):
+    '''catch : CATCH LPAREN EXCEPTION VARIABLE RPAREN LBRACE body RBRACE'''
+
+def p_catchs(p):
+    '''catchs : catch
+            | catch catchs'''
+
+def p_objeto(p):
+    '''objeto : '''
 
 # Función para manejar errores de sintaxis
 def p_error(p):

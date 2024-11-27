@@ -64,7 +64,9 @@ reserved={
     'while': 'WHILE',
     'final':'FINAL',
     'void' : 'VOID',
-    'null' :'NULL'
+    'null' :'NULL',
+    'fgets':'FGETS',
+    'stdin':'STDIN',
 }
 
 #List of token names
@@ -108,8 +110,6 @@ tokens=(
     'LEQ',
     'GEQ',
     'MODULO',
-    'FGETS',
-    'STDIN',
     'QUESTION',
     'COLON',
      'LOGICAL_AND',
@@ -152,8 +152,6 @@ t_OPENTAG = r'<\?php'
 t_CLOSETAG = r'\?>'
 t_ARROW = r'\->'
 t_ARROWMAP=r'\=>'
-t_FGETS=r'fgets'
-t_STDIN=r'STDIN'
 t_DOUBLEPLUS=r'\+\+'
 t_DOUBLEMINUS=r'--'
 t_QUESTION = r'\?'
