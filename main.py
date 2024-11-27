@@ -20,12 +20,25 @@ def p_sentencia(p):
                 | funcionDeclaration
                 | returnStatement
                 | llamadaFuncion
-                
-                
+                | classDeclarate
+                | interface
+                | objeto
+                | includes
+                | namespace
+                | anonymousFunction
+                | throw
+                | instance
+                | constdeclaration
+                | thisdeclaration
+                | concatenate
+                | minuse
+                | pluse
                 '''
+
 def p_returnStatement(p):
     '''returnStatement : RETURN valor SEMICOLON
                        | RETURN SEMICOLON'''
+
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUALS operaArit SEMICOLON
                   | VARIABLE EQUALS valor SEMICOLON'''
@@ -34,6 +47,7 @@ def p_asignacion_fgets(p):
     '''asignacion_fgets : VARIABLE EQUALS FGETS LPAREN STDIN RPAREN SEMICOLON'''
     variable = p[1]  # Nombre de la variable
     print(f"Asigna a {variable} el valor ingresado por el usuario.")
+
 def p_operador_ternario(p):
     '''operador_ternario : LPAREN conditions RPAREN QUESTION valor COLON valor
                         | LPAREN conditions RPAREN QUESTION COLON valor
@@ -44,7 +58,6 @@ def p_operaArit(p):
                 | valor operador operaArit'''
 
 def p_valor(p):
-    
     '''valor : INT
             | VARIABLE
             | FLOAT
@@ -56,13 +69,13 @@ def p_valor(p):
             | operador_ternario
             '''
 
-
 def p_operador(p):
     '''operador : PLUS
                 | MINUS
                 | TIMES
                 | DIVIDE
-                | MODULO'''
+                | MODULO
+                | POTENCIA'''
 
 def p_comparacion(p):
     '''comparacion : valor comparador valor'''
@@ -98,6 +111,7 @@ def p_controlStructure(p):
     '''controlStructure : if
                         | for
                         | while
+                        | dowhile
                         | switch
                         | foreach'''
 
@@ -110,17 +124,15 @@ def p_else_blocks(p):
                    | ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
                    | empty'''
 
-
 def p_conditions(p):
      '''conditions : condition
-                   | condition opLogic conditions
+                   | condition opLogic condition
                    | LPAREN conditions RPAREN'''
 
 def p_condition(p):
      '''condition : valor
                   | valor opSymbol valor
-                  | NOT condition
-                  | LPAREN conditions RPAREN'''
+                  | NOT condition'''
 
 def p_opSymbol(p):
     '''opSymbol : EQ
@@ -161,17 +173,18 @@ def p_while(p):
     '''while : WHILE LPAREN condition RPAREN LBRACE body RBRACE
             | WHILE LPAREN condition RPAREN LBRACE RBRACE'''
 
+def p_dowhile(p):
+    '''dowhile : DO LBRACE body RBRACE WHILE LPAREN condition RPAREN SEMICOLON'''
+
 def p_switch(p):
     '''switch : SWITCH LPAREN valor RPAREN LBRACE caseLists RBRACE
               | SWITCH LPAREN valor RPAREN COLON caseLists ENDSWITCH SEMICOLON'''
-
 
 def p_caseLists(p):
     '''caseLists : cases
                  | cases default
                  | default
                  | empty'''
-
 
 def p_cases(p):
     '''cases : case
@@ -220,16 +233,18 @@ def p_default(p):
                | DEFAULT COLON body
                | DEFAULT SEMICOLON body
                | DEFAULT'''
+
 def p_argumentos(p):
     '''argumentos : argumento   
                   | argumento COMMA argumentos
                   | empty'''
+
 def p_argumento(p):
-    '''argumento : VARIABLE
-                 | type VARIABLE
+    '''argumento : type VARIABLE
                  | VARIABLE EQUALS valor
                  | type VARIABLE EQUALS valor
-                 | operaArit'''   
+                 | operaArit'''
+
 def p_type(p):
     '''type : INT_TYPE
             | FLOAT_TYPE
@@ -254,13 +269,87 @@ def p_objeto(p):
     '''objeto : VARIABLE ARROW ID LPAREN argumentos RPAREN SEMICOLON   '''
 
 def p_funcionDeclaration(p):
-    '''funcionDeclaration : FUNCTION ID LPAREN argumentos RPAREN LBRACE body RBRACE''' 
+    '''funcionDeclaration : FUNCTION ID LPAREN argumentos RPAREN LBRACE body RBRACE'''
+
 def p_llamadaFuncion(p):
     '''llamadaFuncion : ID LPAREN argumentos RPAREN SEMICOLON
                       | EMPTY LPAREN argumentos RPAREN
                       | ID LPAREN argumentos RPAREN
                       | EMPTY LPAREN argumentos RPAREN SEMICOLON''' 
-                      
+
+def p_classDeclarate(p):
+    '''classDeclarate : CLASS ID LBRACE classBody RBRACE
+                    | CLASS ID EXTENDS ID LBRACE classBody RBRACE
+                    | data CLASS ID LBRACE classBody RBRACE
+                    | classInterface'''
+
+def p_classBody(p):
+    '''classBody : classMember
+                | classMember classBody'''
+
+def p_classMember(p):
+    '''classMember : type VARIABLE SEMICOLON
+                    | type FUNCTION ID LPAREN argumentos RPAREN LBRACE body RBRACE
+                    | objectInstantiation'''
+
+def p_objectInstantiation(p):
+    '''objectInstantiation : NEW ID LPAREN argumentos RPAREN
+                            | NEW ID LPAREN RPAREN'''
+
+def p_classInterface(p):
+    '''classInterface : CLASS ID IMPLEMENTS impInterface LBRACE classBody RBRACE
+                    | CLASS ID EXTENDS ID IMPLEMENTS impInterface LBRACE classBody RBRACE
+                    | data CLASS ID IMPLEMENTS impInterface LBRACE classBody RBRACE
+                    | data CLASS ID EXTENDS ID IMPLEMENTS impInterface LBRACE classBody RBRACE'''
+
+def p_impInterface(p):
+    '''impInterface : ID
+                    | ID COMMA impInterface'''
+
+def p_data(p):
+    '''data : ABSTRACT
+            | PRIVATE
+            | PROTECTED
+            | PUBLIC
+            | STATIC
+            | FINAL'''
+
+def p_interface(p):
+    '''interface : INTERFACE ID LBRACE classBody RBRACE'''
+
+def p_includes(p):
+    '''includes : INCLUDE STRING SEMICOLON
+                | INCLUDE STRING DOT STRING SEMICOLON'''
+
+def p_namespace(p):
+    '''namespace : NAMESPACE ID SEMICOLON'''
+
+def p_anonymousFunction(p):
+    'anonymousFunction : VARIABLE EQUALS FN LPAREN RPAREN ARROWMAP comparacion SEMICOLON'
+
+def p_throw(p):
+    '''throw : THROW NEW EXCEPTION LPAREN repiteValores RPAREN SEMICOLON
+            | THROW valor SEMICOLON'''
+
+def p_instance(p):
+    '''instance : VARIABLE INSTANCEOF ID'''
+
+def p_constdeclaration(p):
+    '''constdeclaration : CONST ID EQUALS valor SEMICOLON'''
+
+def p_thisdeclaration(p):
+    '''thisdeclaration : THIS ARROW ID SEMICOLON
+                        | THIS ARROW ID LPAREN RPAREN SEMICOLON'''
+
+def p_concatenate(p):
+    '''concatenate : VARIABLE CONCATENATEEQUAL STRING'''
+
+def p_minuse(p):
+    '''minuse : VARIABLE MINUSEQUAL INT'''
+
+def p_pluse(p):
+    '''pluse : VARIABLE PLUSEQUAL INT'''
+
 # Función para manejar errores de sintaxis
 def p_error(p):
     if p:
