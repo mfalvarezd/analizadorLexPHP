@@ -127,36 +127,52 @@ if ($hacer_algo) {
   }
 
   if ($hacer_algo) foo();
-
-  function foo()
+  if ((!empty($someVar)) && ( $someVar==123))
   {
-    function bar()
-    {
-      echo "No existo hasta que se llame a foo().\n";
-    }
+      echo $someVar;
   }
-  
-  /* No podemos llamar aún a bar()
-     ya que no existe. */
-  
-  foo();
-  
-  /* Ahora podemos llamar a bar(),
-     el procesamiento de foo()
-     la ha hecho accesible. */
-  
-  bar();
 
-  function recursividad($a)
+  if ((!empty($someVar))&&(someFunc($someVar)))
 {
-    if ($a < 20) {
-        echo "$a\n";
-        recursividad($a + $b);
-    }
+    echo $someVar;
 }
-function prueba(boolean $param) {}
- prueba(true);
- if(!$a){
-    echo "xd";
- }
+
+if ((someFunc($someVar))&&(!empty($someVar)))
+{
+    echo $someVar;
+}
+
+if( $a == 1 || $a == 2 ) {
+
+    if( $b == 3 || $b == 4 ) {
+
+        if( $c == 5 ||  $d == 6 ) {
+
+             //Do something here.
+
+        }
+
+    }
+
+}
+
+if( ($a==1 || $a==2) && ($b==3 || $b==4) && ($c==5 || $c==6) ) {
+
+    //do that something here.
+
+}
+if (3 == $foo) bar();
+
+$v = 1;
+
+$r = (1 == $v) ? 'Yes' : 'No'; // $r is set to 'Yes'
+$r = (3 == $v) ? 'Yes' : 'No'; // $r is set to 'No'
+echo (1 == $v) ? 'Yes' : 'No'; // 'Yes' will be printed
+
+// and since PHP 5.3
+$v = 'My Value';
+$r = ($v) ?: 'No Value'; // $r is set to 'My Value' because $v is evaluated to TRUE
+
+$v = '';
+echo ($x==1) ?: 'No Value'; // 'No Value' will be printed because $v is evaluated to FALSE
 ?>

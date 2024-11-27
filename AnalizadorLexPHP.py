@@ -17,6 +17,8 @@ import ply.lex as lex
 #Reserved
 reserved={
 #Inicio contribuciones Jair
+    'stdin':'STDIN',
+    'fgets':'FGETS',
     'abstract':'ABSTRACT',
     'and': 'AND',
     'array':'ARRAY',
@@ -48,7 +50,6 @@ reserved={
     'interface': 'INTERFACE',
     'namespace':'NAMESPACE',
     'new':'NEW',
-    'not': 'LOGICAL_NOT',
     'or': 'OR',
     'print':'PRINT',    
 #inicio contribuciones Piero
@@ -118,7 +119,6 @@ tokens=(
     'COLON',
     'LOGICAL_AND',
     'LOGICAL_OR',
-    'LOGICAL_NOT',
     'ARRAY_TYPE',
     'NOT'
 
@@ -232,16 +232,8 @@ lexer = lex.lex()
 data = '''
 
 
-
-array $matriz = array( 
-
-    array(1, 2, 3), 
-
-    array(4, 5, 6), 
-
-    array(7, 8, 9) 
-
-);  
+echo ($v) ? 'xd': 'No Value';
+ 
 
 '''
 

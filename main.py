@@ -21,32 +21,41 @@ def p_sentencia(p):
                 | returnStatement
                 | llamadaFuncion
                 
+                
                 '''
 def p_returnStatement(p):
     '''returnStatement : RETURN valor SEMICOLON
                        | RETURN SEMICOLON'''
 def p_asignacion(p):
-    '''asignacion : VARIABLE EQUALS operaArit SEMICOLON'''
+    '''asignacion : VARIABLE EQUALS operaArit SEMICOLON
+                  | VARIABLE EQUALS valor SEMICOLON'''
 
 def p_asignacion_fgets(p):
     '''asignacion_fgets : VARIABLE EQUALS FGETS LPAREN STDIN RPAREN SEMICOLON'''
     variable = p[1]  # Nombre de la variable
     print(f"Asigna a {variable} el valor ingresado por el usuario.")
-
+def p_operador_ternario(p):
+    '''operador_ternario : LPAREN conditions RPAREN QUESTION valor COLON valor
+                        | LPAREN conditions RPAREN QUESTION COLON valor
+                        '''
 
 def p_operaArit(p):
     '''operaArit : valor
                 | valor operador operaArit'''
 
 def p_valor(p):
+    
     '''valor : INT
-            | FLOAT
             | VARIABLE
+            | FLOAT
             | STRING
             | BOOL
             | NULL
             | ARRAY
+            | llamadaFuncion
+            | operador_ternario
             '''
+
 
 def p_operador(p):
     '''operador : PLUS
@@ -89,31 +98,29 @@ def p_controlStructure(p):
     '''controlStructure : if
                         | for
                         | while
-                        | switch'''
+                        | switch
+                        | foreach'''
 
 def p_if(p):
-    '''if : IF LPAREN conditions RPAREN LBRACE body RBRACE
-         | IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
-         | IF LPAREN conditions RPAREN body
-         '''
+    '''if : IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+          | IF LPAREN conditions RPAREN body'''
 
 def p_else_blocks(p):
     '''else_blocks : ELSE LBRACE body RBRACE
-                   | ELSE COLON body
                    | ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
-                   | ELSEIF LPAREN conditions RPAREN COLON body else_blocks'''
+                   | empty'''
 
 
 def p_conditions(p):
-    '''conditions : LPAREN condition RPAREN
-                | condition opLogic conditions
-                | unaryLogic condition
-                | condition'''
+     '''conditions : condition
+                   | condition opLogic conditions
+                   | LPAREN conditions RPAREN'''
 
 def p_condition(p):
-    '''condition : valor
-                 | valor opSymbol valor
-                 | operaArit opSymbol operaArit'''
+     '''condition : valor
+                  | valor opSymbol valor
+                  | NOT condition
+                  | LPAREN conditions RPAREN'''
 
 def p_opSymbol(p):
     '''opSymbol : EQ
@@ -129,13 +136,11 @@ def p_opLogic(p):
     '''opLogic : AND
                 | LOGICAL_AND
                 | OR
-                | LOGICAL_OR'''
-def p_unaryLogic(p):
-    '''unaryLogic : NOT
-                  | LOGICAL_NOT'''
+                | LOGICAL_OR
+                '''
+
 def p_body(p):
-     '''body : sentenciaList
-            | sentencia
+     '''body : sentenciaList          
             | empty'''
 
 def p_sentenciaList(p):
@@ -172,8 +177,8 @@ def p_cases(p):
     '''cases : case
              | case cases'''
 
-def foreach(p):
-    '''foreach'''
+def p_foreach(p):
+    '''foreach : FOREACH LPAREN VARIABLE AS VARIABLE RPAREN LBRACE body RBRACE'''
 
 def p_case(p):
     '''case : CASE valor COLON body BREAK SEMICOLON
@@ -246,12 +251,15 @@ def p_catchs(p):
             | catch catchs'''
 
 def p_objeto(p):
-    '''objeto : '''
+    '''objeto : VARIABLE ARROW ID LPAREN argumentos RPAREN SEMICOLON   '''
 
 def p_funcionDeclaration(p):
     '''funcionDeclaration : FUNCTION ID LPAREN argumentos RPAREN LBRACE body RBRACE''' 
 def p_llamadaFuncion(p):
-    '''llamadaFuncion : ID LPAREN argumentos RPAREN SEMICOLON''' 
+    '''llamadaFuncion : ID LPAREN argumentos RPAREN SEMICOLON
+                      | EMPTY LPAREN argumentos RPAREN
+                      | ID LPAREN argumentos RPAREN
+                      | EMPTY LPAREN argumentos RPAREN SEMICOLON''' 
                       
 # Función para manejar errores de sintaxis
 def p_error(p):
