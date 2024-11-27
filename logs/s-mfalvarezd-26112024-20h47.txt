@@ -1,0 +1,3 @@
+Error de sintaxis: '
+switch ($var3) {
+    case ' en la línea 46

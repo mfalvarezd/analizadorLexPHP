@@ -128,12 +128,11 @@ def p_while(p):
             | WHILE LPAREN condition RPAREN LBRACE RBRACE'''
 
 def p_switch(p):
-    '''switch : SWITCH LPAREN condition RPAREN LBRACE caseLists RBRACE
-              | SWITCH LPAREN condition RPAREN LBRACE RBRACE'''
+    '''switch : SWITCH LPAREN valor RPAREN LBRACE caseLists RBRACE'''
 
 def p_caseLists(p):
-    '''caseLists : cases default
-                | cases
+    '''caseLists : cases
+                | cases default
                 | default
                 | empty'''
 
@@ -150,8 +149,8 @@ def p_default(p):
 # Función para manejar errores de sintaxis
 def p_error(p):
     if p:
-        # Reportar solo el error sintáctico y la línea
-        error_msg = f"Error de sintaxis:'{p.value}'"
+        # Reportar el error sintáctico, su valor y la línea
+        error_msg = f"Error de sintaxis: '{p.value}' en la linea {p.lineno}"
         print(error_msg)
         errores_sintacticos.append(error_msg)
     else:

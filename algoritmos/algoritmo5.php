@@ -25,8 +25,9 @@ if ($x > 10) {
 
 // Estructuras de control
 for ($i = 0; $i < 5; $i++) {
-    echo "Iteración: ";
+    echo "Iteración: $i\n";
 }
+
 
 while ($var1 > 0) {
     echo "Decrementando var1:";
@@ -43,13 +44,6 @@ switch ($var3) {
         echo "Mensaje no reconocido";
         break;
 }
-
-// Función para demostrar declaraciones internas
-function ejemplo($param) {
-    return $param * 2;
-}
-
-$doble = ejemplo(15);
 
 
 ?>

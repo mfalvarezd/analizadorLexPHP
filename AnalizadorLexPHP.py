@@ -108,7 +108,6 @@ tokens=(
     'LEQ',
     'GEQ',
     'MODULO',
-    'DOUBLEDOT',
     'FGETS',
     'STDIN',
     'QUESTION',
@@ -153,13 +152,12 @@ t_OPENTAG = r'<\?php'
 t_CLOSETAG = r'\?>'
 t_ARROW = r'\->'
 t_ARROWMAP=r'\=>'
-t_DOUBLEDOT= r'\:'
 t_FGETS=r'fgets'
 t_STDIN=r'STDIN'
 t_DOUBLEPLUS=r'\+\+'
 t_DOUBLEMINUS=r'--'
 t_QUESTION = r'\?'
-t_COLON = r':'
+t_COLON = r'\:'
 
 
 
