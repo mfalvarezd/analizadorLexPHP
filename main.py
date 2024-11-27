@@ -14,8 +14,15 @@ def p_sentencia(p):
     '''sentencia : asignacion
                 | comparacion
                 | impresion
-                | estructurasPrograma'''
-
+                | estructurasPrograma
+                | funcionDeclaration
+                | returnStatement
+                | llamadaFuncion
+                
+                '''
+def p_returnStatement(p):
+    '''returnStatement : RETURN valor SEMICOLON
+                       | RETURN SEMICOLON'''
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUALS operaArit SEMICOLON'''
 
@@ -27,7 +34,11 @@ def p_valor(p):
     '''valor : INT
             | FLOAT
             | VARIABLE
-            | STRING'''
+            | STRING
+            | BOOL
+            | NULL
+            | ARRAY
+            '''
 
 def p_operador(p):
     '''operador : PLUS
@@ -73,19 +84,27 @@ def p_controlStructure(p):
 
 def p_if(p):
     '''if : IF LPAREN conditions RPAREN LBRACE body RBRACE
-         | IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks'''
+         | IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+         | IF LPAREN conditions RPAREN body
+         '''
 
 def p_else_blocks(p):
     '''else_blocks : ELSE LBRACE body RBRACE
-                   | ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks'''
+                   | ELSE COLON body
+                   | ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+                   | ELSEIF LPAREN conditions RPAREN COLON body else_blocks'''
 
 
 def p_conditions(p):
-    '''conditions : condition
-                | condition opLogic conditions'''
+    '''conditions : LPAREN condition RPAREN
+                | condition opLogic conditions
+                | unaryLogic condition
+                | condition'''
 
 def p_condition(p):
-    '''condition : valor opSymbol valor'''
+    '''condition : valor
+                 | valor opSymbol valor
+                 | operaArit opSymbol operaArit'''
 
 def p_opSymbol(p):
     '''opSymbol : EQ
@@ -101,12 +120,13 @@ def p_opLogic(p):
     '''opLogic : AND
                 | LOGICAL_AND
                 | OR
-                | LOGICAL_OR
-                | NOT
-                | LOGICAL_NOT'''
-
+                | LOGICAL_OR'''
+def p_unaryLogic(p):
+    '''unaryLogic : NOT
+                  | LOGICAL_NOT'''
 def p_body(p):
-    '''body : sentenciaList
+     '''body : sentenciaList
+            | sentencia
             | empty'''
 
 def p_sentenciaList(p):
@@ -156,8 +176,30 @@ def p_default(p):
                | DEFAULT COLON body
                | DEFAULT SEMICOLON body
                | DEFAULT'''
+def p_argumentos(p):
+    '''argumentos : argumento   
+                  | argumento COMMA argumentos
+                  | empty'''
+def p_argumento(p):
+    '''argumento : VARIABLE
+                 | type VARIABLE
+                 | VARIABLE EQUALS valor
+                 | type VARIABLE EQUALS valor
+                 | operaArit'''   
+def p_type(p):
+    '''type : INT_TYPE
+            | FLOAT_TYPE
+            | STRING_TYPE
+            | BOOL_TYPE
+            | ARRAY_TYPE
+            | VOID
+            '''
 
-
+def p_funcionDeclaration(p):
+    '''funcionDeclaration : FUNCTION ID LPAREN argumentos RPAREN LBRACE body RBRACE''' 
+def p_llamadaFuncion(p):
+    '''llamadaFuncion : ID LPAREN argumentos RPAREN SEMICOLON''' 
+                      
 # Función para manejar errores de sintaxis
 def p_error(p):
     if p:

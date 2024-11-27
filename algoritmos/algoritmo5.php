@@ -113,4 +113,49 @@ switch ($i):
         echo "i no es igual a 0, 1 ni 2";
 endswitch;
 
+function foo($arg_1, $arg_2, /* ..., */ $arg_n)
+{
+    echo "Función de ejemplo.\n";
+    return $valor_devuelto;
+}
+if ($hacer_algo) {
+    function foo()
+    {
+      echo "No existo hasta que la ejecución del programa llegue hasta mí.\n";
+    }
+  }
+
+  if ($hacer_algo) foo();
+
+  function foo()
+  {
+    function bar()
+    {
+      echo "No existo hasta que se llame a foo().\n";
+    }
+  }
+  
+  /* No podemos llamar aún a bar()
+     ya que no existe. */
+  
+  foo();
+  
+  /* Ahora podemos llamar a bar(),
+     el procesamiento de foo()
+     la ha hecho accesible. */
+  
+  bar();
+
+  function recursividad($a)
+{
+    if ($a < 20) {
+        echo "$a\n";
+        recursividad($a + $b);
+    }
+}
+function prueba(boolean $param) {}
+ prueba(true);
+ if(!$a){
+    echo "xd";
+ }
 ?>
