@@ -32,16 +32,10 @@ for ($i = 0; $i < 5; $i++) {
     echo "Iteración: $i\n";
 }
 
-// Operadores lógicos
-$esVerdadero = ($booleano && ($variable1 > 5)) || !$booleano;
 
-// Comentarios de una línea
-# Otro comentario de una línea
+$esVerdadero = ($booleano && ($variable1 > 5)) || $booleano;
 
-/*
-Comentario de múltiples líneas
-que abarca más de una línea
-*/
+
 
 // Ejemplo de función
 function suma($a, $b) {
@@ -52,7 +46,5 @@ function suma($a, $b) {
 $resultado = suma($variable1, $variable2);
 echo "Resultado de la suma: $resultado\n";
 
-// Operadores de concatenación y asignación compuesta
-$cadena .= " ¡Bienvenido!";
-$variable1 += 5;
+
 ?>

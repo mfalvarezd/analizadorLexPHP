@@ -1,0 +1,1995 @@
+11/28/2024, 03:43:16
+Entrada:
+<?php
+$var = fgets(STDIN);
+
+// Asignaciones
+$var1 = 10;
+$var2 = 20.5;
+$var3 = "Hola, mundo";
+
+// Operaciones aritméticas
+$suma = $var1 + $var2;
+$resta = $var1 - $var2;
+$multiplicacion = $var1 * $var2;
+$division = $var1 / $var2;
+$modulo = $var1 % 3;
+
+// Comparaciones
+if ($x > 10) {
+    echo "Mayor que 10";
+} elseif ($x == 10) {
+    echo "Es igual a 10";
+} else {
+    echo "Menor que 10";
+}
+
+
+
+// Estructuras de control
+for ($i = 0; $i < 5; $i++) {
+    echo "Iteración: $i\n";
+}
+
+
+while ($var1 > 0) {
+    echo "Decrementando var1:";
+}
+switch ($i) {
+    case 0:
+        echo "i es igual a 0";
+        break;
+    case 1:
+        echo "i es igual a 1";
+        break;
+    case 2:
+        echo "i es igual a 2";
+        break;
+}
+
+switch ($i) {
+    case "manzana":
+        echo "i es una manzana";
+        break;
+    case "barra":
+        echo "i es una barra";
+        break;
+    case "pastel":
+        echo "i es un pastel";
+        break;
+}
+
+switch ($i) {
+    case 0:
+        echo "i es igual a 0";
+    case 1:
+        echo "i es igual a 1";
+    case 2:
+        echo "i es igual a 2";
+}
+switch ($i) {
+    case 0:
+    case 1:
+    case 2:
+        echo "i es menor que 3 pero no negativo";
+        break;
+    case 3:
+        echo "i es 3";
+}
+
+switch ($i) {
+    case 0:
+        echo "i es igual a 0";
+        break;
+    case 1:
+        echo "i es igual a 1";
+        break;
+    case 2:
+        echo "i es igual a 2";
+        break;
+    default:
+       echo "i no es igual a 0, 1 ni 2";
+}
+switch($beer)
+{
+    case 'tuborg';
+    case 'carlsberg';
+    case 'heineken';
+        echo 'Buena elección';
+    break;
+    default;
+        echo 'Por favor haga una nueva selección...';
+    break;
+}
+
+switch ($i):
+    case 0:
+        echo "i es igual a 0";
+        break;
+    case 1:
+        echo "i es igual a 1";
+        break;
+    case 2:
+        echo "i es igual a 2";
+        break;
+    default:
+        echo "i no es igual a 0, 1 ni 2";
+endswitch;
+
+function foo($arg_1, $arg_2, /* ..., */ $arg_n)
+{
+    echo "Función de ejemplo.\n";
+    return $valor_devuelto;
+}
+if ($hacer_algo) {
+    function foo()
+    {
+      echo "No existo hasta que la ejecución del programa llegue hasta mí.\n";
+    }
+  }
+
+  if ($hacer_algo) foo();
+  if ((!empty($someVar)) && ( $someVar==123))
+  {
+      echo $someVar;
+  }
+
+  if ((!empty($someVar))&&(someFunc($someVar)))
+{
+    echo $someVar;
+}
+
+if ((someFunc($someVar))&&(!empty($someVar)))
+{
+    echo $someVar;
+}
+
+if( $a == 1 || $a == 2 ) {
+
+    if( $b == 3 || $b == 4 ) {
+
+        if( $c == 5 ||  $d == 6 ) {
+
+             //Do something here.
+
+        }
+
+    }
+
+}
+
+if( ($a==1 || $a==2) && ($b==3 || $b==4) && ($c==5 || $c==6) ) {
+
+    //do that something here.
+
+}
+if (3 == $foo) bar();
+
+$v = 1;
+
+
+?>
+
+Salida:
+LexToken(OPENTAG,'<?php',1,0)
+LexToken(VARIABLE,'$var',2,6)
+LexToken(EQUALS,'=',2,11)
+LexToken(FGETS,'fgets',2,13)
+LexToken(LPAREN,'(',2,18)
+LexToken(STDIN,'STDIN',2,19)
+LexToken(RPAREN,')',2,24)
+LexToken(SEMICOLON,';',2,25)
+LexToken(VARIABLE,'$var1',5,44)
+LexToken(EQUALS,'=',5,50)
+LexToken(INT,10,5,52)
+LexToken(SEMICOLON,';',5,54)
+LexToken(VARIABLE,'$var2',6,56)
+LexToken(EQUALS,'=',6,62)
+LexToken(FLOAT,20.5,6,64)
+LexToken(SEMICOLON,';',6,68)
+LexToken(VARIABLE,'$var3',7,70)
+LexToken(EQUALS,'=',7,76)
+LexToken(STRING,'Hola, mundo',7,78)
+LexToken(SEMICOLON,';',7,91)
+LexToken(VARIABLE,'$suma',10,122)
+LexToken(EQUALS,'=',10,128)
+LexToken(VARIABLE,'$var1',10,130)
+LexToken(PLUS,'+',10,136)
+LexToken(VARIABLE,'$var2',10,138)
+LexToken(SEMICOLON,';',10,143)
+LexToken(VARIABLE,'$resta',11,145)
+LexToken(EQUALS,'=',11,152)
+LexToken(VARIABLE,'$var1',11,154)
+LexToken(MINUS,'-',11,160)
+LexToken(VARIABLE,'$var2',11,162)
+LexToken(SEMICOLON,';',11,167)
+LexToken(VARIABLE,'$multiplicacion',12,169)
+LexToken(EQUALS,'=',12,185)
+LexToken(VARIABLE,'$var1',12,187)
+LexToken(TIMES,'*',12,193)
+LexToken(VARIABLE,'$var2',12,195)
+LexToken(SEMICOLON,';',12,200)
+LexToken(VARIABLE,'$division',13,202)
+LexToken(EQUALS,'=',13,212)
+LexToken(VARIABLE,'$var1',13,214)
+LexToken(DIVIDE,'/',13,220)
+LexToken(VARIABLE,'$var2',13,222)
+LexToken(SEMICOLON,';',13,227)
+LexToken(VARIABLE,'$modulo',14,229)
+LexToken(EQUALS,'=',14,237)
+LexToken(VARIABLE,'$var1',14,239)
+LexToken(MODULO,'%',14,245)
+LexToken(INT,3,14,247)
+LexToken(SEMICOLON,';',14,248)
+LexToken(IF,'if',17,268)
+LexToken(LPAREN,'(',17,271)
+LexToken(VARIABLE,'$x',17,272)
+LexToken(GT,'>',17,275)
+LexToken(INT,10,17,277)
+LexToken(RPAREN,')',17,279)
+LexToken(LBRACE,'{',17,281)
+LexToken(ECHO,'echo',18,287)
+LexToken(STRING,'Mayor que 10',18,292)
+LexToken(SEMICOLON,';',18,306)
+LexToken(RBRACE,'}',19,308)
+LexToken(ELSEIF,'elseif',19,310)
+LexToken(LPAREN,'(',19,317)
+LexToken(VARIABLE,'$x',19,318)
+LexToken(EQ,'==',19,321)
+LexToken(INT,10,19,324)
+LexToken(RPAREN,')',19,326)
+LexToken(LBRACE,'{',19,328)
+LexToken(ECHO,'echo',20,334)
+LexToken(STRING,'Es igual a 10',20,339)
+LexToken(SEMICOLON,';',20,354)
+LexToken(RBRACE,'}',21,356)
+LexToken(ELSE,'else',21,358)
+LexToken(LBRACE,'{',21,363)
+LexToken(ECHO,'echo',22,369)
+LexToken(STRING,'Menor que 10',22,374)
+LexToken(SEMICOLON,';',22,388)
+LexToken(RBRACE,'}',23,390)
+LexToken(FOR,'for',28,421)
+LexToken(LPAREN,'(',28,425)
+LexToken(VARIABLE,'$i',28,426)
+LexToken(EQUALS,'=',28,429)
+LexToken(INT,0,28,431)
+LexToken(SEMICOLON,';',28,432)
+LexToken(VARIABLE,'$i',28,434)
+LexToken(LT,'<',28,437)
+LexToken(INT,5,28,439)
+LexToken(SEMICOLON,';',28,440)
+LexToken(VARIABLE,'$i',28,442)
+LexToken(DOUBLEPLUS,'++',28,444)
+LexToken(RPAREN,')',28,446)
+LexToken(LBRACE,'{',28,448)
+LexToken(ECHO,'echo',29,454)
+LexToken(STRING,'Iteración: $i\\n',29,459)
+LexToken(SEMICOLON,';',29,477)
+LexToken(RBRACE,'}',30,479)
+LexToken(WHILE,'while',33,483)
+LexToken(LPAREN,'(',33,489)
+LexToken(VARIABLE,'$var1',33,490)
+LexToken(GT,'>',33,496)
+LexToken(INT,0,33,498)
+LexToken(RPAREN,')',33,499)
+LexToken(LBRACE,'{',33,501)
+LexToken(ECHO,'echo',34,507)
+LexToken(STRING,'Decrementando var1:',34,512)
+LexToken(SEMICOLON,';',34,533)
+LexToken(RBRACE,'}',35,535)
+LexToken(SWITCH,'switch',36,537)
+LexToken(LPAREN,'(',36,544)
+LexToken(VARIABLE,'$i',36,545)
+LexToken(RPAREN,')',36,547)
+LexToken(LBRACE,'{',36,549)
+LexToken(CASE,'case',37,555)
+LexToken(INT,0,37,560)
+LexToken(COLON,':',37,561)
+LexToken(ECHO,'echo',38,571)
+LexToken(STRING,'i es igual a 0',38,576)
+LexToken(SEMICOLON,';',38,592)
+LexToken(BREAK,'break',39,602)
+LexToken(SEMICOLON,';',39,607)
+LexToken(CASE,'case',40,613)
+LexToken(INT,1,40,618)
+LexToken(COLON,':',40,619)
+LexToken(ECHO,'echo',41,629)
+LexToken(STRING,'i es igual a 1',41,634)
+LexToken(SEMICOLON,';',41,650)
+LexToken(BREAK,'break',42,660)
+LexToken(SEMICOLON,';',42,665)
+LexToken(CASE,'case',43,671)
+LexToken(INT,2,43,676)
+LexToken(COLON,':',43,677)
+LexToken(ECHO,'echo',44,687)
+LexToken(STRING,'i es igual a 2',44,692)
+LexToken(SEMICOLON,';',44,708)
+LexToken(BREAK,'break',45,718)
+LexToken(SEMICOLON,';',45,723)
+LexToken(RBRACE,'}',46,725)
+LexToken(SWITCH,'switch',48,728)
+LexToken(LPAREN,'(',48,735)
+LexToken(VARIABLE,'$i',48,736)
+LexToken(RPAREN,')',48,738)
+LexToken(LBRACE,'{',48,740)
+LexToken(CASE,'case',49,746)
+LexToken(STRING,'manzana',49,751)
+LexToken(COLON,':',49,760)
+LexToken(ECHO,'echo',50,770)
+LexToken(STRING,'i es una manzana',50,775)
+LexToken(SEMICOLON,';',50,793)
+LexToken(BREAK,'break',51,803)
+LexToken(SEMICOLON,';',51,808)
+LexToken(CASE,'case',52,814)
+LexToken(STRING,'barra',52,819)
+LexToken(COLON,':',52,826)
+LexToken(ECHO,'echo',53,836)
+LexToken(STRING,'i es una barra',53,841)
+LexToken(SEMICOLON,';',53,857)
+LexToken(BREAK,'break',54,867)
+LexToken(SEMICOLON,';',54,872)
+LexToken(CASE,'case',55,878)
+LexToken(STRING,'pastel',55,883)
+LexToken(COLON,':',55,891)
+LexToken(ECHO,'echo',56,901)
+LexToken(STRING,'i es un pastel',56,906)
+LexToken(SEMICOLON,';',56,922)
+LexToken(BREAK,'break',57,932)
+LexToken(SEMICOLON,';',57,937)
+LexToken(RBRACE,'}',58,939)
+LexToken(SWITCH,'switch',60,942)
+LexToken(LPAREN,'(',60,949)
+LexToken(VARIABLE,'$i',60,950)
+LexToken(RPAREN,')',60,952)
+LexToken(LBRACE,'{',60,954)
+LexToken(CASE,'case',61,960)
+LexToken(INT,0,61,965)
+LexToken(COLON,':',61,966)
+LexToken(ECHO,'echo',62,976)
+LexToken(STRING,'i es igual a 0',62,981)
+LexToken(SEMICOLON,';',62,997)
+LexToken(CASE,'case',63,1003)
+LexToken(INT,1,63,1008)
+LexToken(COLON,':',63,1009)
+LexToken(ECHO,'echo',64,1019)
+LexToken(STRING,'i es igual a 1',64,1024)
+LexToken(SEMICOLON,';',64,1040)
+LexToken(CASE,'case',65,1046)
+LexToken(INT,2,65,1051)
+LexToken(COLON,':',65,1052)
+LexToken(ECHO,'echo',66,1062)
+LexToken(STRING,'i es igual a 2',66,1067)
+LexToken(SEMICOLON,';',66,1083)
+LexToken(RBRACE,'}',67,1085)
+LexToken(SWITCH,'switch',68,1087)
+LexToken(LPAREN,'(',68,1094)
+LexToken(VARIABLE,'$i',68,1095)
+LexToken(RPAREN,')',68,1097)
+LexToken(LBRACE,'{',68,1099)
+LexToken(CASE,'case',69,1105)
+LexToken(INT,0,69,1110)
+LexToken(COLON,':',69,1111)
+LexToken(CASE,'case',70,1117)
+LexToken(INT,1,70,1122)
+LexToken(COLON,':',70,1123)
+LexToken(CASE,'case',71,1129)
+LexToken(INT,2,71,1134)
+LexToken(COLON,':',71,1135)
+LexToken(ECHO,'echo',72,1145)
+LexToken(STRING,'i es menor que 3 pero no negativo',72,1150)
+LexToken(SEMICOLON,';',72,1185)
+LexToken(BREAK,'break',73,1195)
+LexToken(SEMICOLON,';',73,1200)
+LexToken(CASE,'case',74,1206)
+LexToken(INT,3,74,1211)
+LexToken(COLON,':',74,1212)
+LexToken(ECHO,'echo',75,1222)
+LexToken(STRING,'i es 3',75,1227)
+LexToken(SEMICOLON,';',75,1235)
+LexToken(RBRACE,'}',76,1237)
+LexToken(SWITCH,'switch',78,1240)
+LexToken(LPAREN,'(',78,1247)
+LexToken(VARIABLE,'$i',78,1248)
+LexToken(RPAREN,')',78,1250)
+LexToken(LBRACE,'{',78,1252)
+LexToken(CASE,'case',79,1258)
+LexToken(INT,0,79,1263)
+LexToken(COLON,':',79,1264)
+LexToken(ECHO,'echo',80,1274)
+LexToken(STRING,'i es igual a 0',80,1279)
+LexToken(SEMICOLON,';',80,1295)
+LexToken(BREAK,'break',81,1305)
+LexToken(SEMICOLON,';',81,1310)
+LexToken(CASE,'case',82,1316)
+LexToken(INT,1,82,1321)
+LexToken(COLON,':',82,1322)
+LexToken(ECHO,'echo',83,1332)
+LexToken(STRING,'i es igual a 1',83,1337)
+LexToken(SEMICOLON,';',83,1353)
+LexToken(BREAK,'break',84,1363)
+LexToken(SEMICOLON,';',84,1368)
+LexToken(CASE,'case',85,1374)
+LexToken(INT,2,85,1379)
+LexToken(COLON,':',85,1380)
+LexToken(ECHO,'echo',86,1390)
+LexToken(STRING,'i es igual a 2',86,1395)
+LexToken(SEMICOLON,';',86,1411)
+LexToken(BREAK,'break',87,1421)
+LexToken(SEMICOLON,';',87,1426)
+LexToken(DEFAULT,'default',88,1432)
+LexToken(COLON,':',88,1439)
+LexToken(ECHO,'echo',89,1448)
+LexToken(STRING,'i no es igual a 0, 1 ni 2',89,1453)
+LexToken(SEMICOLON,';',89,1480)
+LexToken(RBRACE,'}',90,1482)
+LexToken(SWITCH,'switch',91,1484)
+LexToken(LPAREN,'(',91,1490)
+LexToken(VARIABLE,'$beer',91,1491)
+LexToken(RPAREN,')',91,1496)
+LexToken(LBRACE,'{',92,1498)
+LexToken(CASE,'case',93,1504)
+LexToken(STRING,'tuborg',93,1509)
+LexToken(SEMICOLON,';',93,1517)
+LexToken(CASE,'case',94,1523)
+LexToken(STRING,'carlsberg',94,1528)
+LexToken(SEMICOLON,';',94,1539)
+LexToken(CASE,'case',95,1545)
+LexToken(STRING,'heineken',95,1550)
+LexToken(SEMICOLON,';',95,1560)
+LexToken(ECHO,'echo',96,1570)
+LexToken(STRING,'Buena elección',96,1575)
+LexToken(SEMICOLON,';',96,1592)
+LexToken(BREAK,'break',97,1598)
+LexToken(SEMICOLON,';',97,1603)
+LexToken(DEFAULT,'default',98,1609)
+LexToken(SEMICOLON,';',98,1616)
+LexToken(ECHO,'echo',99,1626)
+LexToken(STRING,'Por favor haga una nueva selección...',99,1631)
+LexToken(SEMICOLON,';',99,1671)
+LexToken(BREAK,'break',100,1677)
+LexToken(SEMICOLON,';',100,1682)
+LexToken(RBRACE,'}',101,1684)
+LexToken(SWITCH,'switch',103,1687)
+LexToken(LPAREN,'(',103,1694)
+LexToken(VARIABLE,'$i',103,1695)
+LexToken(RPAREN,')',103,1697)
+LexToken(COLON,':',103,1698)
+LexToken(CASE,'case',104,1704)
+LexToken(INT,0,104,1709)
+LexToken(COLON,':',104,1710)
+LexToken(ECHO,'echo',105,1720)
+LexToken(STRING,'i es igual a 0',105,1725)
+LexToken(SEMICOLON,';',105,1741)
+LexToken(BREAK,'break',106,1751)
+LexToken(SEMICOLON,';',106,1756)
+LexToken(CASE,'case',107,1762)
+LexToken(INT,1,107,1767)
+LexToken(COLON,':',107,1768)
+LexToken(ECHO,'echo',108,1778)
+LexToken(STRING,'i es igual a 1',108,1783)
+LexToken(SEMICOLON,';',108,1799)
+LexToken(BREAK,'break',109,1809)
+LexToken(SEMICOLON,';',109,1814)
+LexToken(CASE,'case',110,1820)
+LexToken(INT,2,110,1825)
+LexToken(COLON,':',110,1826)
+LexToken(ECHO,'echo',111,1836)
+LexToken(STRING,'i es igual a 2',111,1841)
+LexToken(SEMICOLON,';',111,1857)
+LexToken(BREAK,'break',112,1867)
+LexToken(SEMICOLON,';',112,1872)
+LexToken(DEFAULT,'default',113,1878)
+LexToken(COLON,':',113,1885)
+LexToken(ECHO,'echo',114,1895)
+LexToken(STRING,'i no es igual a 0, 1 ni 2',114,1900)
+LexToken(SEMICOLON,';',114,1927)
+LexToken(ENDSWITCH,'endswitch',115,1929)
+LexToken(SEMICOLON,';',115,1938)
+LexToken(FUNCTION,'function',117,1941)
+LexToken(ID,'foo',117,1950)
+LexToken(LPAREN,'(',117,1953)
+LexToken(VARIABLE,'$arg_1',117,1954)
+LexToken(COMMA,',',117,1960)
+LexToken(VARIABLE,'$arg_2',117,1962)
+LexToken(COMMA,',',117,1968)
+LexToken(VARIABLE,'$arg_n',117,1981)
+LexToken(RPAREN,')',117,1987)
+LexToken(LBRACE,'{',118,1989)
+LexToken(ECHO,'echo',119,1995)
+LexToken(STRING,'Función de ejemplo.\\n',119,2000)
+LexToken(SEMICOLON,';',119,2024)
+LexToken(RETURN,'return',120,2030)
+LexToken(VARIABLE,'$valor_devuelto',120,2037)
+LexToken(SEMICOLON,';',120,2052)
+LexToken(RBRACE,'}',121,2054)
+LexToken(IF,'if',122,2056)
+LexToken(LPAREN,'(',122,2059)
+LexToken(VARIABLE,'$hacer_algo',122,2060)
+LexToken(RPAREN,')',122,2071)
+LexToken(LBRACE,'{',122,2073)
+LexToken(FUNCTION,'function',123,2079)
+LexToken(ID,'foo',123,2088)
+LexToken(LPAREN,'(',123,2091)
+LexToken(RPAREN,')',123,2092)
+LexToken(LBRACE,'{',124,2098)
+LexToken(ECHO,'echo',125,2106)
+LexToken(STRING,'No existo hasta que la ejecución del programa llegue hasta m�\xad.\\n',125,2111)
+LexToken(SEMICOLON,';',125,2179)
+LexToken(RBRACE,'}',126,2185)
+LexToken(RBRACE,'}',127,2189)
+LexToken(IF,'if',129,2194)
+LexToken(LPAREN,'(',129,2197)
+LexToken(VARIABLE,'$hacer_algo',129,2198)
+LexToken(RPAREN,')',129,2209)
+LexToken(ID,'foo',129,2211)
+LexToken(LPAREN,'(',129,2214)
+LexToken(RPAREN,')',129,2215)
+LexToken(SEMICOLON,';',129,2216)
+LexToken(IF,'if',130,2220)
+LexToken(LPAREN,'(',130,2223)
+LexToken(LPAREN,'(',130,2224)
+LexToken(NOT,'!',130,2225)
+LexToken(EMPTY,'empty',130,2226)
+LexToken(LPAREN,'(',130,2231)
+LexToken(VARIABLE,'$someVar',130,2232)
+LexToken(RPAREN,')',130,2240)
+LexToken(RPAREN,')',130,2241)
+LexToken(LOGICAL_AND,'&&',130,2243)
+LexToken(LPAREN,'(',130,2246)
+LexToken(VARIABLE,'$someVar',130,2248)
+LexToken(EQ,'==',130,2256)
+LexToken(INT,123,130,2258)
+LexToken(RPAREN,')',130,2261)
+LexToken(RPAREN,')',130,2262)
+LexToken(LBRACE,'{',131,2266)
+LexToken(ECHO,'echo',132,2274)
+LexToken(VARIABLE,'$someVar',132,2279)
+LexToken(SEMICOLON,';',132,2287)
+LexToken(RBRACE,'}',133,2291)
+LexToken(IF,'if',135,2296)
+LexToken(LPAREN,'(',135,2299)
+LexToken(LPAREN,'(',135,2300)
+LexToken(NOT,'!',135,2301)
+LexToken(EMPTY,'empty',135,2302)
+LexToken(LPAREN,'(',135,2307)
+LexToken(VARIABLE,'$someVar',135,2308)
+LexToken(RPAREN,')',135,2316)
+LexToken(RPAREN,')',135,2317)
+LexToken(LOGICAL_AND,'&&',135,2318)
+LexToken(LPAREN,'(',135,2320)
+LexToken(ID,'someFunc',135,2321)
+LexToken(LPAREN,'(',135,2329)
+LexToken(VARIABLE,'$someVar',135,2330)
+LexToken(RPAREN,')',135,2338)
+LexToken(RPAREN,')',135,2339)
+LexToken(RPAREN,')',135,2340)
+LexToken(LBRACE,'{',136,2342)
+LexToken(ECHO,'echo',137,2348)
+LexToken(VARIABLE,'$someVar',137,2353)
+LexToken(SEMICOLON,';',137,2361)
+LexToken(RBRACE,'}',138,2363)
+LexToken(IF,'if',140,2366)
+LexToken(LPAREN,'(',140,2369)
+LexToken(LPAREN,'(',140,2370)
+LexToken(ID,'someFunc',140,2371)
+LexToken(LPAREN,'(',140,2379)
+LexToken(VARIABLE,'$someVar',140,2380)
+LexToken(RPAREN,')',140,2388)
+LexToken(RPAREN,')',140,2389)
+LexToken(LOGICAL_AND,'&&',140,2390)
+LexToken(LPAREN,'(',140,2392)
+LexToken(NOT,'!',140,2393)
+LexToken(EMPTY,'empty',140,2394)
+LexToken(LPAREN,'(',140,2399)
+LexToken(VARIABLE,'$someVar',140,2400)
+LexToken(RPAREN,')',140,2408)
+LexToken(RPAREN,')',140,2409)
+LexToken(RPAREN,')',140,2410)
+LexToken(LBRACE,'{',141,2412)
+LexToken(ECHO,'echo',142,2418)
+LexToken(VARIABLE,'$someVar',142,2423)
+LexToken(SEMICOLON,';',142,2431)
+LexToken(RBRACE,'}',143,2433)
+LexToken(IF,'if',145,2436)
+LexToken(LPAREN,'(',145,2438)
+LexToken(VARIABLE,'$a',145,2440)
+LexToken(EQ,'==',145,2443)
+LexToken(INT,1,145,2446)
+LexToken(LOGICAL_OR,'||',145,2448)
+LexToken(VARIABLE,'$a',145,2451)
+LexToken(EQ,'==',145,2454)
+LexToken(INT,2,145,2457)
+LexToken(RPAREN,')',145,2459)
+LexToken(LBRACE,'{',145,2461)
+LexToken(IF,'if',147,2468)
+LexToken(LPAREN,'(',147,2470)
+LexToken(VARIABLE,'$b',147,2472)
+LexToken(EQ,'==',147,2475)
+LexToken(INT,3,147,2478)
+LexToken(LOGICAL_OR,'||',147,2480)
+LexToken(VARIABLE,'$b',147,2483)
+LexToken(EQ,'==',147,2486)
+LexToken(INT,4,147,2489)
+LexToken(RPAREN,')',147,2491)
+LexToken(LBRACE,'{',147,2493)
+LexToken(IF,'if',149,2504)
+LexToken(LPAREN,'(',149,2506)
+LexToken(VARIABLE,'$c',149,2508)
+LexToken(EQ,'==',149,2511)
+LexToken(INT,5,149,2514)
+LexToken(LOGICAL_OR,'||',149,2516)
+LexToken(VARIABLE,'$d',149,2520)
+LexToken(EQ,'==',149,2523)
+LexToken(INT,6,149,2526)
+LexToken(RPAREN,')',149,2528)
+LexToken(LBRACE,'{',149,2530)
+LexToken(RBRACE,'}',153,2576)
+LexToken(RBRACE,'}',155,2583)
+LexToken(RBRACE,'}',157,2586)
+LexToken(IF,'if',159,2589)
+LexToken(LPAREN,'(',159,2591)
+LexToken(LPAREN,'(',159,2593)
+LexToken(VARIABLE,'$a',159,2594)
+LexToken(EQ,'==',159,2596)
+LexToken(INT,1,159,2598)
+LexToken(LOGICAL_OR,'||',159,2600)
+LexToken(VARIABLE,'$a',159,2603)
+LexToken(EQ,'==',159,2605)
+LexToken(INT,2,159,2607)
+LexToken(RPAREN,')',159,2608)
+LexToken(LOGICAL_AND,'&&',159,2610)
+LexToken(LPAREN,'(',159,2613)
+LexToken(VARIABLE,'$b',159,2614)
+LexToken(EQ,'==',159,2616)
+LexToken(INT,3,159,2618)
+LexToken(LOGICAL_OR,'||',159,2620)
+LexToken(VARIABLE,'$b',159,2623)
+LexToken(EQ,'==',159,2625)
+LexToken(INT,4,159,2627)
+LexToken(RPAREN,')',159,2628)
+LexToken(LOGICAL_AND,'&&',159,2630)
+LexToken(LPAREN,'(',159,2633)
+LexToken(VARIABLE,'$c',159,2634)
+LexToken(EQ,'==',159,2636)
+LexToken(INT,5,159,2638)
+LexToken(LOGICAL_OR,'||',159,2640)
+LexToken(VARIABLE,'$c',159,2643)
+LexToken(EQ,'==',159,2645)
+LexToken(INT,6,159,2647)
+LexToken(RPAREN,')',159,2648)
+LexToken(RPAREN,')',159,2650)
+LexToken(LBRACE,'{',159,2652)
+LexToken(RBRACE,'}',163,2686)
+LexToken(IF,'if',164,2688)
+LexToken(LPAREN,'(',164,2691)
+LexToken(INT,3,164,2692)
+LexToken(EQ,'==',164,2694)
+LexToken(VARIABLE,'$foo',164,2697)
+LexToken(RPAREN,')',164,2701)
+LexToken(ID,'bar',164,2703)
+LexToken(LPAREN,'(',164,2706)
+LexToken(RPAREN,')',164,2707)
+LexToken(SEMICOLON,';',164,2708)
+LexToken(VARIABLE,'$v',166,2711)
+LexToken(EQUALS,'=',166,2714)
+LexToken(INT,1,166,2716)
+LexToken(SEMICOLON,';',166,2717)
+LexToken(CLOSETAG,'?>',169,2721)
+11/28/2024, 03:43:17
+Entrada:
+<?php
+$var = fgets(STDIN);
+
+// Asignaciones
+$var1 = 10;
+$var2 = 20.5;
+$var3 = "Hola, mundo";
+
+// Operaciones aritméticas
+$suma = $var1 + $var2;
+$resta = $var1 - $var2;
+$multiplicacion = $var1 * $var2;
+$division = $var1 / $var2;
+$modulo = $var1 % 3;
+
+// Comparaciones
+if ($x > 10) {
+    echo "Mayor que 10";
+} elseif ($x == 10) {
+    echo "Es igual a 10";
+} else {
+    echo "Menor que 10";
+}
+
+
+
+// Estructuras de control
+for ($i = 0; $i < 5; $i++) {
+    echo "Iteración: $i\n";
+}
+
+
+while ($var1 > 0) {
+    echo "Decrementando var1:";
+}
+switch ($i) {
+    case 0:
+        echo "i es igual a 0";
+        break;
+    case 1:
+        echo "i es igual a 1";
+        break;
+    case 2:
+        echo "i es igual a 2";
+        break;
+}
+
+switch ($i) {
+    case "manzana":
+        echo "i es una manzana";
+        break;
+    case "barra":
+        echo "i es una barra";
+        break;
+    case "pastel":
+        echo "i es un pastel";
+        break;
+}
+
+switch ($i) {
+    case 0:
+        echo "i es igual a 0";
+    case 1:
+        echo "i es igual a 1";
+    case 2:
+        echo "i es igual a 2";
+}
+switch ($i) {
+    case 0:
+    case 1:
+    case 2:
+        echo "i es menor que 3 pero no negativo";
+        break;
+    case 3:
+        echo "i es 3";
+}
+
+switch ($i) {
+    case 0:
+        echo "i es igual a 0";
+        break;
+    case 1:
+        echo "i es igual a 1";
+        break;
+    case 2:
+        echo "i es igual a 2";
+        break;
+    default:
+       echo "i no es igual a 0, 1 ni 2";
+}
+switch($beer)
+{
+    case 'tuborg';
+    case 'carlsberg';
+    case 'heineken';
+        echo 'Buena elección';
+    break;
+    default;
+        echo 'Por favor haga una nueva selección...';
+    break;
+}
+
+switch ($i):
+    case 0:
+        echo "i es igual a 0";
+        break;
+    case 1:
+        echo "i es igual a 1";
+        break;
+    case 2:
+        echo "i es igual a 2";
+        break;
+    default:
+        echo "i no es igual a 0, 1 ni 2";
+endswitch;
+
+function foo($arg_1, $arg_2, /* ..., */ $arg_n)
+{
+    echo "Función de ejemplo.\n";
+    return $valor_devuelto;
+}
+if ($hacer_algo) {
+    function foo()
+    {
+      echo "No existo hasta que la ejecución del programa llegue hasta mí.\n";
+    }
+  }
+
+  if ($hacer_algo) foo();
+  if ((!empty($someVar)) && ( $someVar==123))
+  {
+      echo $someVar;
+  }
+
+  if ((!empty($someVar))&&(someFunc($someVar)))
+{
+    echo $someVar;
+}
+
+if ((someFunc($someVar))&&(!empty($someVar)))
+{
+    echo $someVar;
+}
+
+if( $a == 1 || $a == 2 ) {
+
+    if( $b == 3 || $b == 4 ) {
+
+        if( $c == 5 ||  $d == 6 ) {
+
+             //Do something here.
+
+        }
+
+    }
+
+}
+
+if( ($a==1 || $a==2) && ($b==3 || $b==4) && ($c==5 || $c==6) ) {
+
+    //do that something here.
+
+}
+if (3 == $foo) bar();
+
+$v = 1;
+
+
+?>
+
+Salida:
+11/28/2024, 03:43:21
+Entrada:
+<?php
+// Validar arreglos asociativos
+$persona = array("nombre" => "Piero", "edad" => 25, "ciudad" => "Lima");
+
+// Acceso a datos del arreglo asociativo
+echo $persona["nombre"]; // Deberia imprimir: Piero
+
+// Validar if-else
+$edad = 18;
+if ($edad >= 18) {
+    echo "Eres mayor de edad.";
+} else {
+    echo "Eres menor de edad.";
+}
+
+// Validar funcion anonima
+$multiplicar = function($a, $b) {
+    return $a * $b;
+};
+echo $multiplicar(3, 4); // Deberia imprimir: 12
+?>
+
+
+Salida:
+LexToken(OPENTAG,'<?php',339,0)
+LexToken(VARIABLE,'$persona',341,38)
+LexToken(EQUALS,'=',341,47)
+LexToken(ARRAY,'array',341,49)
+LexToken(LPAREN,'(',341,54)
+LexToken(STRING,'nombre',341,55)
+LexToken(ARROWMAP,'=>',341,64)
+LexToken(STRING,'Piero',341,67)
+LexToken(COMMA,',',341,74)
+LexToken(STRING,'edad',341,76)
+LexToken(ARROWMAP,'=>',341,83)
+LexToken(INT,25,341,86)
+LexToken(COMMA,',',341,88)
+LexToken(STRING,'ciudad',341,90)
+LexToken(ARROWMAP,'=>',341,99)
+LexToken(STRING,'Lima',341,102)
+LexToken(RPAREN,')',341,108)
+LexToken(SEMICOLON,';',341,109)
+LexToken(ECHO,'echo',344,153)
+LexToken(VARIABLE,'$persona',344,158)
+LexToken(LBRACKET,'[',344,166)
+LexToken(STRING,'nombre',344,167)
+LexToken(RBRACKET,']',344,175)
+LexToken(SEMICOLON,';',344,176)
+LexToken(VARIABLE,'$edad',347,225)
+LexToken(EQUALS,'=',347,231)
+LexToken(INT,18,347,233)
+LexToken(SEMICOLON,';',347,235)
+LexToken(IF,'if',348,237)
+LexToken(LPAREN,'(',348,240)
+LexToken(VARIABLE,'$edad',348,241)
+LexToken(GEQ,'>=',348,247)
+LexToken(INT,18,348,250)
+LexToken(RPAREN,')',348,252)
+LexToken(LBRACE,'{',348,254)
+LexToken(ECHO,'echo',349,260)
+LexToken(STRING,'Eres mayor de edad.',349,265)
+LexToken(SEMICOLON,';',349,286)
+LexToken(RBRACE,'}',350,288)
+LexToken(ELSE,'else',350,290)
+LexToken(LBRACE,'{',350,295)
+LexToken(ECHO,'echo',351,301)
+LexToken(STRING,'Eres menor de edad.',351,306)
+LexToken(SEMICOLON,';',351,327)
+LexToken(RBRACE,'}',352,329)
+LexToken(VARIABLE,'$multiplicar',355,359)
+LexToken(EQUALS,'=',355,372)
+LexToken(FUNCTION,'function',355,374)
+LexToken(LPAREN,'(',355,382)
+LexToken(VARIABLE,'$a',355,383)
+LexToken(COMMA,',',355,385)
+LexToken(VARIABLE,'$b',355,387)
+LexToken(RPAREN,')',355,389)
+LexToken(LBRACE,'{',355,391)
+LexToken(RETURN,'return',356,397)
+LexToken(VARIABLE,'$a',356,404)
+LexToken(TIMES,'*',356,407)
+LexToken(VARIABLE,'$b',356,409)
+LexToken(SEMICOLON,';',356,411)
+LexToken(RBRACE,'}',357,413)
+LexToken(SEMICOLON,';',357,414)
+LexToken(ECHO,'echo',358,416)
+LexToken(VARIABLE,'$multiplicar',358,421)
+LexToken(LPAREN,'(',358,433)
+LexToken(INT,3,358,434)
+LexToken(COMMA,',',358,435)
+LexToken(INT,4,358,437)
+LexToken(RPAREN,')',358,438)
+LexToken(SEMICOLON,';',358,439)
+LexToken(CLOSETAG,'?>',359,465)
+11/28/2024, 03:43:21
+Entrada:
+<?php
+// Validar arreglos asociativos
+$persona = array("nombre" => "Piero", "edad" => 25, "ciudad" => "Lima");
+
+// Acceso a datos del arreglo asociativo
+echo $persona["nombre"]; // Deberia imprimir: Piero
+
+// Validar if-else
+$edad = 18;
+if ($edad >= 18) {
+    echo "Eres mayor de edad.";
+} else {
+    echo "Eres menor de edad.";
+}
+
+// Validar funcion anonima
+$multiplicar = function($a, $b) {
+    return $a * $b;
+};
+echo $multiplicar(3, 4); // Deberia imprimir: 12
+?>
+
+
+Salida:
+Error de sintaxis - Token: LBRACKET ('['), L�nea: 366, Columna: 166
+11/28/2024, 03:43:24
+Entrada:
+<?php
+
+// Definimos una interfaz para las operaciones matemáticas
+interface Operacion {
+    public function calcular($num1, $num2);
+}
+
+// Clase para la operación de suma
+class Suma implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 + $num2;
+    }
+}
+
+// Clase para la operación de resta
+class Resta implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 - $num2;
+    }
+}
+
+// Clase para la operación de multiplicación
+class Multiplicacion implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 * $num2;
+    }
+}
+
+// Clase para la operación de división con manejo de excepción si el divisor es cero
+class Division implements Operacion {
+    public function calcular($num1, $num2) {
+        if ($num2 == 0) {
+            throw new Exception("Error: División por cero no permitida.");
+        }
+        return $num1 / $num2;
+    }
+}
+
+// Clase Calculadora que usa el patrón de diseño 'Factory' para crear operaciones
+class Calculadora {
+    const OPERACIONES = [
+        'suma' => 'Suma',
+        'resta' => 'Resta',
+        'multiplicacion' => 'Multiplicacion',
+        'division' => 'Division'
+    ];
+
+    public function realizarOperacion($tipo, $num1, $num2) {
+        if (!array_key_exists($tipo, self::OPERACIONES)) {
+            throw new Exception("Error: Operación no soportada.");
+        }
+
+        // Creamos una instancia de la operación solicitada
+        $operacionClase = self::OPERACIONES[$tipo];
+        $operacion = new $operacionClase();
+        return $operacion->calcular($num1, $num2);
+    }
+}
+
+// Ejemplo de uso
+$calculadora = new Calculadora();
+$numeros = [10, 5];
+
+$operaciones = ['suma', 'resta', 'multiplicacion', 'division'];
+foreach ($operaciones as $op) {
+    try {
+        $resultado = $calculadora->realizarOperacion($op, $numeros[0], $numeros[1]);
+        echo "Resultado de la operación $op entre {$numeros[0]} y {$numeros[1]}: $resultado\n";
+    } catch (Exception $e) {
+        echo $e->getMessage() . "\n";
+    }
+}
+
+?>
+
+
+Salida:
+LexToken(OPENTAG,'<?php',383,0)
+LexToken(INTERFACE,'interface',386,67)
+LexToken(ID,'Operacion',386,77)
+LexToken(LBRACE,'{',386,87)
+LexToken(PUBLIC,'public',387,93)
+LexToken(FUNCTION,'function',387,100)
+LexToken(ID,'calcular',387,109)
+LexToken(LPAREN,'(',387,117)
+LexToken(VARIABLE,'$num1',387,118)
+LexToken(COMMA,',',387,123)
+LexToken(VARIABLE,'$num2',387,125)
+LexToken(RPAREN,')',387,130)
+LexToken(SEMICOLON,';',387,131)
+LexToken(RBRACE,'}',388,133)
+LexToken(CLASS,'class',391,172)
+LexToken(ID,'Suma',391,178)
+LexToken(IMPLEMENTS,'implements',391,183)
+LexToken(ID,'Operacion',391,194)
+LexToken(LBRACE,'{',391,204)
+LexToken(PUBLIC,'public',392,210)
+LexToken(FUNCTION,'function',392,217)
+LexToken(ID,'calcular',392,226)
+LexToken(LPAREN,'(',392,234)
+LexToken(VARIABLE,'$num1',392,235)
+LexToken(COMMA,',',392,240)
+LexToken(VARIABLE,'$num2',392,242)
+LexToken(RPAREN,')',392,247)
+LexToken(LBRACE,'{',392,249)
+LexToken(RETURN,'return',393,259)
+LexToken(VARIABLE,'$num1',393,266)
+LexToken(PLUS,'+',393,272)
+LexToken(VARIABLE,'$num2',393,274)
+LexToken(SEMICOLON,';',393,279)
+LexToken(RBRACE,'}',394,285)
+LexToken(RBRACE,'}',395,287)
+LexToken(CLASS,'class',398,327)
+LexToken(ID,'Resta',398,333)
+LexToken(IMPLEMENTS,'implements',398,339)
+LexToken(ID,'Operacion',398,350)
+LexToken(LBRACE,'{',398,360)
+LexToken(PUBLIC,'public',399,366)
+LexToken(FUNCTION,'function',399,373)
+LexToken(ID,'calcular',399,382)
+LexToken(LPAREN,'(',399,390)
+LexToken(VARIABLE,'$num1',399,391)
+LexToken(COMMA,',',399,396)
+LexToken(VARIABLE,'$num2',399,398)
+LexToken(RPAREN,')',399,403)
+LexToken(LBRACE,'{',399,405)
+LexToken(RETURN,'return',400,415)
+LexToken(VARIABLE,'$num1',400,422)
+LexToken(MINUS,'-',400,428)
+LexToken(VARIABLE,'$num2',400,430)
+LexToken(SEMICOLON,';',400,435)
+LexToken(RBRACE,'}',401,441)
+LexToken(RBRACE,'}',402,443)
+LexToken(CLASS,'class',405,493)
+LexToken(ID,'Multiplicacion',405,499)
+LexToken(IMPLEMENTS,'implements',405,514)
+LexToken(ID,'Operacion',405,525)
+LexToken(LBRACE,'{',405,535)
+LexToken(PUBLIC,'public',406,541)
+LexToken(FUNCTION,'function',406,548)
+LexToken(ID,'calcular',406,557)
+LexToken(LPAREN,'(',406,565)
+LexToken(VARIABLE,'$num1',406,566)
+LexToken(COMMA,',',406,571)
+LexToken(VARIABLE,'$num2',406,573)
+LexToken(RPAREN,')',406,578)
+LexToken(LBRACE,'{',406,580)
+LexToken(RETURN,'return',407,590)
+LexToken(VARIABLE,'$num1',407,597)
+LexToken(TIMES,'*',407,603)
+LexToken(VARIABLE,'$num2',407,605)
+LexToken(SEMICOLON,';',407,610)
+LexToken(RBRACE,'}',408,616)
+LexToken(RBRACE,'}',409,618)
+LexToken(CLASS,'class',412,709)
+LexToken(ID,'Division',412,715)
+LexToken(IMPLEMENTS,'implements',412,724)
+LexToken(ID,'Operacion',412,735)
+LexToken(LBRACE,'{',412,745)
+LexToken(PUBLIC,'public',413,751)
+LexToken(FUNCTION,'function',413,758)
+LexToken(ID,'calcular',413,767)
+LexToken(LPAREN,'(',413,775)
+LexToken(VARIABLE,'$num1',413,776)
+LexToken(COMMA,',',413,781)
+LexToken(VARIABLE,'$num2',413,783)
+LexToken(RPAREN,')',413,788)
+LexToken(LBRACE,'{',413,790)
+LexToken(IF,'if',414,800)
+LexToken(LPAREN,'(',414,803)
+LexToken(VARIABLE,'$num2',414,804)
+LexToken(EQ,'==',414,810)
+LexToken(INT,0,414,813)
+LexToken(RPAREN,')',414,814)
+LexToken(LBRACE,'{',414,816)
+LexToken(THROW,'throw',415,830)
+LexToken(NEW,'new',415,836)
+LexToken(EXCEPTION,'Exception',415,840)
+LexToken(LPAREN,'(',415,849)
+LexToken(STRING,'Error: División por cero no permitida.',415,850)
+LexToken(RPAREN,')',415,891)
+LexToken(SEMICOLON,';',415,892)
+LexToken(RBRACE,'}',416,902)
+LexToken(RETURN,'return',417,912)
+LexToken(VARIABLE,'$num1',417,919)
+LexToken(DIVIDE,'/',417,925)
+LexToken(VARIABLE,'$num2',417,927)
+LexToken(SEMICOLON,';',417,932)
+LexToken(RBRACE,'}',418,938)
+LexToken(RBRACE,'}',419,940)
+LexToken(CLASS,'class',422,1027)
+LexToken(ID,'Calculadora',422,1033)
+LexToken(LBRACE,'{',422,1045)
+LexToken(CONST,'const',423,1051)
+LexToken(ID,'OPERACIONES',423,1057)
+LexToken(EQUALS,'=',423,1069)
+LexToken(LBRACKET,'[',423,1071)
+LexToken(STRING,'suma',424,1081)
+LexToken(ARROWMAP,'=>',424,1088)
+LexToken(STRING,'Suma',424,1091)
+LexToken(COMMA,',',424,1097)
+LexToken(STRING,'resta',425,1107)
+LexToken(ARROWMAP,'=>',425,1115)
+LexToken(STRING,'Resta',425,1118)
+LexToken(COMMA,',',425,1125)
+LexToken(STRING,'multiplicacion',426,1135)
+LexToken(ARROWMAP,'=>',426,1152)
+LexToken(STRING,'Multiplicacion',426,1155)
+LexToken(COMMA,',',426,1171)
+LexToken(STRING,'division',427,1181)
+LexToken(ARROWMAP,'=>',427,1192)
+LexToken(STRING,'Division',427,1195)
+LexToken(RBRACKET,']',428,1210)
+LexToken(SEMICOLON,';',428,1211)
+LexToken(PUBLIC,'public',430,1218)
+LexToken(FUNCTION,'function',430,1225)
+LexToken(ID,'realizarOperacion',430,1234)
+LexToken(LPAREN,'(',430,1251)
+LexToken(VARIABLE,'$tipo',430,1252)
+LexToken(COMMA,',',430,1257)
+LexToken(VARIABLE,'$num1',430,1259)
+LexToken(COMMA,',',430,1264)
+LexToken(VARIABLE,'$num2',430,1266)
+LexToken(RPAREN,')',430,1271)
+LexToken(LBRACE,'{',430,1273)
+LexToken(IF,'if',431,1283)
+LexToken(LPAREN,'(',431,1286)
+LexToken(NOT,'!',431,1287)
+LexToken(ID,'array_key_exists',431,1288)
+LexToken(LPAREN,'(',431,1304)
+LexToken(VARIABLE,'$tipo',431,1305)
+LexToken(COMMA,',',431,1310)
+LexToken(ID,'self',431,1312)
+LexToken(COLON,':',431,1316)
+LexToken(COLON,':',431,1317)
+LexToken(ID,'OPERACIONES',431,1318)
+LexToken(RPAREN,')',431,1329)
+LexToken(RPAREN,')',431,1330)
+LexToken(LBRACE,'{',431,1332)
+LexToken(THROW,'throw',432,1346)
+LexToken(NEW,'new',432,1352)
+LexToken(EXCEPTION,'Exception',432,1356)
+LexToken(LPAREN,'(',432,1365)
+LexToken(STRING,'Error: Operación no soportada.',432,1366)
+LexToken(RPAREN,')',432,1399)
+LexToken(SEMICOLON,';',432,1400)
+LexToken(RBRACE,'}',433,1410)
+LexToken(VARIABLE,'$operacionClase',436,1482)
+LexToken(EQUALS,'=',436,1498)
+LexToken(ID,'self',436,1500)
+LexToken(COLON,':',436,1504)
+LexToken(COLON,':',436,1505)
+LexToken(ID,'OPERACIONES',436,1506)
+LexToken(LBRACKET,'[',436,1517)
+LexToken(VARIABLE,'$tipo',436,1518)
+LexToken(RBRACKET,']',436,1523)
+LexToken(SEMICOLON,';',436,1524)
+LexToken(VARIABLE,'$operacion',437,1534)
+LexToken(EQUALS,'=',437,1545)
+LexToken(NEW,'new',437,1547)
+LexToken(VARIABLE,'$operacionClase',437,1551)
+LexToken(LPAREN,'(',437,1566)
+LexToken(RPAREN,')',437,1567)
+LexToken(SEMICOLON,';',437,1568)
+LexToken(RETURN,'return',438,1578)
+LexToken(VARIABLE,'$operacion',438,1585)
+LexToken(ARROW,'->',438,1595)
+LexToken(ID,'calcular',438,1597)
+LexToken(LPAREN,'(',438,1605)
+LexToken(VARIABLE,'$num1',438,1606)
+LexToken(COMMA,',',438,1611)
+LexToken(VARIABLE,'$num2',438,1613)
+LexToken(RPAREN,')',438,1618)
+LexToken(SEMICOLON,';',438,1619)
+LexToken(RBRACE,'}',439,1625)
+LexToken(RBRACE,'}',440,1627)
+LexToken(VARIABLE,'$calculadora',443,1648)
+LexToken(EQUALS,'=',443,1661)
+LexToken(NEW,'new',443,1663)
+LexToken(ID,'Calculadora',443,1667)
+LexToken(LPAREN,'(',443,1678)
+LexToken(RPAREN,')',443,1679)
+LexToken(SEMICOLON,';',443,1680)
+LexToken(VARIABLE,'$numeros',444,1682)
+LexToken(EQUALS,'=',444,1691)
+LexToken(LBRACKET,'[',444,1693)
+LexToken(INT,10,444,1694)
+LexToken(COMMA,',',444,1696)
+LexToken(INT,5,444,1698)
+LexToken(RBRACKET,']',444,1699)
+LexToken(SEMICOLON,';',444,1700)
+LexToken(VARIABLE,'$operaciones',446,1703)
+LexToken(EQUALS,'=',446,1716)
+LexToken(LBRACKET,'[',446,1718)
+LexToken(STRING,'suma',446,1719)
+LexToken(COMMA,',',446,1725)
+LexToken(STRING,'resta',446,1727)
+LexToken(COMMA,',',446,1734)
+LexToken(STRING,'multiplicacion',446,1736)
+LexToken(COMMA,',',446,1752)
+LexToken(STRING,'division',446,1754)
+LexToken(RBRACKET,']',446,1764)
+LexToken(SEMICOLON,';',446,1765)
+LexToken(FOREACH,'foreach',447,1767)
+LexToken(LPAREN,'(',447,1775)
+LexToken(VARIABLE,'$operaciones',447,1776)
+LexToken(AS,'as',447,1789)
+LexToken(VARIABLE,'$op',447,1792)
+LexToken(RPAREN,')',447,1795)
+LexToken(LBRACE,'{',447,1797)
+LexToken(TRY,'try',448,1803)
+LexToken(LBRACE,'{',448,1807)
+LexToken(VARIABLE,'$resultado',449,1817)
+LexToken(EQUALS,'=',449,1828)
+LexToken(VARIABLE,'$calculadora',449,1830)
+LexToken(ARROW,'->',449,1842)
+LexToken(ID,'realizarOperacion',449,1844)
+LexToken(LPAREN,'(',449,1861)
+LexToken(VARIABLE,'$op',449,1862)
+LexToken(COMMA,',',449,1865)
+LexToken(VARIABLE,'$numeros',449,1867)
+LexToken(LBRACKET,'[',449,1875)
+LexToken(INT,0,449,1876)
+LexToken(RBRACKET,']',449,1877)
+LexToken(COMMA,',',449,1878)
+LexToken(VARIABLE,'$numeros',449,1880)
+LexToken(LBRACKET,'[',449,1888)
+LexToken(INT,1,449,1889)
+LexToken(RBRACKET,']',449,1890)
+LexToken(RPAREN,')',449,1891)
+LexToken(SEMICOLON,';',449,1892)
+LexToken(ECHO,'echo',450,1902)
+LexToken(STRING,'Resultado de la operación $op entre {$numeros[0]} y {$numeros[1]}: $resultado\\n',450,1907)
+LexToken(SEMICOLON,';',450,1989)
+LexToken(RBRACE,'}',451,1995)
+LexToken(CATCH,'catch',451,1997)
+LexToken(LPAREN,'(',451,2003)
+LexToken(EXCEPTION,'Exception',451,2004)
+LexToken(VARIABLE,'$e',451,2014)
+LexToken(RPAREN,')',451,2016)
+LexToken(LBRACE,'{',451,2018)
+LexToken(ECHO,'echo',452,2028)
+LexToken(VARIABLE,'$e',452,2033)
+LexToken(ARROW,'->',452,2035)
+LexToken(ID,'getMessage',452,2037)
+LexToken(LPAREN,'(',452,2047)
+LexToken(RPAREN,')',452,2048)
+LexToken(DOT,'.',452,2050)
+LexToken(STRING,'\\n',452,2052)
+LexToken(SEMICOLON,';',452,2056)
+LexToken(RBRACE,'}',453,2062)
+LexToken(RBRACE,'}',454,2064)
+LexToken(CLOSETAG,'?>',456,2067)
+11/28/2024, 03:43:25
+Entrada:
+<?php
+
+// Definimos una interfaz para las operaciones matemáticas
+interface Operacion {
+    public function calcular($num1, $num2);
+}
+
+// Clase para la operación de suma
+class Suma implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 + $num2;
+    }
+}
+
+// Clase para la operación de resta
+class Resta implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 - $num2;
+    }
+}
+
+// Clase para la operación de multiplicación
+class Multiplicacion implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 * $num2;
+    }
+}
+
+// Clase para la operación de división con manejo de excepción si el divisor es cero
+class Division implements Operacion {
+    public function calcular($num1, $num2) {
+        if ($num2 == 0) {
+            throw new Exception("Error: División por cero no permitida.");
+        }
+        return $num1 / $num2;
+    }
+}
+
+// Clase Calculadora que usa el patrón de diseño 'Factory' para crear operaciones
+class Calculadora {
+    const OPERACIONES = [
+        'suma' => 'Suma',
+        'resta' => 'Resta',
+        'multiplicacion' => 'Multiplicacion',
+        'division' => 'Division'
+    ];
+
+    public function realizarOperacion($tipo, $num1, $num2) {
+        if (!array_key_exists($tipo, self::OPERACIONES)) {
+            throw new Exception("Error: Operación no soportada.");
+        }
+
+        // Creamos una instancia de la operación solicitada
+        $operacionClase = self::OPERACIONES[$tipo];
+        $operacion = new $operacionClase();
+        return $operacion->calcular($num1, $num2);
+    }
+}
+
+// Ejemplo de uso
+$calculadora = new Calculadora();
+$numeros = [10, 5];
+
+$operaciones = ['suma', 'resta', 'multiplicacion', 'division'];
+foreach ($operaciones as $op) {
+    try {
+        $resultado = $calculadora->realizarOperacion($op, $numeros[0], $numeros[1]);
+        echo "Resultado de la operación $op entre {$numeros[0]} y {$numeros[1]}: $resultado\n";
+    } catch (Exception $e) {
+        echo $e->getMessage() . "\n";
+    }
+}
+
+?>
+
+
+Salida:
+Error de sintaxis - Token: PUBLIC ('public'), L�nea: 462, Columna: 93
+11/28/2024, 03:43:26
+Entrada:
+<?php
+// Variables y asignaciones básicas
+$var1 = 1;
+$var2 = 0.5;
+$var3=100;
+$result = $var1 + $var2 + $var3; // Suma de enteros y flotantes
+
+// Cadenas con secuencias de escape
+$string1 = "Hello\nWorld!";
+$string2 = 'This is a \t tab.';
+$escaped = "She said, \"Hello!\"";
+
+// Operadores de comparación
+$isEqual = ($var1 == $var2);
+$isNotEqual = ($var1 !== $var2);
+$isGreaterOrEqual = ($var1 >= $var2);
+
+// Estructuras de control
+if ($var1 < $var2) {
+    echo "var1 es menor que var2";
+} else {
+    echo "var1 es mayor o igual a var2";
+}
+
+// Bucles y palabras reservadas
+for ($i = 0; $i < 4; $i++) {
+    echo "i: $i\n";
+}
+
+$array = array(1, 2, 3); // Creación de un arreglo
+foreach ($array as $item) {
+    echo $item;
+}
+
+// Prueba de operadores lógicos
+$isTrue = true && false || true;
+
+// Comentarios
+// Esto es un comentario de una línea
+/* Y esto es un comentario
+   de varias líneas */
+
+// Prueba de constantes booleanas y nulas
+$isNull = NULL;
+$isFalse = false;
+$isTrue = true;
+?>
+
+
+Salida:
+LexToken(OPENTAG,'<?php',533,0)
+LexToken(VARIABLE,'$var1',535,43)
+LexToken(EQUALS,'=',535,49)
+LexToken(INT,1,535,51)
+LexToken(SEMICOLON,';',535,52)
+LexToken(VARIABLE,'$var2',536,54)
+LexToken(EQUALS,'=',536,60)
+LexToken(FLOAT,0.5,536,62)
+LexToken(SEMICOLON,';',536,65)
+LexToken(VARIABLE,'$var3',537,67)
+LexToken(EQUALS,'=',537,72)
+LexToken(INT,100,537,73)
+LexToken(SEMICOLON,';',537,76)
+LexToken(VARIABLE,'$result',538,78)
+LexToken(EQUALS,'=',538,86)
+LexToken(VARIABLE,'$var1',538,88)
+LexToken(PLUS,'+',538,94)
+LexToken(VARIABLE,'$var2',538,96)
+LexToken(PLUS,'+',538,102)
+LexToken(VARIABLE,'$var3',538,104)
+LexToken(SEMICOLON,';',538,109)
+LexToken(VARIABLE,'$string1',541,179)
+LexToken(EQUALS,'=',541,188)
+LexToken(STRING,'Hello\\nWorld!',541,190)
+LexToken(SEMICOLON,';',541,205)
+LexToken(VARIABLE,'$string2',542,207)
+LexToken(EQUALS,'=',542,216)
+LexToken(STRING,'This is a \\t tab.',542,218)
+LexToken(SEMICOLON,';',542,237)
+LexToken(VARIABLE,'$escaped',543,239)
+LexToken(EQUALS,'=',543,248)
+LexToken(STRING,'She said, \\"Hello!\\"',543,250)
+LexToken(SEMICOLON,';',543,272)
+LexToken(VARIABLE,'$isEqual',546,305)
+LexToken(EQUALS,'=',546,314)
+LexToken(LPAREN,'(',546,316)
+LexToken(VARIABLE,'$var1',546,317)
+LexToken(EQ,'==',546,323)
+LexToken(VARIABLE,'$var2',546,326)
+LexToken(RPAREN,')',546,331)
+LexToken(SEMICOLON,';',546,332)
+LexToken(VARIABLE,'$isNotEqual',547,334)
+LexToken(EQUALS,'=',547,346)
+LexToken(LPAREN,'(',547,348)
+LexToken(VARIABLE,'$var1',547,349)
+LexToken(STRICTNEQ,'!==',547,355)
+LexToken(VARIABLE,'$var2',547,359)
+LexToken(RPAREN,')',547,364)
+LexToken(SEMICOLON,';',547,365)
+LexToken(VARIABLE,'$isGreaterOrEqual',548,367)
+LexToken(EQUALS,'=',548,385)
+LexToken(LPAREN,'(',548,387)
+LexToken(VARIABLE,'$var1',548,388)
+LexToken(GEQ,'>=',548,394)
+LexToken(VARIABLE,'$var2',548,397)
+LexToken(RPAREN,')',548,402)
+LexToken(SEMICOLON,';',548,403)
+LexToken(IF,'if',551,432)
+LexToken(LPAREN,'(',551,435)
+LexToken(VARIABLE,'$var1',551,436)
+LexToken(LT,'<',551,442)
+LexToken(VARIABLE,'$var2',551,444)
+LexToken(RPAREN,')',551,449)
+LexToken(LBRACE,'{',551,451)
+LexToken(ECHO,'echo',552,457)
+LexToken(STRING,'var1 es menor que var2',552,462)
+LexToken(SEMICOLON,';',552,486)
+LexToken(RBRACE,'}',553,488)
+LexToken(ELSE,'else',553,490)
+LexToken(LBRACE,'{',553,495)
+LexToken(ECHO,'echo',554,501)
+LexToken(STRING,'var1 es mayor o igual a var2',554,506)
+LexToken(SEMICOLON,';',554,536)
+LexToken(RBRACE,'}',555,538)
+LexToken(FOR,'for',558,573)
+LexToken(LPAREN,'(',558,577)
+LexToken(VARIABLE,'$i',558,578)
+LexToken(EQUALS,'=',558,581)
+LexToken(INT,0,558,583)
+LexToken(SEMICOLON,';',558,584)
+LexToken(VARIABLE,'$i',558,586)
+LexToken(LT,'<',558,589)
+LexToken(INT,4,558,591)
+LexToken(SEMICOLON,';',558,592)
+LexToken(VARIABLE,'$i',558,594)
+LexToken(DOUBLEPLUS,'++',558,596)
+LexToken(RPAREN,')',558,598)
+LexToken(LBRACE,'{',558,600)
+LexToken(ECHO,'echo',559,606)
+LexToken(STRING,'i: $i\\n',559,611)
+LexToken(SEMICOLON,';',559,620)
+LexToken(RBRACE,'}',560,622)
+LexToken(VARIABLE,'$array',562,625)
+LexToken(EQUALS,'=',562,632)
+LexToken(ARRAY,'array',562,634)
+LexToken(LPAREN,'(',562,639)
+LexToken(INT,1,562,640)
+LexToken(COMMA,',',562,641)
+LexToken(INT,2,562,643)
+LexToken(COMMA,',',562,644)
+LexToken(INT,3,562,646)
+LexToken(RPAREN,')',562,647)
+LexToken(SEMICOLON,';',562,648)
+LexToken(FOREACH,'foreach',563,677)
+LexToken(LPAREN,'(',563,685)
+LexToken(VARIABLE,'$array',563,686)
+LexToken(AS,'as',563,693)
+LexToken(VARIABLE,'$item',563,696)
+LexToken(RPAREN,')',563,701)
+LexToken(LBRACE,'{',563,703)
+LexToken(ECHO,'echo',564,709)
+LexToken(VARIABLE,'$item',564,714)
+LexToken(SEMICOLON,';',564,719)
+LexToken(RBRACE,'}',565,721)
+LexToken(VARIABLE,'$isTrue',568,757)
+LexToken(EQUALS,'=',568,765)
+LexToken(BOOL,True,568,767)
+LexToken(LOGICAL_AND,'&&',568,772)
+LexToken(BOOL,False,568,775)
+LexToken(LOGICAL_OR,'||',568,781)
+LexToken(BOOL,True,568,784)
+LexToken(SEMICOLON,';',568,788)
+LexToken(VARIABLE,'$isNull',576,939)
+LexToken(EQUALS,'=',576,947)
+LexToken(NULL,'NULL',576,949)
+LexToken(SEMICOLON,';',576,953)
+LexToken(VARIABLE,'$isFalse',577,955)
+LexToken(EQUALS,'=',577,964)
+LexToken(BOOL,False,577,966)
+LexToken(SEMICOLON,';',577,971)
+LexToken(VARIABLE,'$isTrue',578,973)
+LexToken(EQUALS,'=',578,981)
+LexToken(BOOL,True,578,983)
+LexToken(SEMICOLON,';',578,987)
+LexToken(CLOSETAG,'?>',579,989)
+11/28/2024, 03:43:27
+Entrada:
+<?php
+// Variables y asignaciones básicas
+$var1 = 1;
+$var2 = 0.5;
+$var3=100;
+$result = $var1 + $var2 + $var3; // Suma de enteros y flotantes
+
+// Cadenas con secuencias de escape
+$string1 = "Hello\nWorld!";
+$string2 = 'This is a \t tab.';
+$escaped = "She said, \"Hello!\"";
+
+// Operadores de comparación
+$isEqual = ($var1 == $var2);
+$isNotEqual = ($var1 !== $var2);
+$isGreaterOrEqual = ($var1 >= $var2);
+
+// Estructuras de control
+if ($var1 < $var2) {
+    echo "var1 es menor que var2";
+} else {
+    echo "var1 es mayor o igual a var2";
+}
+
+// Bucles y palabras reservadas
+for ($i = 0; $i < 4; $i++) {
+    echo "i: $i\n";
+}
+
+$array = array(1, 2, 3); // Creación de un arreglo
+foreach ($array as $item) {
+    echo $item;
+}
+
+// Prueba de operadores lógicos
+$isTrue = true && false || true;
+
+// Comentarios
+// Esto es un comentario de una línea
+/* Y esto es un comentario
+   de varias líneas */
+
+// Prueba de constantes booleanas y nulas
+$isNull = NULL;
+$isFalse = false;
+$isTrue = true;
+?>
+
+
+Salida:
+11/28/2024, 03:43:28
+Entrada:
+<?php
+// Variables y asignaciones básicas
+$var1 = 1;
+$var2 = 0.5;
+$var3=100;
+$result = $var1 + $var2 + $var3; // Suma de enteros y flotantes
+
+// Cadenas con secuencias de escape
+$string1 = "Hello\nWorld!";
+$string2 = 'This is a \t tab.';
+$escaped = "She said, \"Hello!\"";
+
+// Operadores de comparación
+$isEqual = ($var1 == $var2);
+$isNotEqual = ($var1 !== $var2);
+$isGreaterOrEqual = ($var1 >= $var2);
+
+// Estructuras de control
+if ($var1 < $var2) {
+    echo "var1 es menor que var2";
+} else {
+    echo "var1 es mayor o igual a var2";
+}
+
+// Bucles y palabras reservadas
+for ($i = 0; $i < 4; $i++) {
+    echo "i: $i\n";
+}
+
+$array = array(1, 2, 3); // Creación de un arreglo
+foreach ($array as $item) {
+    echo $item;
+}
+
+// Prueba de operadores lógicos
+$isTrue = true && false || true;
+
+// Comentarios
+// Esto es un comentario de una línea
+/* Y esto es un comentario
+   de varias líneas */
+
+// Prueba de constantes booleanas y nulas
+$isNull = NULL;
+$isFalse = false;
+$isTrue = true;
+?>
+
+
+Salida:
+11/28/2024, 03:43:28
+Entrada:
+<?php
+// Variables y asignaciones básicas
+$var1 = 1;
+$var2 = 0.5;
+$var3=100;
+$result = $var1 + $var2 + $var3; // Suma de enteros y flotantes
+
+// Cadenas con secuencias de escape
+$string1 = "Hello\nWorld!";
+$string2 = 'This is a \t tab.';
+$escaped = "She said, \"Hello!\"";
+
+// Operadores de comparación
+$isEqual = ($var1 == $var2);
+$isNotEqual = ($var1 !== $var2);
+$isGreaterOrEqual = ($var1 >= $var2);
+
+// Estructuras de control
+if ($var1 < $var2) {
+    echo "var1 es menor que var2";
+} else {
+    echo "var1 es mayor o igual a var2";
+}
+
+// Bucles y palabras reservadas
+for ($i = 0; $i < 4; $i++) {
+    echo "i: $i\n";
+}
+
+$array = array(1, 2, 3); // Creación de un arreglo
+foreach ($array as $item) {
+    echo $item;
+}
+
+// Prueba de operadores lógicos
+$isTrue = true && false || true;
+
+// Comentarios
+// Esto es un comentario de una línea
+/* Y esto es un comentario
+   de varias líneas */
+
+// Prueba de constantes booleanas y nulas
+$isNull = NULL;
+$isFalse = false;
+$isTrue = true;
+?>
+
+
+Salida:
+LexToken(OPENTAG,'<?php',677,0)
+LexToken(VARIABLE,'$var1',679,43)
+LexToken(EQUALS,'=',679,49)
+LexToken(INT,1,679,51)
+LexToken(SEMICOLON,';',679,52)
+LexToken(VARIABLE,'$var2',680,54)
+LexToken(EQUALS,'=',680,60)
+LexToken(FLOAT,0.5,680,62)
+LexToken(SEMICOLON,';',680,65)
+LexToken(VARIABLE,'$var3',681,67)
+LexToken(EQUALS,'=',681,72)
+LexToken(INT,100,681,73)
+LexToken(SEMICOLON,';',681,76)
+LexToken(VARIABLE,'$result',682,78)
+LexToken(EQUALS,'=',682,86)
+LexToken(VARIABLE,'$var1',682,88)
+LexToken(PLUS,'+',682,94)
+LexToken(VARIABLE,'$var2',682,96)
+LexToken(PLUS,'+',682,102)
+LexToken(VARIABLE,'$var3',682,104)
+LexToken(SEMICOLON,';',682,109)
+LexToken(VARIABLE,'$string1',685,179)
+LexToken(EQUALS,'=',685,188)
+LexToken(STRING,'Hello\\nWorld!',685,190)
+LexToken(SEMICOLON,';',685,205)
+LexToken(VARIABLE,'$string2',686,207)
+LexToken(EQUALS,'=',686,216)
+LexToken(STRING,'This is a \\t tab.',686,218)
+LexToken(SEMICOLON,';',686,237)
+LexToken(VARIABLE,'$escaped',687,239)
+LexToken(EQUALS,'=',687,248)
+LexToken(STRING,'She said, \\"Hello!\\"',687,250)
+LexToken(SEMICOLON,';',687,272)
+LexToken(VARIABLE,'$isEqual',690,305)
+LexToken(EQUALS,'=',690,314)
+LexToken(LPAREN,'(',690,316)
+LexToken(VARIABLE,'$var1',690,317)
+LexToken(EQ,'==',690,323)
+LexToken(VARIABLE,'$var2',690,326)
+LexToken(RPAREN,')',690,331)
+LexToken(SEMICOLON,';',690,332)
+LexToken(VARIABLE,'$isNotEqual',691,334)
+LexToken(EQUALS,'=',691,346)
+LexToken(LPAREN,'(',691,348)
+LexToken(VARIABLE,'$var1',691,349)
+LexToken(STRICTNEQ,'!==',691,355)
+LexToken(VARIABLE,'$var2',691,359)
+LexToken(RPAREN,')',691,364)
+LexToken(SEMICOLON,';',691,365)
+LexToken(VARIABLE,'$isGreaterOrEqual',692,367)
+LexToken(EQUALS,'=',692,385)
+LexToken(LPAREN,'(',692,387)
+LexToken(VARIABLE,'$var1',692,388)
+LexToken(GEQ,'>=',692,394)
+LexToken(VARIABLE,'$var2',692,397)
+LexToken(RPAREN,')',692,402)
+LexToken(SEMICOLON,';',692,403)
+LexToken(IF,'if',695,432)
+LexToken(LPAREN,'(',695,435)
+LexToken(VARIABLE,'$var1',695,436)
+LexToken(LT,'<',695,442)
+LexToken(VARIABLE,'$var2',695,444)
+LexToken(RPAREN,')',695,449)
+LexToken(LBRACE,'{',695,451)
+LexToken(ECHO,'echo',696,457)
+LexToken(STRING,'var1 es menor que var2',696,462)
+LexToken(SEMICOLON,';',696,486)
+LexToken(RBRACE,'}',697,488)
+LexToken(ELSE,'else',697,490)
+LexToken(LBRACE,'{',697,495)
+LexToken(ECHO,'echo',698,501)
+LexToken(STRING,'var1 es mayor o igual a var2',698,506)
+LexToken(SEMICOLON,';',698,536)
+LexToken(RBRACE,'}',699,538)
+LexToken(FOR,'for',702,573)
+LexToken(LPAREN,'(',702,577)
+LexToken(VARIABLE,'$i',702,578)
+LexToken(EQUALS,'=',702,581)
+LexToken(INT,0,702,583)
+LexToken(SEMICOLON,';',702,584)
+LexToken(VARIABLE,'$i',702,586)
+LexToken(LT,'<',702,589)
+LexToken(INT,4,702,591)
+LexToken(SEMICOLON,';',702,592)
+LexToken(VARIABLE,'$i',702,594)
+LexToken(DOUBLEPLUS,'++',702,596)
+LexToken(RPAREN,')',702,598)
+LexToken(LBRACE,'{',702,600)
+LexToken(ECHO,'echo',703,606)
+LexToken(STRING,'i: $i\\n',703,611)
+LexToken(SEMICOLON,';',703,620)
+LexToken(RBRACE,'}',704,622)
+LexToken(VARIABLE,'$array',706,625)
+LexToken(EQUALS,'=',706,632)
+LexToken(ARRAY,'array',706,634)
+LexToken(LPAREN,'(',706,639)
+LexToken(INT,1,706,640)
+LexToken(COMMA,',',706,641)
+LexToken(INT,2,706,643)
+LexToken(COMMA,',',706,644)
+LexToken(INT,3,706,646)
+LexToken(RPAREN,')',706,647)
+LexToken(SEMICOLON,';',706,648)
+LexToken(FOREACH,'foreach',707,677)
+LexToken(LPAREN,'(',707,685)
+LexToken(VARIABLE,'$array',707,686)
+LexToken(AS,'as',707,693)
+LexToken(VARIABLE,'$item',707,696)
+LexToken(RPAREN,')',707,701)
+LexToken(LBRACE,'{',707,703)
+LexToken(ECHO,'echo',708,709)
+LexToken(VARIABLE,'$item',708,714)
+LexToken(SEMICOLON,';',708,719)
+LexToken(RBRACE,'}',709,721)
+LexToken(VARIABLE,'$isTrue',712,757)
+LexToken(EQUALS,'=',712,765)
+LexToken(BOOL,True,712,767)
+LexToken(LOGICAL_AND,'&&',712,772)
+LexToken(BOOL,False,712,775)
+LexToken(LOGICAL_OR,'||',712,781)
+LexToken(BOOL,True,712,784)
+LexToken(SEMICOLON,';',712,788)
+LexToken(VARIABLE,'$isNull',720,939)
+LexToken(EQUALS,'=',720,947)
+LexToken(NULL,'NULL',720,949)
+LexToken(SEMICOLON,';',720,953)
+LexToken(VARIABLE,'$isFalse',721,955)
+LexToken(EQUALS,'=',721,964)
+LexToken(BOOL,False,721,966)
+LexToken(SEMICOLON,';',721,971)
+LexToken(VARIABLE,'$isTrue',722,973)
+LexToken(EQUALS,'=',722,981)
+LexToken(BOOL,True,722,983)
+LexToken(SEMICOLON,';',722,987)
+LexToken(CLOSETAG,'?>',723,989)
+11/28/2024, 03:43:29
+Entrada:
+<?php
+// Variables y asignaciones básicas
+$var1 = 1;
+$var2 = 0.5;
+$var3=100;
+$result = $var1 + $var2 + $var3; // Suma de enteros y flotantes
+
+// Cadenas con secuencias de escape
+$string1 = "Hello\nWorld!";
+$string2 = 'This is a \t tab.';
+$escaped = "She said, \"Hello!\"";
+
+// Operadores de comparación
+$isEqual = ($var1 == $var2);
+$isNotEqual = ($var1 !== $var2);
+$isGreaterOrEqual = ($var1 >= $var2);
+
+// Estructuras de control
+if ($var1 < $var2) {
+    echo "var1 es menor que var2";
+} else {
+    echo "var1 es mayor o igual a var2";
+}
+
+// Bucles y palabras reservadas
+for ($i = 0; $i < 4; $i++) {
+    echo "i: $i\n";
+}
+
+$array = array(1, 2, 3); // Creación de un arreglo
+foreach ($array as $item) {
+    echo $item;
+}
+
+// Prueba de operadores lógicos
+$isTrue = true && false || true;
+
+// Comentarios
+// Esto es un comentario de una línea
+/* Y esto es un comentario
+   de varias líneas */
+
+// Prueba de constantes booleanas y nulas
+$isNull = NULL;
+$isFalse = false;
+$isTrue = true;
+?>
+
+
+Salida:
+11/28/2024, 03:43:37
+Entrada:
+<?php
+// Ejemplo de variables y asignaciones
+$variable1 = 10;
+$variable2 = 20.5;
+$cadena = "Hola, mundo!";
+$booleano = true;
+
+// Operadores aritméticos
+$suma = $variable1 + $variable2;
+$resta = $variable1 - $variable2;
+$multiplicacion = $variable1 * 3;
+$division = $variable2 / $variable1;
+$modulo = $variable1 % 3;
+
+// Operadores de comparación
+$esIgual = ($variable1 == $variable2);
+$esIdentico = ($variable1 === 10);
+$esMenor = ($variable1 < $variable2);
+$esMayor = ($variable1 > $variable2);
+$esDiferente = ($variable1 != $variable2);
+
+// Estructuras de control
+if ($variable1 > 5) {
+    echo "Variable 1 es mayor que 5\n";
+} elseif ($variable1 == 5) {
+    echo "Variable 1 es igual a 5\n";
+} else {
+    echo "Variable 1 es menor que 5\n";
+}
+
+for ($i = 0; $i < 5; $i++) {
+    echo "Iteración: $i\n";
+}
+
+
+$esVerdadero = ($booleano && ($variable1 > 5)) || $booleano;
+
+
+
+// Ejemplo de función
+function suma($a, $b) {
+    return $a + $b;
+}
+
+// Ejemplo de llamada a función
+$resultado = suma($variable1, $variable2);
+echo "Resultado de la suma: $resultado\n";
+
+
+?>
+
+
+Salida:
+Error de sintaxis - Token: ECHO ('echo'), L�nea: 819, Columna: 1021
