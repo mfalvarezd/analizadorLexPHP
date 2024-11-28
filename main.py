@@ -39,6 +39,8 @@ def p_returnStatement(p):
     '''returnStatement : RETURN valor SEMICOLON
                        | RETURN SEMICOLON'''
 
+
+
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUALS operaArit SEMICOLON
                   | VARIABLE EQUALS valor SEMICOLON'''
@@ -54,8 +56,13 @@ def p_operador_ternario(p):
                         '''
 
 def p_operaArit(p):
-    '''operaArit : valor
-                | valor operador operaArit'''
+    '''operaArit : valornumerico
+                | valornumerico operador operaArit'''
+
+def p_valornumerico(p):
+    '''valornumerico : INT
+                    | FLOAT
+                    | VARIABLE'''
 
 def p_valor(p):
     '''valor : INT
