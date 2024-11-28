@@ -42,7 +42,8 @@ def p_returnStatement(p):
 
 
 def p_asignacion(p):
-    '''asignacion : VARIABLE EQUALS expresion SEMICOLON'''
+    '''asignacion : VARIABLE EQUALS expresion SEMICOLON
+                  '''
 def p_expresion(p):
     '''expresion : valor
                  | expresion opLogic expresion
@@ -260,10 +261,10 @@ def p_argumento(p):
     '''argumento : type VARIABLE
                  | VARIABLE EQUALS valor
                  | type VARIABLE EQUALS valor
-                 | operaArit
                  | valor
                  | llamadaFuncion
-                 | VARIABLE'''
+                 | operaArit'''
+
 
 def p_type(p):
     '''type : INT_TYPE
