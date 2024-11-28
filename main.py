@@ -31,18 +31,25 @@ def p_sentencia(p):
                 | constdeclaration
                 | thisdeclaration
                 | concatenate
-                | minuse
-                | pluse
+                | alterVar
                 '''
 
 def p_returnStatement(p):
     '''returnStatement : RETURN expresion SEMICOLON
                        | RETURN SEMICOLON'''
-
+def p_funci(p):
+    '''funci : ID LPAREN RPAREN
+            | ID LPAREN argumentos RPAREN SEMICOLON
+            | ID LPAREN RPAREN SEMICOLON
+            | LPAREN argumentos RPAREN'''
 
 
 def p_asignacion(p):
-    '''asignacion : VARIABLE EQUALS expresion SEMICOLON'''
+    '''asignacion : VARIABLE EQUALS expresion SEMICOLON
+                | VARIABLE minuse SEMICOLON
+                | VARIABLE pluse SEMICOLON
+                | VARIABLE EQUALS funcion_strlen SEMICOLON'''
+
 def p_expresion(p):
     '''expresion : valor
                  | expresion opLogic expresion
@@ -50,6 +57,10 @@ def p_expresion(p):
                  | LPAREN comparacion RPAREN
                  | operaArit
                  | LPAREN expresion RPAREN
+                 | llamadaFuncion
+                 | concatenate
+                 | minuse
+                 | pluse
                  '''
 
 def p_asignacion_fgets(p):
@@ -59,7 +70,7 @@ def p_asignacion_fgets(p):
 
 
 def p_operaArit(p):
-    '''operaArit : valor
+    '''operaArit : valornumerico
                  | operaArit operador operaArit
                  | LPAREN operaArit RPAREN
                  '''
@@ -90,8 +101,7 @@ def p_operador(p):
                 | POTENCIA'''
 
 def p_comparacion(p):
-    '''comparacion : valor opSymbol valor
-                    | expresion opSymbol expresion'''
+    '''comparacion : valornumerico opSymbol valornumerico'''
 
 
 
@@ -115,7 +125,9 @@ def p_empty(p):
 def p_estructurasPrograma(p):
     '''estructurasPrograma : controlStructure
                         | dataStructure'''
-
+def p_alterVar(p):
+    '''alterVar : VARIABLE DOUBLEPLUS SEMICOLON
+                | VARIABLE DOUBLEMINUS SEMICOLON'''
 def p_controlStructure(p):
     '''controlStructure : if
                         | for
@@ -126,7 +138,7 @@ def p_controlStructure(p):
 
 def p_if(p):
     '''if : IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
-          | IF LPAREN conditions RPAREN body'''
+          | IF LPAREN conditions RPAREN body SEMICOLON'''
 
 def p_else_blocks(p):
     '''else_blocks : ELSE LBRACE body RBRACE
@@ -247,13 +259,14 @@ def p_default(p):
 def p_argumentos(p):
     '''argumentos : argumento   
                   | argumento COMMA argumentos
-                  | empty'''
+                  '''
 
 def p_argumento(p):
-    '''argumento : type VARIABLE
+    '''argumento : valor
+                 | type VARIABLE
                  | VARIABLE EQUALS valor
                  | type VARIABLE EQUALS valor
-                 | operaArit'''
+                 | empty'''
 
 def p_type(p):
     '''type : INT_TYPE
@@ -279,13 +292,12 @@ def p_objeto(p):
     '''objeto : VARIABLE ARROW ID LPAREN argumentos RPAREN SEMICOLON   '''
 
 def p_funcionDeclaration(p):
-    '''funcionDeclaration : FUNCTION ID LPAREN argumentos RPAREN LBRACE body RBRACE'''
+    '''funcionDeclaration : FUNCTION ID LPAREN argumentos RPAREN LBRACE body RBRACE
+                        | data FUNCTION ID LPAREN argumentos RPAREN LBRACE body RBRACE'''
 
 def p_llamadaFuncion(p):
-    '''llamadaFuncion : ID LPAREN argumentos RPAREN SEMICOLON
-                      | EMPTY LPAREN argumentos RPAREN
-                      | ID LPAREN argumentos RPAREN
-                      | EMPTY LPAREN argumentos RPAREN SEMICOLON''' 
+    '''llamadaFuncion : ID LPAREN argumentos RPAREN 
+                      | EMPTY LPAREN argumentos RPAREN''' 
 
 def p_classDeclarate(p):
     '''classDeclarate : CLASS ID LBRACE classBody RBRACE
@@ -325,7 +337,7 @@ def p_data(p):
             | FINAL'''
 
 def p_interface(p):
-    '''interface : INTERFACE ID LBRACE classBody RBRACE'''
+    '''interface : INTERFACE ID LBRACE sentenciaList RBRACE'''
 
 def p_includes(p):
     '''includes : INCLUDE STRING SEMICOLON
@@ -352,13 +364,15 @@ def p_thisdeclaration(p):
                         | THIS ARROW ID LPAREN RPAREN SEMICOLON'''
 
 def p_concatenate(p):
-    '''concatenate : VARIABLE CONCATENATEEQUAL STRING'''
+    '''concatenate : valor DOT STRING '''
 
 def p_minuse(p):
-    '''minuse : VARIABLE MINUSEQUAL INT'''
+    '''minuse :  MINUSEQUAL INT'''
 
 def p_pluse(p):
-    '''pluse : VARIABLE PLUSEQUAL INT'''
+    '''pluse : PLUSEQUAL INT'''
+def p_funcion_strlen(p):
+    '''funcion_strlen : STRLEN LPAREN STRING RPAREN '''
 
 
 # Inicializar la lista de errores sintácticos

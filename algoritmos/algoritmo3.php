@@ -2,7 +2,9 @@
 
 // Definimos una interfaz para las operaciones matemáticas
 interface Operacion {
-    public function calcular($num1, $num2);
+    public function calcular($num1, $num2){
+        echo "hola";
+    }
 }
 
 // Clase para la operación de suma

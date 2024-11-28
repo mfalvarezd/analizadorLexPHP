@@ -50,6 +50,7 @@ reserved={
     'or': 'OR',
     'print':'PRINT',    
 #inicio contribuciones Piero
+    'strlen':'STRLEN',
     'private': 'PRIVATE',
     'protected':'PROTECTED',
     'public':'PUBLIC',

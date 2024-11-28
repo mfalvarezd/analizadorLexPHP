@@ -1,9 +1,7 @@
 <?php
 // Validar arreglos asociativos
-$persona = array("nombre" => "Piero", "edad" => 25, "ciudad" => "Lima");
+$persocna = array("nombre" => "Piero", "edad" => 25, "ciudad" => "Lima");
 
-// Acceso a datos del arreglo asociativo
-echo $persona["nombre"]; // Deberia imprimir: Piero
 
 // Validar if-else
 $edad = 18;
