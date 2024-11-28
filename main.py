@@ -42,8 +42,7 @@ def p_returnStatement(p):
 
 
 def p_asignacion(p):
-    '''asignacion : VARIABLE EQUALS expresion SEMICOLON
-                  '''
+    '''asignacion : VARIABLE EQUALS expresion SEMICOLON'''
 def p_expresion(p):
     '''expresion : valor
                  | expresion opLogic expresion
@@ -51,7 +50,6 @@ def p_expresion(p):
                  | LPAREN comparacion RPAREN
                  | operaArit
                  | LPAREN expresion RPAREN
-                 | operador_ternario
                  '''
 
 def p_asignacion_fgets(p):
@@ -59,15 +57,10 @@ def p_asignacion_fgets(p):
     variable = p[1]  # Nombre de la variable
     print(f"Asigna a {variable} el valor ingresado por el usuario.")
 
-def p_operador_ternario(p):
-    '''operador_ternario : LPAREN conditions RPAREN QUESTION valor COLON valor
-                        | LPAREN conditions RPAREN QUESTION COLON valor
-                        | LPAREN VARIABLE RPAREN QUESTION COLON valor
-                        '''
 
 def p_operaArit(p):
     '''operaArit : valor
-                 | valor operador operaArit
+                 | operaArit operador operaArit
                  | LPAREN operaArit RPAREN
                  '''
 
@@ -110,7 +103,6 @@ def p_imprimir(p):
     '''imprimir : LPAREN repiteValores RPAREN
                 | LPAREN RPAREN
                 | repiteValores
-                | operador_ternario
                 | empty'''
 
 def p_repiteValores(p):
@@ -261,10 +253,7 @@ def p_argumento(p):
     '''argumento : type VARIABLE
                  | VARIABLE EQUALS valor
                  | type VARIABLE EQUALS valor
-                 | valor
-                 | llamadaFuncion
                  | operaArit'''
-
 
 def p_type(p):
     '''type : INT_TYPE
@@ -294,10 +283,9 @@ def p_funcionDeclaration(p):
 
 def p_llamadaFuncion(p):
     '''llamadaFuncion : ID LPAREN argumentos RPAREN SEMICOLON
+                      | EMPTY LPAREN argumentos RPAREN
                       | ID LPAREN argumentos RPAREN
-                      | ID LPAREN RPAREN SEMICOLON
-                      | ID LPAREN RPAREN'''
- 
+                      | EMPTY LPAREN argumentos RPAREN SEMICOLON''' 
 
 def p_classDeclarate(p):
     '''classDeclarate : CLASS ID LBRACE classBody RBRACE

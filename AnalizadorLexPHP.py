@@ -112,7 +112,6 @@ tokens=(
     'LEQ',
     'GEQ',
     'MODULO',
-    'QUESTION',
     'COLON',
     'LOGICAL_AND',
     'LOGICAL_OR',
@@ -159,7 +158,6 @@ t_ARROW = r'\->'
 t_ARROWMAP=r'\=>'
 t_DOUBLEPLUS=r'\+\+'
 t_DOUBLEMINUS=r'--'
-t_QUESTION = r'\?'
 t_COLON = r'\:'
 
 
