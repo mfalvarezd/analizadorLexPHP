@@ -128,12 +128,12 @@ def p_controlStructure(p):
                         | foreach'''
 
 def p_if(p):
-    '''if : IF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
-          | IF LPAREN conditions RPAREN body'''
+    '''if : IF LPAREN conditions RPAREN LBRACE sentenciaList RBRACE else_blocks
+          | IF LPAREN conditions RPAREN sentenciaList'''
 
 def p_else_blocks(p):
-    '''else_blocks : ELSE LBRACE body RBRACE
-                   | ELSEIF LPAREN conditions RPAREN LBRACE body RBRACE else_blocks
+    '''else_blocks : ELSE LBRACE sentenciaList RBRACE
+                   | ELSEIF LPAREN conditions RPAREN LBRACE sentenciaList RBRACE else_blocks
                    | empty'''
 
 def p_conditions(p):
@@ -164,10 +164,6 @@ def p_opLogic(p):
                 | LOGICAL_OR
                 '''
 
-def p_body(p):
-     '''body : sentenciaList          
-            | empty'''
-
 def p_sentenciaList(p):
     '''sentenciaList : sentencia
                     | sentencia sentenciaList'''
@@ -176,18 +172,18 @@ def p_for(p):
     '''for : forStatement'''
 
 def p_forStatement(p):
-    '''forStatement : FOR LPAREN forcondition RPAREN LBRACE body RBRACE'''
+    '''forStatement : FOR LPAREN forcondition RPAREN LBRACE sentenciaList RBRACE'''
 
 def p_forcondition(p):
     '''forcondition : VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEPLUS
                     | VARIABLE EQUALS INT SEMICOLON VARIABLE opSymbol INT SEMICOLON VARIABLE DOUBLEMINUS'''
 
 def p_while(p):
-    '''while : WHILE LPAREN condition RPAREN LBRACE body RBRACE
+    '''while : WHILE LPAREN condition RPAREN LBRACE sentenciaList RBRACE
             | WHILE LPAREN condition RPAREN LBRACE RBRACE'''
 
 def p_dowhile(p):
-    '''dowhile : DO LBRACE body RBRACE WHILE LPAREN condition RPAREN SEMICOLON'''
+    '''dowhile : DO LBRACE sentenciaList RBRACE WHILE LPAREN condition RPAREN SEMICOLON'''
 
 def p_switch(p):
     '''switch : SWITCH LPAREN valor RPAREN LBRACE caseLists RBRACE
@@ -204,12 +200,12 @@ def p_cases(p):
              | case cases'''
 
 def p_foreach(p):
-    '''foreach : FOREACH LPAREN VARIABLE AS VARIABLE RPAREN LBRACE body RBRACE'''
+    '''foreach : FOREACH LPAREN VARIABLE AS VARIABLE RPAREN LBRACE sentenciaList RBRACE'''
 
 def p_case(p):
-    '''case : CASE valor COLON body BREAK SEMICOLON
-            | CASE valor SEMICOLON body BREAK SEMICOLON
-            | CASE valor COLON body
+    '''case : CASE valor COLON sentenciaList BREAK SEMICOLON
+            | CASE valor SEMICOLON sentenciaList BREAK SEMICOLON
+            | CASE valor COLON sentenciaList
             | CASE valor SEMICOLON
             | CASE valor'''
 
@@ -241,10 +237,10 @@ def p_mapArrow(p):
     '''mapArrow : valor ARROWMAP valor'''
 
 def p_default(p):
-    '''default : DEFAULT COLON body BREAK SEMICOLON
-               | DEFAULT SEMICOLON body BREAK SEMICOLON
-               | DEFAULT COLON body
-               | DEFAULT SEMICOLON body
+    '''default : DEFAULT COLON sentenciaList BREAK SEMICOLON
+               | DEFAULT SEMICOLON sentenciaList BREAK SEMICOLON
+               | DEFAULT COLON sentenciaList
+               | DEFAULT SEMICOLON sentenciaList
                | DEFAULT'''
 
 def p_argumentos(p):
@@ -268,11 +264,11 @@ def p_type(p):
             '''
 
 def p_try(p):
-    '''try : TRY LBRACE body RBRACE catchs
-            | TRY LBRACE body RBRACE catchs FINALLY LBRACE body RBRACE '''
+    '''try : TRY LBRACE sentenciaList RBRACE catchs
+            | TRY LBRACE sentenciaList RBRACE catchs FINALLY LBRACE sentenciaList RBRACE '''
 
 def p_catch(p):
-    '''catch : CATCH LPAREN EXCEPTION VARIABLE RPAREN LBRACE body RBRACE'''
+    '''catch : CATCH LPAREN EXCEPTION VARIABLE RPAREN LBRACE sentenciaList RBRACE'''
 
 def p_catchs(p):
     '''catchs : catch
@@ -282,7 +278,7 @@ def p_objeto(p):
     '''objeto : VARIABLE ARROW ID LPAREN argumentos RPAREN SEMICOLON   '''
 
 def p_funcionDeclaration(p):
-    '''funcionDeclaration : FUNCTION ID LPAREN argumentos RPAREN LBRACE body RBRACE'''
+    '''funcionDeclaration : FUNCTION ID LPAREN argumentos RPAREN LBRACE sentenciaList RBRACE'''
 
 def p_llamadaFuncion(p):
     '''llamadaFuncion : ID LPAREN argumentos RPAREN SEMICOLON
@@ -302,7 +298,7 @@ def p_classBody(p):
 
 def p_classMember(p):
     '''classMember : type VARIABLE SEMICOLON
-                    | type FUNCTION ID LPAREN argumentos RPAREN LBRACE body RBRACE
+                    | type FUNCTION ID LPAREN argumentos RPAREN LBRACE sentenciaList RBRACE
                     | objectInstantiation'''
 
 def p_objectInstantiation(p):
