@@ -40,6 +40,16 @@ def mostrar_contenido(event):
         except Exception as e:
             tk.messagebox.showerror("Error", f"No se pudo cargar el archivo.\n{e}")
 
+def update_line_numbers(event=None):
+    line_numbers = ""
+    total_lines = int(cajatexto.index('end-1c').split('.')[0])  # Obtiene el número total de líneas
+    for line in range(1, total_lines + 1):
+        line_numbers += f"{line}\n"
+    text_line_numbers.config(state="normal")
+    text_line_numbers.delete(1.0, "end")
+    text_line_numbers.insert(1.0, line_numbers)
+    text_line_numbers.config(state="disabled")
+
 # Función para análisis léxico
 def lexico():
     codigo = cajatexto.get("1.0", END)
@@ -132,10 +142,20 @@ Label(frame_principal, text="ANALIZADOR PHP", bg="#3a7aba", fg="#FFFFFF", font=(
 
 Label(frame_principal, text="Ingrese su código aquí:", bg="#3a7aba",fg="#FFFFFF", font=("Arial", 12)).grid(row=1, column=0, sticky="w", pady=5)
 
-# Caja de texto de entrada
-cajatexto = st.ScrolledText(frame_principal, width=80, height=15, wrap=WORD)
-cajatexto.grid(row=2, column=0, columnspan=2, pady=10)
+# Caja de texto de entrada con números de línea
+frame_text = Frame(frame_principal)
+frame_text.grid(row=2, column=0, columnspan=2, pady=10, sticky="nsew")
 
+text_line_numbers = Text(frame_text, width=4, padx=4, pady=4, state="disabled", wrap="none", bg="#f0f0f0", fg="#333")
+text_line_numbers.pack(side="left", fill="y")
+
+cajatexto = st.ScrolledText(frame_text, width=80, height=15, wrap=WORD)
+cajatexto.pack(side="right", fill="both", expand=True)
+
+cajatexto.bind("<KeyRelease>", update_line_numbers)
+cajatexto.bind("<MouseWheel>", update_line_numbers)
+
+# Botones y resultados
 botonLex = Button(frame_principal, text="Analizar Léxico", width=15, height=2, bg='#FA8726', command=lexico)
 botonLex.grid(row=3, column=0, pady=5, sticky="e", padx=10)
 
@@ -144,7 +164,6 @@ botonSin.grid(row=3, column=1, pady=5, sticky="w", padx=10)
 
 Label(frame_principal, text="Resultados del análisis:", bg="#3a7aba",fg="#FFFFFF", font=("Arial", 12)).grid(row=4, column=0, sticky="w", pady=5)
 
-# Caja de resultados
 resultadoLex = st.ScrolledText(frame_principal, width=80, height=15, wrap=WORD)
 resultadoLex.grid(row=5, column=0, columnspan=2, pady=10)
 resultadoLex.configure(state='disabled')
@@ -152,8 +171,9 @@ resultadoLex.configure(state='disabled')
 b_limpiar = Button(frame_principal, text="Limpiar", width=10, height=2, bg='#FA8726', command=limpiar)
 b_limpiar.grid(row=6, column=0, columnspan=2, pady=5)
 
-# Inicializar lista de archivos
+# Inicializar lista de archivos y números de línea
 listar_archivos()
+update_line_numbers()
 
 # Iniciar GUI
 root.mainloop()

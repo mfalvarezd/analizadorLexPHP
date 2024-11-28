@@ -42,9 +42,16 @@ def p_returnStatement(p):
 
 
 def p_asignacion(p):
-    '''asignacion : VARIABLE EQUALS operaArit SEMICOLON
-                  | VARIABLE EQUALS valor SEMICOLON
-                  | VARIABLE EQUALS operador_ternario SEMICOLON'''
+    '''asignacion : VARIABLE EQUALS expresion SEMICOLON'''
+def p_expresion(p):
+    '''expresion : valor
+                 | expresion opLogic expresion
+                 | comparacion
+                 | LPAREN comparacion RPAREN
+                 | operaArit
+                 | LPAREN expresion RPAREN
+                 | operador_ternario
+                 '''
 
 def p_asignacion_fgets(p):
     '''asignacion_fgets : VARIABLE EQUALS FGETS LPAREN STDIN RPAREN SEMICOLON'''
@@ -58,8 +65,10 @@ def p_operador_ternario(p):
                         '''
 
 def p_operaArit(p):
-    '''operaArit : valornumerico
-                | valornumerico operador operaArit'''
+    '''operaArit : valor
+                 | operaArit operador operaArit
+                 | LPAREN operaArit RPAREN
+                 '''
 
 def p_valornumerico(p):
     '''valornumerico : INT
@@ -87,13 +96,10 @@ def p_operador(p):
                 | POTENCIA'''
 
 def p_comparacion(p):
-    '''comparacion : valor comparador valor'''
+    '''comparacion : valor opSymbol valor
+                    | expresion opSymbol expresion'''
 
-def p_comparador(p):
-    '''comparador : LT
-                | GT
-                | LEQ
-                | GEQ'''
+
 
 def p_impresion(p):
     '''impresion : ECHO imprimir SEMICOLON
@@ -369,16 +375,18 @@ errores_sintacticos = []
 def p_error(p):
     if p:
         # Reportar el error sintáctico, su valor y la línea
-        print(f"Error de sintaxis - Token: {p.type}, Línea: {p.lineno}, Col: {p.lexpos}")
-        errores_sintacticos.append("Error de sintaxis en token {}, en la linea {}, Col: {}".format(p.type, p.lineno, p.lexpos))
+        mensaje = f"Error de sintaxis - Token: {p.type} ('{p.value}'), Línea: {p.lineno}, Columna: {p.lexpos}"
+        errores_sintacticos.append(mensaje)
+        print(mensaje)
         parser.errok()
     else:
-        # Manejar caso de fin inesperado del archivo
         errores_sintacticos.append("Error, sentencia incompleta")
-        print("Error de sintaxis Fin de Linea")
+        print("Error de sintaxis: Fin de entrada inesperado.")
         
 
 # Crear el parser
+lexer.lineno = 1  # Reinicia el contador de líneas del lexer
+
 parser = yacc.yacc()
 
 def getAnalizadorSintactico():
