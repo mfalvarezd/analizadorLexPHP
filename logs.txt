@@ -1,0 +1,15 @@
+11/27/2024, 21:52:27
+Entrada:
+$var = 4;
+
+Salida:
+LexToken(VARIABLE,'$var',1,0)
+LexToken(EQUALS,'=',1,5)
+LexToken(INT,4,1,7)
+LexToken(SEMICOLON,';',1,8)
+11/27/2024, 21:52:36
+Entrada:
+$var = 4;
+
+Salida:
+Error de sintaxis en token VARIABLE, en la linea 2, Col: 0
