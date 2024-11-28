@@ -1,110 +1,159 @@
 import tkinter as tk
 from tkinter import *
 import tkinter.scrolledtext as st
-import main as sn
+import os
+import main as smt
 import AnalizadorLexPHP as lx
+from datetime import datetime
 
-from datetime import datetime 
-
+# Configuración inicial
 today = datetime.now()
+valorLexico = lx.lexer
+valorsintatico = smt.parser
+analizadorLexico = lx.getAnalizadorLexico()
+analizadorSintactico = smt.getAnalizadorSintactico()
+logs_file = open('logs\logs.txt', 'w')
 
-valorLexico= lx.lexer
-valorsintatico= sn.parser
-analizadorLexico=lx.obtener_validador_lexico()
-analizadorSintactico= sn.obtener_analizador_sintactico()
+# Carpetas de trabajo
+current_directory = os.path.dirname(os.path.abspath(__file__))
+algoritmos_directory = os.path.join(current_directory, "algoritmos")
+os.makedirs(algoritmos_directory, exist_ok=True)
 
-logs_file = open ('logs.txt','w')
+# Función para listar archivos en la carpeta algoritmos
+def listar_archivos():
+    lista_archivos.delete(0, END)
+    archivos = [f for f in os.listdir(algoritmos_directory) if f.endswith('.php')]
+    for archivo in archivos:
+        lista_archivos.insert(END, archivo)
 
+# Función para mostrar contenido del archivo seleccionado
+def mostrar_contenido(event):
+    seleccion = lista_archivos.curselection()
+    if seleccion:
+        archivo = lista_archivos.get(seleccion[0])
+        archivo_path = os.path.join(algoritmos_directory, archivo)
+        try:
+            with open(archivo_path, 'r') as f:
+                contenido = f.read()
+                cajatexto.delete(1.0, END)
+                cajatexto.insert(END, contenido)
+        except Exception as e:
+            tk.messagebox.showerror("Error", f"No se pudo cargar el archivo.\n{e}")
 
-## Root GUI
-root = tk.Tk()
-root.title("Analizador PHP")
-root.resizable(False, False)
-ancho_pantalla = root.winfo_screenwidth()
-alto_pantalla = root.winfo_screenheight()
-
-ancho_ventana = 1100 
-alto_ventana = 800 
-
-## Etiqueta Principal
-etiqueta = tk.Label(root, text="ANALIZADOR DE CÓDIGO PHP" , fg="#FFFFFF", bg='#FADF9D',  font=("Arial", 25) )
-etiqueta.grid(row = 0, column = 0, padx = 15, columnspan=2)
-
-##Etiqueta Ingreso
-mensaje_in = tk.Label(root, text="Ingrese su código aquí:" , bg='#FADF9D',  font=("Arial", 12))
-mensaje_in.grid(row = 1, column = 0, padx = 2)
-
-## Caja de ingreso
-cajatexto = tk.scrolledtext.ScrolledText(root, width= 80, height = 12, wrap=WORD)
-cajatexto.grid(row=2, column=0, padx=20, pady=20, rowspan=5)
-
-
-#Analisis lexico
+# Función para análisis léxico
 def lexico():
     codigo = cajatexto.get("1.0", END)
-    logs_file.write(datetime.now().strftime("%m/%d/%Y, %H:%M:%S")+ "\n")
-    logs_file.write("Entrada:"+"\n" +codigo+"\n")
+    logs_file.write(datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + "\n")
+    logs_file.write("Entrada:" + "\n" + codigo + "\n")
     resultadoLex.configure(state='normal')
     resultadoLex.delete("1.0", END)
-   
-    lista_tokens = [] 
+
+    lista_tokens = []
     analizadorLexico.input(codigo)
-    lx.getTokens(analizadorLexico, lista_tokens)   
-    logs_file.write("Salida:"+"\n")
+    lx.getListaTokens(analizadorLexico, lista_tokens)
+    logs_file.write("Salida:" + "\n")
 
+    for i, token in enumerate(lista_tokens):
+        logs_file.write(str(token) + "\n")
+        resultadoLex.insert(float(i + 1), str(token) + "\n")
 
-    for i in range(0,len(lista_tokens)):
-        logs_file.write(str(lista_tokens[i])+"\n")
-        resultadoLex.insert( float(i+1), str(lista_tokens[i])+"\n")
-    
-    resultadoLex.configure(state='disabled') 
+    resultadoLex.configure(state='disabled')
 
-#Boton analisis lexico
-botonLex = tk.Button(root, text="Analizar Léxico", width = 15, height=2, bg='#FA8726', command=lexico)
-botonLex.grid(row = 3, column = 1, padx = 15)
-
-## Caja de salida lexico
-resultadoLex = tk.scrolledtext.ScrolledText(root, width= 80, height = 12, wrap=WORD)
-resultadoLex.grid(row = 12, column=0, padx = 20 ,pady = 20, rowspan=5)
-resultadoLex.configure(state='disabled')   
-
-
+# Función para análisis sintáctico
 def sintatico():
-    #obtenemos el codigo
     codigo = cajatexto.get("1.0", END)
-
-    logs_file.write(datetime.now().strftime("%m/%d/%Y, %H:%M:%S")+ "\n")
-    logs_file.write("Entrada:"+"\n" +codigo+"\n")
+    logs_file.write(datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + "\n")
+    logs_file.write("Entrada:" + "\n" + codigo + "\n")
     resultadoLex.configure(state='normal')
     resultadoLex.delete("1.0", END)
 
-    logs_file.write("Salida:"+"\n")
-    
-    analisis = str(analizadorSintactico.parse(codigo))   
-    
-    if len(sn.errores_sintaxis) > 0:
-        
-        for i in range(len(sn.errores_sintaxis)):
-            logs_file.write(str(sn.errores_sintaxis[i])+"\n")
-            resultadoLex.insert( float(i+1), str(sn.errores_sintaxis[i])+"\n")
-        sn.errores_sintaxis.clear() 
+    logs_file.write("Salida:" + "\n")
+    analisis = str(analizadorSintactico.parse(codigo))
+
+    if smt.errores_sintacticos:
+        for i, error in enumerate(smt.errores_sintacticos):
+            logs_file.write(str(error) + "\n")
+            resultadoLex.insert(float(i + 1), str(error) + "\n")
+        smt.errores_sintacticos.clear()
     else:
-        # Insertamos el resultado
-       resultadoLex.insert("1.0", "Ingreso Válido")
+        resultadoLex.insert("1.0", "Ingreso Válido")
 
-    resultadoLex.configure(state='disabled')   
-        
-botonSin = tk.Button(root, text="Analizar Sintáxis", width = 15, height=2, bg='#FA8726',command=sintatico)
-botonSin.grid(row = 4, column = 1, padx = 15)
+    resultadoLex.configure(state='disabled')
 
-
+# Función para limpiar contenido
 def limpiar():
     cajatexto.delete("1.0", END)
     resultadoLex.configure(state='normal')
     resultadoLex.delete("1.0", END)
 
-b_limpiar = tk.Button(root, text="Limpiar", width = 10, height=2, bg='#FA8726',command=limpiar)
-b_limpiar.grid(row = 14, column = 1, padx = 15, columnspan=1)
+# GUI Principal
+root = tk.Tk()
+root.title("Analizador PHP")
+root.resizable(True, True)
+root.geometry("1000x550")
+root.configure(bg='#3a7aba')
 
-root.configure(bg='#FADF9D')
+# Canvas y scrollbar
+canvas = Canvas(root, bg="#3a7aba")
+scrollbar = Scrollbar(root, orient="vertical", command=canvas.yview)
+scrollable_frame = Frame(canvas, bg="#3a7aba")
+
+scrollable_frame.bind(
+    "<Configure>",
+    lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+)
+
+canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+
+canvas.configure(yscrollcommand=scrollbar.set)
+
+scrollbar.pack(side="right", fill="y")
+canvas.pack(side="left", fill="both", expand=True)
+
+# Marco izquierdo: lista de archivos
+frame_izquierdo = Frame(scrollable_frame, bg="#3a7aba", width=250)
+frame_izquierdo.grid(row=0, column=0, rowspan=20, sticky="ns", padx=10, pady=10)
+
+Label(frame_izquierdo, text="Archivos en 'algoritmos'", bg="#3a7aba", font=("Arial", 12, "bold")).pack(pady=5)
+
+# Lista de archivos
+lista_archivos = Listbox(frame_izquierdo, bg="white", fg="black", width=30, height=20, font=("Arial", 10))
+lista_archivos.pack(fill=BOTH, expand=True, pady=5)
+lista_archivos.bind("<<ListboxSelect>>", mostrar_contenido)
+
+boton_actualizar = Button(frame_izquierdo, text="Actualizar Lista", bg="#FA8726", command=listar_archivos)
+boton_actualizar.pack(fill=X, pady=5)
+
+# Marco principal
+frame_principal = Frame(scrollable_frame, bg="#3a7aba")
+frame_principal.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
+
+Label(frame_principal, text="ANALIZADOR DE CÓDIGO PHP", bg="#3a7aba", fg="#FFFFFF", font=("Arial", 25)).grid(row=0, column=0, columnspan=2, pady=10)
+
+Label(frame_principal, text="Ingrese su código aquí:", bg="#3a7aba", font=("Arial", 12)).grid(row=1, column=0, sticky="w", pady=5)
+
+# Caja de texto de entrada
+cajatexto = st.ScrolledText(frame_principal, width=80, height=15, wrap=WORD)
+cajatexto.grid(row=2, column=0, columnspan=2, pady=10)
+
+botonLex = Button(frame_principal, text="Analizar Léxico", width=15, height=2, bg='#FA8726', command=lexico)
+botonLex.grid(row=3, column=0, pady=5, sticky="e", padx=10)
+
+botonSin = Button(frame_principal, text="Analizar Sintáxis", width=15, height=2, bg='#FA8726', command=sintatico)
+botonSin.grid(row=3, column=1, pady=5, sticky="w", padx=10)
+
+Label(frame_principal, text="Resultados del análisis:", bg="#3a7aba", font=("Arial", 12)).grid(row=4, column=0, sticky="w", pady=5)
+
+# Caja de resultados
+resultadoLex = st.ScrolledText(frame_principal, width=80, height=15, wrap=WORD)
+resultadoLex.grid(row=5, column=0, columnspan=2, pady=10)
+resultadoLex.configure(state='disabled')
+
+b_limpiar = Button(frame_principal, text="Limpiar", width=10, height=2, bg='#FA8726', command=limpiar)
+b_limpiar.grid(row=6, column=0, columnspan=2, pady=5)
+
+# Inicializar lista de archivos
+listar_archivos()
+
+# Iniciar GUI
 root.mainloop()

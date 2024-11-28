@@ -1,0 +1,435 @@
+11/27/2024, 22:50:19
+Entrada:
+<?php
+
+// Definimos una interfaz para las operaciones matemáticas
+interface Operacion {
+    public function calcular($num1, $num2);
+}
+
+// Clase para la operación de suma
+class Suma implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 + $num2;
+    }
+}
+
+// Clase para la operación de resta
+class Resta implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 - $num2;
+    }
+}
+
+// Clase para la operación de multiplicación
+class Multiplicacion implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 * $num2;
+    }
+}
+
+// Clase para la operación de división con manejo de excepción si el divisor es cero
+class Division implements Operacion {
+    public function calcular($num1, $num2) {
+        if ($num2 == 0) {
+            throw new Exception("Error: División por cero no permitida.");
+        }
+        return $num1 / $num2;
+    }
+}
+
+// Clase Calculadora que usa el patrón de diseño 'Factory' para crear operaciones
+class Calculadora {
+    const OPERACIONES = [
+        'suma' => 'Suma',
+        'resta' => 'Resta',
+        'multiplicacion' => 'Multiplicacion',
+        'division' => 'Division'
+    ];
+
+    public function realizarOperacion($tipo, $num1, $num2) {
+        if (!array_key_exists($tipo, self::OPERACIONES)) {
+            throw new Exception("Error: Operación no soportada.");
+        }
+
+        // Creamos una instancia de la operación solicitada
+        $operacionClase = self::OPERACIONES[$tipo];
+        $operacion = new $operacionClase();
+        return $operacion->calcular($num1, $num2);
+    }
+}
+
+// Ejemplo de uso
+$calculadora = new Calculadora();
+$numeros = [10, 5];
+
+$operaciones = ['suma', 'resta', 'multiplicacion', 'division'];
+foreach ($operaciones as $op) {
+    try {
+        $resultado = $calculadora->realizarOperacion($op, $numeros[0], $numeros[1]);
+        echo "Resultado de la operación $op entre {$numeros[0]} y {$numeros[1]}: $resultado\n";
+    } catch (Exception $e) {
+        echo $e->getMessage() . "\n";
+    }
+}
+
+?>
+
+
+Salida:
+LexToken(OPENTAG,'<?php',1,0)
+LexToken(INTERFACE,'interface',4,67)
+LexToken(ID,'Operacion',4,77)
+LexToken(LBRACE,'{',4,87)
+LexToken(PUBLIC,'public',5,93)
+LexToken(FUNCTION,'function',5,100)
+LexToken(ID,'calcular',5,109)
+LexToken(LPAREN,'(',5,117)
+LexToken(VARIABLE,'$num1',5,118)
+LexToken(COMMA,',',5,123)
+LexToken(VARIABLE,'$num2',5,125)
+LexToken(RPAREN,')',5,130)
+LexToken(SEMICOLON,';',5,131)
+LexToken(RBRACE,'}',6,133)
+LexToken(CLASS,'class',9,172)
+LexToken(ID,'Suma',9,178)
+LexToken(IMPLEMENTS,'implements',9,183)
+LexToken(ID,'Operacion',9,194)
+LexToken(LBRACE,'{',9,204)
+LexToken(PUBLIC,'public',10,210)
+LexToken(FUNCTION,'function',10,217)
+LexToken(ID,'calcular',10,226)
+LexToken(LPAREN,'(',10,234)
+LexToken(VARIABLE,'$num1',10,235)
+LexToken(COMMA,',',10,240)
+LexToken(VARIABLE,'$num2',10,242)
+LexToken(RPAREN,')',10,247)
+LexToken(LBRACE,'{',10,249)
+LexToken(RETURN,'return',11,259)
+LexToken(VARIABLE,'$num1',11,266)
+LexToken(PLUS,'+',11,272)
+LexToken(VARIABLE,'$num2',11,274)
+LexToken(SEMICOLON,';',11,279)
+LexToken(RBRACE,'}',12,285)
+LexToken(RBRACE,'}',13,287)
+LexToken(CLASS,'class',16,327)
+LexToken(ID,'Resta',16,333)
+LexToken(IMPLEMENTS,'implements',16,339)
+LexToken(ID,'Operacion',16,350)
+LexToken(LBRACE,'{',16,360)
+LexToken(PUBLIC,'public',17,366)
+LexToken(FUNCTION,'function',17,373)
+LexToken(ID,'calcular',17,382)
+LexToken(LPAREN,'(',17,390)
+LexToken(VARIABLE,'$num1',17,391)
+LexToken(COMMA,',',17,396)
+LexToken(VARIABLE,'$num2',17,398)
+LexToken(RPAREN,')',17,403)
+LexToken(LBRACE,'{',17,405)
+LexToken(RETURN,'return',18,415)
+LexToken(VARIABLE,'$num1',18,422)
+LexToken(MINUS,'-',18,428)
+LexToken(VARIABLE,'$num2',18,430)
+LexToken(SEMICOLON,';',18,435)
+LexToken(RBRACE,'}',19,441)
+LexToken(RBRACE,'}',20,443)
+LexToken(CLASS,'class',23,493)
+LexToken(ID,'Multiplicacion',23,499)
+LexToken(IMPLEMENTS,'implements',23,514)
+LexToken(ID,'Operacion',23,525)
+LexToken(LBRACE,'{',23,535)
+LexToken(PUBLIC,'public',24,541)
+LexToken(FUNCTION,'function',24,548)
+LexToken(ID,'calcular',24,557)
+LexToken(LPAREN,'(',24,565)
+LexToken(VARIABLE,'$num1',24,566)
+LexToken(COMMA,',',24,571)
+LexToken(VARIABLE,'$num2',24,573)
+LexToken(RPAREN,')',24,578)
+LexToken(LBRACE,'{',24,580)
+LexToken(RETURN,'return',25,590)
+LexToken(VARIABLE,'$num1',25,597)
+LexToken(TIMES,'*',25,603)
+LexToken(VARIABLE,'$num2',25,605)
+LexToken(SEMICOLON,';',25,610)
+LexToken(RBRACE,'}',26,616)
+LexToken(RBRACE,'}',27,618)
+LexToken(CLASS,'class',30,709)
+LexToken(ID,'Division',30,715)
+LexToken(IMPLEMENTS,'implements',30,724)
+LexToken(ID,'Operacion',30,735)
+LexToken(LBRACE,'{',30,745)
+LexToken(PUBLIC,'public',31,751)
+LexToken(FUNCTION,'function',31,758)
+LexToken(ID,'calcular',31,767)
+LexToken(LPAREN,'(',31,775)
+LexToken(VARIABLE,'$num1',31,776)
+LexToken(COMMA,',',31,781)
+LexToken(VARIABLE,'$num2',31,783)
+LexToken(RPAREN,')',31,788)
+LexToken(LBRACE,'{',31,790)
+LexToken(IF,'if',32,800)
+LexToken(LPAREN,'(',32,803)
+LexToken(VARIABLE,'$num2',32,804)
+LexToken(EQ,'==',32,810)
+LexToken(INT,0,32,813)
+LexToken(RPAREN,')',32,814)
+LexToken(LBRACE,'{',32,816)
+LexToken(THROW,'throw',33,830)
+LexToken(NEW,'new',33,836)
+LexToken(EXCEPTION,'Exception',33,840)
+LexToken(LPAREN,'(',33,849)
+LexToken(STRING,'Error: División por cero no permitida.',33,850)
+LexToken(RPAREN,')',33,891)
+LexToken(SEMICOLON,';',33,892)
+LexToken(RBRACE,'}',34,902)
+LexToken(RETURN,'return',35,912)
+LexToken(VARIABLE,'$num1',35,919)
+LexToken(DIVIDE,'/',35,925)
+LexToken(VARIABLE,'$num2',35,927)
+LexToken(SEMICOLON,';',35,932)
+LexToken(RBRACE,'}',36,938)
+LexToken(RBRACE,'}',37,940)
+LexToken(CLASS,'class',40,1027)
+LexToken(ID,'Calculadora',40,1033)
+LexToken(LBRACE,'{',40,1045)
+LexToken(CONST,'const',41,1051)
+LexToken(ID,'OPERACIONES',41,1057)
+LexToken(EQUALS,'=',41,1069)
+LexToken(LBRACKET,'[',41,1071)
+LexToken(STRING,'suma',42,1081)
+LexToken(ARROWMAP,'=>',42,1088)
+LexToken(STRING,'Suma',42,1091)
+LexToken(COMMA,',',42,1097)
+LexToken(STRING,'resta',43,1107)
+LexToken(ARROWMAP,'=>',43,1115)
+LexToken(STRING,'Resta',43,1118)
+LexToken(COMMA,',',43,1125)
+LexToken(STRING,'multiplicacion',44,1135)
+LexToken(ARROWMAP,'=>',44,1152)
+LexToken(STRING,'Multiplicacion',44,1155)
+LexToken(COMMA,',',44,1171)
+LexToken(STRING,'division',45,1181)
+LexToken(ARROWMAP,'=>',45,1192)
+LexToken(STRING,'Division',45,1195)
+LexToken(RBRACKET,']',46,1210)
+LexToken(SEMICOLON,';',46,1211)
+LexToken(PUBLIC,'public',48,1218)
+LexToken(FUNCTION,'function',48,1225)
+LexToken(ID,'realizarOperacion',48,1234)
+LexToken(LPAREN,'(',48,1251)
+LexToken(VARIABLE,'$tipo',48,1252)
+LexToken(COMMA,',',48,1257)
+LexToken(VARIABLE,'$num1',48,1259)
+LexToken(COMMA,',',48,1264)
+LexToken(VARIABLE,'$num2',48,1266)
+LexToken(RPAREN,')',48,1271)
+LexToken(LBRACE,'{',48,1273)
+LexToken(IF,'if',49,1283)
+LexToken(LPAREN,'(',49,1286)
+LexToken(NOT,'!',49,1287)
+LexToken(ID,'array_key_exists',49,1288)
+LexToken(LPAREN,'(',49,1304)
+LexToken(VARIABLE,'$tipo',49,1305)
+LexToken(COMMA,',',49,1310)
+LexToken(ID,'self',49,1312)
+LexToken(COLON,':',49,1316)
+LexToken(COLON,':',49,1317)
+LexToken(ID,'OPERACIONES',49,1318)
+LexToken(RPAREN,')',49,1329)
+LexToken(RPAREN,')',49,1330)
+LexToken(LBRACE,'{',49,1332)
+LexToken(THROW,'throw',50,1346)
+LexToken(NEW,'new',50,1352)
+LexToken(EXCEPTION,'Exception',50,1356)
+LexToken(LPAREN,'(',50,1365)
+LexToken(STRING,'Error: Operación no soportada.',50,1366)
+LexToken(RPAREN,')',50,1399)
+LexToken(SEMICOLON,';',50,1400)
+LexToken(RBRACE,'}',51,1410)
+LexToken(VARIABLE,'$operacionClase',54,1482)
+LexToken(EQUALS,'=',54,1498)
+LexToken(ID,'self',54,1500)
+LexToken(COLON,':',54,1504)
+LexToken(COLON,':',54,1505)
+LexToken(ID,'OPERACIONES',54,1506)
+LexToken(LBRACKET,'[',54,1517)
+LexToken(VARIABLE,'$tipo',54,1518)
+LexToken(RBRACKET,']',54,1523)
+LexToken(SEMICOLON,';',54,1524)
+LexToken(VARIABLE,'$operacion',55,1534)
+LexToken(EQUALS,'=',55,1545)
+LexToken(NEW,'new',55,1547)
+LexToken(VARIABLE,'$operacionClase',55,1551)
+LexToken(LPAREN,'(',55,1566)
+LexToken(RPAREN,')',55,1567)
+LexToken(SEMICOLON,';',55,1568)
+LexToken(RETURN,'return',56,1578)
+LexToken(VARIABLE,'$operacion',56,1585)
+LexToken(ARROW,'->',56,1595)
+LexToken(ID,'calcular',56,1597)
+LexToken(LPAREN,'(',56,1605)
+LexToken(VARIABLE,'$num1',56,1606)
+LexToken(COMMA,',',56,1611)
+LexToken(VARIABLE,'$num2',56,1613)
+LexToken(RPAREN,')',56,1618)
+LexToken(SEMICOLON,';',56,1619)
+LexToken(RBRACE,'}',57,1625)
+LexToken(RBRACE,'}',58,1627)
+LexToken(VARIABLE,'$calculadora',61,1648)
+LexToken(EQUALS,'=',61,1661)
+LexToken(NEW,'new',61,1663)
+LexToken(ID,'Calculadora',61,1667)
+LexToken(LPAREN,'(',61,1678)
+LexToken(RPAREN,')',61,1679)
+LexToken(SEMICOLON,';',61,1680)
+LexToken(VARIABLE,'$numeros',62,1682)
+LexToken(EQUALS,'=',62,1691)
+LexToken(LBRACKET,'[',62,1693)
+LexToken(INT,10,62,1694)
+LexToken(COMMA,',',62,1696)
+LexToken(INT,5,62,1698)
+LexToken(RBRACKET,']',62,1699)
+LexToken(SEMICOLON,';',62,1700)
+LexToken(VARIABLE,'$operaciones',64,1703)
+LexToken(EQUALS,'=',64,1716)
+LexToken(LBRACKET,'[',64,1718)
+LexToken(STRING,'suma',64,1719)
+LexToken(COMMA,',',64,1725)
+LexToken(STRING,'resta',64,1727)
+LexToken(COMMA,',',64,1734)
+LexToken(STRING,'multiplicacion',64,1736)
+LexToken(COMMA,',',64,1752)
+LexToken(STRING,'division',64,1754)
+LexToken(RBRACKET,']',64,1764)
+LexToken(SEMICOLON,';',64,1765)
+LexToken(FOREACH,'foreach',65,1767)
+LexToken(LPAREN,'(',65,1775)
+LexToken(VARIABLE,'$operaciones',65,1776)
+LexToken(AS,'as',65,1789)
+LexToken(VARIABLE,'$op',65,1792)
+LexToken(RPAREN,')',65,1795)
+LexToken(LBRACE,'{',65,1797)
+LexToken(TRY,'try',66,1803)
+LexToken(LBRACE,'{',66,1807)
+LexToken(VARIABLE,'$resultado',67,1817)
+LexToken(EQUALS,'=',67,1828)
+LexToken(VARIABLE,'$calculadora',67,1830)
+LexToken(ARROW,'->',67,1842)
+LexToken(ID,'realizarOperacion',67,1844)
+LexToken(LPAREN,'(',67,1861)
+LexToken(VARIABLE,'$op',67,1862)
+LexToken(COMMA,',',67,1865)
+LexToken(VARIABLE,'$numeros',67,1867)
+LexToken(LBRACKET,'[',67,1875)
+LexToken(INT,0,67,1876)
+LexToken(RBRACKET,']',67,1877)
+LexToken(COMMA,',',67,1878)
+LexToken(VARIABLE,'$numeros',67,1880)
+LexToken(LBRACKET,'[',67,1888)
+LexToken(INT,1,67,1889)
+LexToken(RBRACKET,']',67,1890)
+LexToken(RPAREN,')',67,1891)
+LexToken(SEMICOLON,';',67,1892)
+LexToken(ECHO,'echo',68,1902)
+LexToken(STRING,'Resultado de la operación $op entre {$numeros[0]} y {$numeros[1]}: $resultado\\n',68,1907)
+LexToken(SEMICOLON,';',68,1989)
+LexToken(RBRACE,'}',69,1995)
+LexToken(CATCH,'catch',69,1997)
+LexToken(LPAREN,'(',69,2003)
+LexToken(EXCEPTION,'Exception',69,2004)
+LexToken(VARIABLE,'$e',69,2014)
+LexToken(RPAREN,')',69,2016)
+LexToken(LBRACE,'{',69,2018)
+LexToken(ECHO,'echo',70,2028)
+LexToken(VARIABLE,'$e',70,2033)
+LexToken(ARROW,'->',70,2035)
+LexToken(ID,'getMessage',70,2037)
+LexToken(LPAREN,'(',70,2047)
+LexToken(RPAREN,')',70,2048)
+LexToken(DOT,'.',70,2050)
+LexToken(STRING,'\\n',70,2052)
+LexToken(SEMICOLON,';',70,2056)
+LexToken(RBRACE,'}',71,2062)
+LexToken(RBRACE,'}',72,2064)
+LexToken(CLOSETAG,'?>',74,2067)
+11/27/2024, 22:50:21
+Entrada:
+<?php
+
+// Definimos una interfaz para las operaciones matemáticas
+interface Operacion {
+    public function calcular($num1, $num2);
+}
+
+// Clase para la operación de suma
+class Suma implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 + $num2;
+    }
+}
+
+// Clase para la operación de resta
+class Resta implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 - $num2;
+    }
+}
+
+// Clase para la operación de multiplicación
+class Multiplicacion implements Operacion {
+    public function calcular($num1, $num2) {
+        return $num1 * $num2;
+    }
+}
+
+// Clase para la operación de división con manejo de excepción si el divisor es cero
+class Division implements Operacion {
+    public function calcular($num1, $num2) {
+        if ($num2 == 0) {
+            throw new Exception("Error: División por cero no permitida.");
+        }
+        return $num1 / $num2;
+    }
+}
+
+// Clase Calculadora que usa el patrón de diseño 'Factory' para crear operaciones
+class Calculadora {
+    const OPERACIONES = [
+        'suma' => 'Suma',
+        'resta' => 'Resta',
+        'multiplicacion' => 'Multiplicacion',
+        'division' => 'Division'
+    ];
+
+    public function realizarOperacion($tipo, $num1, $num2) {
+        if (!array_key_exists($tipo, self::OPERACIONES)) {
+            throw new Exception("Error: Operación no soportada.");
+        }
+
+        // Creamos una instancia de la operación solicitada
+        $operacionClase = self::OPERACIONES[$tipo];
+        $operacion = new $operacionClase();
+        return $operacion->calcular($num1, $num2);
+    }
+}
+
+// Ejemplo de uso
+$calculadora = new Calculadora();
+$numeros = [10, 5];
+
+$operaciones = ['suma', 'resta', 'multiplicacion', 'division'];
+foreach ($operaciones as $op) {
+    try {
+        $resultado = $calculadora->realizarOperacion($op, $numeros[0], $numeros[1]);
+        echo "Resultado de la operación $op entre {$numeros[0]} y {$numeros[1]}: $resultado\n";
+    } catch (Exception $e) {
+        echo $e->getMessage() . "\n";
+    }
+}
+
+?>
+
+
+Salida:
+Error de sintaxis en token PUBLIC, en la linea 80, Col: 93
