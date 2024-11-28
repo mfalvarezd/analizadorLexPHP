@@ -114,7 +114,7 @@ canvas.pack(side="left", fill="both", expand=True)
 frame_izquierdo = Frame(scrollable_frame, bg="#3a7aba", width=250)
 frame_izquierdo.grid(row=0, column=0, rowspan=20, sticky="ns", padx=10, pady=10)
 
-Label(frame_izquierdo, text="Archivos en 'algoritmos'", bg="#3a7aba", font=("Arial", 12, "bold")).pack(pady=5)
+Label(frame_izquierdo, text="Algoritmos", bg="#3a7aba", fg="#FFFFFF",font=("Arial", 12, "bold")).pack(pady=5)
 
 # Lista de archivos
 lista_archivos = Listbox(frame_izquierdo, bg="white", fg="black", width=30, height=20, font=("Arial", 10))
@@ -128,9 +128,9 @@ boton_actualizar.pack(fill=X, pady=5)
 frame_principal = Frame(scrollable_frame, bg="#3a7aba")
 frame_principal.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 
-Label(frame_principal, text="ANALIZADOR DE CÓDIGO PHP", bg="#3a7aba", fg="#FFFFFF", font=("Arial", 25)).grid(row=0, column=0, columnspan=2, pady=10)
+Label(frame_principal, text="ANALIZADOR PHP", bg="#3a7aba", fg="#FFFFFF", font=("Arial", 25)).grid(row=0, column=0, columnspan=2, pady=10)
 
-Label(frame_principal, text="Ingrese su código aquí:", bg="#3a7aba", font=("Arial", 12)).grid(row=1, column=0, sticky="w", pady=5)
+Label(frame_principal, text="Ingrese su código aquí:", bg="#3a7aba",fg="#FFFFFF", font=("Arial", 12)).grid(row=1, column=0, sticky="w", pady=5)
 
 # Caja de texto de entrada
 cajatexto = st.ScrolledText(frame_principal, width=80, height=15, wrap=WORD)
@@ -142,7 +142,7 @@ botonLex.grid(row=3, column=0, pady=5, sticky="e", padx=10)
 botonSin = Button(frame_principal, text="Analizar Sintáxis", width=15, height=2, bg='#FA8726', command=sintatico)
 botonSin.grid(row=3, column=1, pady=5, sticky="w", padx=10)
 
-Label(frame_principal, text="Resultados del análisis:", bg="#3a7aba", font=("Arial", 12)).grid(row=4, column=0, sticky="w", pady=5)
+Label(frame_principal, text="Resultados del análisis:", bg="#3a7aba",fg="#FFFFFF", font=("Arial", 12)).grid(row=4, column=0, sticky="w", pady=5)
 
 # Caja de resultados
 resultadoLex = st.ScrolledText(frame_principal, width=80, height=15, wrap=WORD)
