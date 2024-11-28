@@ -6,7 +6,7 @@ $var1 = 10;
 $var2 = 20.5;
 $var3 = "Hola, mundo";
 
-// Operaciones aritmÃ©ticas
+// Operaciones aritméticas
 $suma = $var1 + $var2;
 $resta = $var1 - $var2;
 $multiplicacion = $var1 * $var2;
@@ -26,7 +26,7 @@ if ($x > 10) {
 
 // Estructuras de control
 for ($i = 0; $i < 5; $i++) {
-    echo "IteraciÃ³n: $i\n";
+    echo "Iteración: $i\n";
 }
 
 
@@ -93,10 +93,10 @@ switch($beer)
     case 'tuborg';
     case 'carlsberg';
     case 'heineken';
-        echo 'Buena elecciÃ³n';
+        echo 'Buena elección';
     break;
     default;
-        echo 'Por favor haga una nueva selecciÃ³n...';
+        echo 'Por favor haga una nueva selección...';
     break;
 }
 
@@ -116,31 +116,65 @@ endswitch;
 
 function foo($arg_1, $arg_2, /* ..., */ $arg_n)
 {
-    echo "FunciÃ³n de ejemplo.\n";
+    echo "Función de ejemplo.\n";
     return $valor_devuelto;
 }
 if ($hacer_algo) {
     function foo()
     {
-      echo "No existo hasta que la ejecucion del programa llegue hasta mÃ­.\n";
+      echo "No existo hasta que la ejecución del programa llegue hasta mí.\n";
     }
   }
 
-if ($hacer_algo) foo();
-  
+  if ($hacer_algo) foo();
+  if ((!empty($someVar)) && ( $someVar==123))
+  {
+      echo $someVar;
+  }
 
+  if ((!empty($someVar))&&(someFunc($someVar)))
+{
+    echo $someVar;
+}
+
+if ((someFunc($someVar))&&(!empty($someVar)))
+{
+    echo $someVar;
+}
+
+if( $a == 1 || $a == 2 ) {
+
+    if( $b == 3 || $b == 4 ) {
+
+        if( $c == 5 ||  $d == 6 ) {
+
+             //Do something here.
+
+        }
+
+    }
+
+}
+
+if( ($a==1 || $a==2) && ($b==3 || $b==4) && ($c==5 || $c==6) ) {
+
+    //do that something here.
+
+}
 if (3 == $foo) bar();
 
 $v = 1;
 
 $r = (1 == $v) ? 'Yes' : 'No'; // $r is set to 'Yes'
-$r = (3 == $v) ? 'Yes' : 'No'; // $r is set to 'No'
-echo (1 == $v) ? 'Yes' : 'No'; // 'Yes' will be printed
+$r = ($v) ?: 'No'; // $r is set to 'No'
+ // 'Yes' will be printed
+ echo (1 == $v) ? 'Yes' : 'No'; // 'Yes' will be printed
 
-// and since PHP 5.3
-$v = 'My Value';
-$r = ($v) ?: 'No Value'; // $r is set to 'My Value' because $v is evaluated to TRUE
+ // and since PHP 5.3
+ $v = 'My Value';
+ $r = ($v) ?: 'No Value'; // $r is set to 'My Value' because $v is evaluated to TRUE
+ 
+ $v = '';
+ echo ($x) ?: 'No Value'; // 'No Value' will be printed because $v is evaluated to FALSE
 
-$v = '';
-echo ($x==1) ?: 'No Value'; // 'No Value' will be printed because $v is evaluated to FALSE
 ?>

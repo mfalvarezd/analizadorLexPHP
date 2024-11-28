@@ -43,7 +43,8 @@ def p_returnStatement(p):
 
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUALS operaArit SEMICOLON
-                  | VARIABLE EQUALS valor SEMICOLON'''
+                  | VARIABLE EQUALS valor SEMICOLON
+                  | VARIABLE EQUALS operador_ternario SEMICOLON'''
 
 def p_asignacion_fgets(p):
     '''asignacion_fgets : VARIABLE EQUALS FGETS LPAREN STDIN RPAREN SEMICOLON'''
@@ -53,6 +54,7 @@ def p_asignacion_fgets(p):
 def p_operador_ternario(p):
     '''operador_ternario : LPAREN conditions RPAREN QUESTION valor COLON valor
                         | LPAREN conditions RPAREN QUESTION COLON valor
+                        | LPAREN VARIABLE RPAREN QUESTION COLON valor
                         '''
 
 def p_operaArit(p):
@@ -73,7 +75,7 @@ def p_valor(p):
             | NULL
             | ARRAY
             | llamadaFuncion
-            | operador_ternario
+            
             '''
 
 def p_operador(p):
@@ -101,6 +103,7 @@ def p_imprimir(p):
     '''imprimir : LPAREN repiteValores RPAREN
                 | LPAREN RPAREN
                 | repiteValores
+                | operador_ternario
                 | empty'''
 
 def p_repiteValores(p):
@@ -133,13 +136,14 @@ def p_else_blocks(p):
 
 def p_conditions(p):
      '''conditions : condition
-                   | condition opLogic condition
+                   | condition opLogic conditions
                    | LPAREN conditions RPAREN'''
 
 def p_condition(p):
      '''condition : valor
                   | valor opSymbol valor
-                  | NOT condition'''
+                  | NOT condition
+                  | LPAREN conditions RPAREN'''
 
 def p_opSymbol(p):
     '''opSymbol : EQ
