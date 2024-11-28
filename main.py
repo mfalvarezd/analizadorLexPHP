@@ -36,7 +36,7 @@ def p_sentencia(p):
                 '''
 
 def p_returnStatement(p):
-    '''returnStatement : RETURN valor SEMICOLON
+    '''returnStatement : RETURN expresion SEMICOLON
                        | RETURN SEMICOLON'''
 
 
@@ -66,7 +66,7 @@ def p_operador_ternario(p):
 
 def p_operaArit(p):
     '''operaArit : valor
-                 | operaArit operador operaArit
+                 | valor operador operaArit
                  | LPAREN operaArit RPAREN
                  '''
 
@@ -260,7 +260,10 @@ def p_argumento(p):
     '''argumento : type VARIABLE
                  | VARIABLE EQUALS valor
                  | type VARIABLE EQUALS valor
-                 | operaArit'''
+                 | operaArit
+                 | valor
+                 | llamadaFuncion
+                 | VARIABLE'''
 
 def p_type(p):
     '''type : INT_TYPE
@@ -290,9 +293,10 @@ def p_funcionDeclaration(p):
 
 def p_llamadaFuncion(p):
     '''llamadaFuncion : ID LPAREN argumentos RPAREN SEMICOLON
-                      | EMPTY LPAREN argumentos RPAREN
                       | ID LPAREN argumentos RPAREN
-                      | EMPTY LPAREN argumentos RPAREN SEMICOLON''' 
+                      | ID LPAREN RPAREN SEMICOLON
+                      | ID LPAREN RPAREN'''
+ 
 
 def p_classDeclarate(p):
     '''classDeclarate : CLASS ID LBRACE classBody RBRACE
