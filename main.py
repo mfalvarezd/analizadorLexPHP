@@ -375,7 +375,7 @@ variable_types = {}
 
 # Asignación de valor a una variable
 def p_statement_valor(p):
-    '''statement_valor : VARIABLE EQUALS valor'''
+    '''statement_valor : VARIABLE EQUALS valornumerico'''
     var_name = p[1]
     value = p[3]
 
