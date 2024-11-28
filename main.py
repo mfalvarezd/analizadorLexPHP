@@ -32,7 +32,7 @@ def p_sentencia(p):
                 | thisdeclaration
                 | concatenate
                 | minuse
-                | pluse
+                
                 '''
 
 def p_returnStatement(p):
@@ -53,6 +53,7 @@ def p_operador_ternario(p):
                         | LPAREN conditions RPAREN QUESTION COLON valor
                         '''
 
+#Semántico 1
 def p_operaArit(p):
     '''operaArit : valor
                 | valor operador operaArit'''
@@ -75,8 +76,10 @@ def p_operador(p):
                 | TIMES
                 | DIVIDE
                 | MODULO
-                | POTENCIA'''
+                | POTENCIA
+                | PLUSEQUAL'''
 
+#Semántico 2
 def p_comparacion(p):
     '''comparacion : valor comparador valor'''
 
@@ -341,14 +344,77 @@ def p_thisdeclaration(p):
     '''thisdeclaration : THIS ARROW ID SEMICOLON
                         | THIS ARROW ID LPAREN RPAREN SEMICOLON'''
 
+#Semántica 3
 def p_concatenate(p):
     '''concatenate : VARIABLE CONCATENATEEQUAL STRING'''
 
+#Semántica 4
 def p_minuse(p):
     '''minuse : VARIABLE MINUSEQUAL INT'''
 
-def p_pluse(p):
-    '''pluse : VARIABLE PLUSEQUAL INT'''
+#Semántica 5
+#def p_pluse(p):
+#   '''pluse : VARIABLE PLUSEQUAL INT'''
+
+#Semántica 6
+def p_funcion_strlen(p):
+    '''funcion : STRLEN LPAREN STRING RPAREN'''
+
+# Diccionario para almacenar las variables y sus valores
+variable_types = {}
+
+# Asignación de valor a una variable
+def p_statement_valor(p):
+    '''statement_valor : VARIABLE EQUALS valor'''
+    var_name = p[1]
+    value = p[3]
+
+    # Verificar el tipo de la variable antes de asignar el valor
+    if isinstance(value, (int, float, str)):  # Verifica si el valor es válido
+        variable_types[var_name] = value
+        p[0] = f"{var_name} = {value}"
+    else:
+        raise TypeError(f"Tipo de dato no válido para la asignación a {var_name}")
+
+# Manejo de la operación += con validación de tipos
+def p_statement_plusequal(p):
+    '''statement_plusequal : VARIABLE EQUALS VARIABLE PLUSEQUAL INT'''
+    
+    var_name = p[1]  # Nombre de la variable que recibirá el nuevo valor
+    variable_name = p[3]  # Nombre de la variable cuyo valor se está modificando
+    increment_value = p[4]  # El valor que se va a sumar
+    
+    # Obtener el valor actual de la variable que se está modificando
+    current_value = variable_types.get(variable_name)
+    
+    if current_value is None:
+        raise ValueError(f"Variable {variable_name} no definida")
+    
+    # Verificar que el tipo de la variable sea un número entero (o flotante)
+    if not isinstance(current_value, (int, float)):
+        raise TypeError(f"Tipo de variable {variable_name} no es un número. Se esperaba un número para la operación de suma.")
+    
+    # Realizar la operación de incremento
+    new_value = current_value + increment_value
+    
+    # Asignar el nuevo valor a la variable que está siendo modificada
+    variable_types[variable_name] = new_value
+    
+    # Luego asignamos el resultado de la operación a la nueva variable
+    variable_types[var_name] = new_value
+    
+    # Devolver el resultado para esta regla semántica
+    p[0] = f"{var_name} = {variable_name} + {increment_value}"
+
+# Manejo de valores enteros
+def p_expr_int(p):
+    '''expr : INT'''
+    p[0] = int(p[1])  # El valor es de tipo entero
+
+# Manejo de valores de tipo cadena
+def p_expr_string(p):
+    '''expr : STRING'''
+    p[0] = str(p[1])  # El valor es de tipo cadena
 
 # Función para manejar errores de sintaxis
 def p_error(p):
