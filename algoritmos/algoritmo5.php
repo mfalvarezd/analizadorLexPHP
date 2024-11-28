@@ -6,7 +6,7 @@ $var1 = 10;
 $var2 = 20.5;
 $var3 = "Hola, mundo";
 
-// Operaciones aritméticas
+// Operaciones aritmÃ©ticas
 $suma = $var1 + $var2;
 $resta = $var1 - $var2;
 $multiplicacion = $var1 * $var2;
@@ -26,7 +26,7 @@ if ($x > 10) {
 
 // Estructuras de control
 for ($i = 0; $i < 5; $i++) {
-    echo "Iteración: $i\n";
+    echo "IteraciÃ³n: $i\n";
 }
 
 
@@ -93,10 +93,10 @@ switch($beer)
     case 'tuborg';
     case 'carlsberg';
     case 'heineken';
-        echo 'Buena elección';
+        echo 'Buena elecciÃ³n';
     break;
     default;
-        echo 'Por favor haga una nueva selección...';
+        echo 'Por favor haga una nueva selecciÃ³n...';
     break;
 }
 
@@ -116,51 +116,19 @@ endswitch;
 
 function foo($arg_1, $arg_2, /* ..., */ $arg_n)
 {
-    echo "Función de ejemplo.\n";
+    echo "FunciÃ³n de ejemplo.\n";
     return $valor_devuelto;
 }
 if ($hacer_algo) {
     function foo()
     {
-      echo "No existo hasta que la ejecución del programa llegue hasta mí.\n";
+      echo "No existo hasta que la ejecucion del programa llegue hasta mÃ­.\n";
     }
   }
 
-  if ($hacer_algo) foo();
-  if ((!empty($someVar)) && ( $someVar==123))
-  {
-      echo $someVar;
-  }
+if ($hacer_algo) foo();
+  
 
-  if ((!empty($someVar))&&(someFunc($someVar)))
-{
-    echo $someVar;
-}
-
-if ((someFunc($someVar))&&(!empty($someVar)))
-{
-    echo $someVar;
-}
-
-if( $a == 1 || $a == 2 ) {
-
-    if( $b == 3 || $b == 4 ) {
-
-        if( $c == 5 ||  $d == 6 ) {
-
-             //Do something here.
-
-        }
-
-    }
-
-}
-
-if( ($a==1 || $a==2) && ($b==3 || $b==4) && ($c==5 || $c==6) ) {
-
-    //do that something here.
-
-}
 if (3 == $foo) bar();
 
 $v = 1;
