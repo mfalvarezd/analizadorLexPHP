@@ -117,7 +117,8 @@ tokens=(
     'LOGICAL_AND',
     'LOGICAL_OR',
     'ARRAY_TYPE',
-    'NOT'
+    'NOT',
+    'STRLEN'
 
     
 )+ tuple(reserved.values())
@@ -160,6 +161,7 @@ t_ARROWMAP=r'\=>'
 t_DOUBLEPLUS=r'\+\+'
 t_DOUBLEMINUS=r'--'
 t_COLON = r'\:'
+t_STRLEN = r'strlen' 
 
 
 
