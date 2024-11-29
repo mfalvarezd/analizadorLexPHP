@@ -1,0 +1,241 @@
+11/28/2024, 11:26:43
+Entrada:
+<?php
+// Semantico
+ 
+// Semántico 1: operación aritmética
+$suma = $var + 3;
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$array = array(1, 2, 3); // Creación de un arreglo
+ 
+?>
+
+
+Salida:
+11/28/2024, 11:26:54
+Entrada:
+<?php
+// Semantico
+ 
+// Semántico 1: operación aritmética
+$suma = 5 + 3;
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$array = array(1, 2, "ds"); // Creación de un arreglo
+ 
+?>
+
+
+Salida:
+11/28/2024, 11:27:02
+Entrada:
+<?php
+// Semantico
+ 
+// Semántico 1: operación aritmética
+$suma = 5 + 3;
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$array = array(); // Creación de un arreglo
+ 
+?>
+
+
+Salida:
+Error de sintaxis - Token: RPAREN (')'), L�nea: 36, Columna: 146
+11/28/2024, 11:27:36
+Entrada:
+<?php
+// Semantico
+ 
+// Semántico 1: operación aritmética
+$suma = 5 + 3;
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$array = [1, 2, 3]; // Creación de un arreglo
+ 
+?>
+
+
+Salida:
+11/28/2024, 11:28:47
+Entrada:
+<?php
+// Semantico
+ 
+// Estructuras de control
+if ($variable1 > 5) {
+    echo "Variable 1 es mayor que 5\n";
+}
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$var = array(1,2,3);
+ 
+?>
+
+
+Salida:
+11/28/2024, 11:29:07
+Entrada:
+<?php
+// Semantico
+ 
+// Estructuras de control
+if ($variable1 > 5) {
+    echo "Variable 1 es mayor que 5\n";
+}
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$var = array(1.2,2,3);
+ 
+?>
+
+
+Salida:
+11/28/2024, 11:29:14
+Entrada:
+<?php
+// Semantico
+ 
+// Estructuras de control
+if ($variable1 > 5) {
+    echo "Variable 1 es mayor que 5\n";
+}
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$var = array(1.3,2,3);
+ 
+?>
+
+
+Salida:
+11/28/2024, 11:29:20
+Entrada:
+<?php
+// Semantico
+ 
+// Estructuras de control
+if ($variable1 > 5) {
+    echo "Variable 1 es mayor que 5\n";
+}
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$var = array($va,2,3);
+ 
+?>
+
+
+Salida:
+11/28/2024, 11:29:20
+Entrada:
+<?php
+// Semantico
+ 
+// Estructuras de control
+if ($variable1 > 5) {
+    echo "Variable 1 es mayor que 5\n";
+}
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$var = array($va,2,3);
+ 
+?>
+
+
+Salida:
+11/28/2024, 11:29:42
+Entrada:
+<?php
+// Semantico
+ 
+// Estructuras de control
+if ($variable1 > 5 && 4<12) {
+    echo "Variable 1 es mayor que 5\n";
+}
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$var = array(1,2,3);
+ 
+?>
+
+
+Salida:
+11/28/2024, 11:29:43
+Entrada:
+<?php
+// Semantico
+ 
+// Estructuras de control
+if ($variable1 > 5 && 4<12) {
+    echo "Variable 1 es mayor que 5\n";
+}
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$var = array(1,2,3);
+ 
+?>
+
+
+Salida:
+11/28/2024, 11:29:43
+Entrada:
+<?php
+// Semantico
+ 
+// Estructuras de control
+if ($variable1 > 5 && 4<12) {
+    echo "Variable 1 es mayor que 5\n";
+}
+ 
+// Semántico 2: comparación
+$comparar = (5 > 3);
+ 
+$var = array(1,2,3);
+ 
+?>
+
+
+Salida:
+11/28/2024, 11:30:02
+Entrada:
+<?php
+// Semantico
+ 
+// Estructuras de control
+if ($variable1 > 5 && 4<12) {
+    echo "Variable 1 es mayor que 5\n";
+}
+ 
+// Semántico 2: comparación
+$comparar = ("ds" > 3);
+ 
+$var = array(1,2,3);
+ 
+?>
+
+
+Salida:
+Error de sintaxis - Token: GT ('>'), L�nea: 182, Columna: 169

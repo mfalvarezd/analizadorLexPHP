@@ -1,19 +1,19 @@
 <?php
-// Validar arreglos asociativos
-$persocna = array("nombre" => "Piero", "edad" => 25, "ciudad" => "Lima");
+// Error Léxico: uso de un carácter no permitido ($@)
+$variable_invalida$@ = 10; 
 
+// Error Sintáctico: falta un punto y coma (;) al final de la línea
+if ($variable_invalida > 5) 
+    echo "La variable es mayor que 5" // Falta el punto y coma
 
-// Validar if-else
-$edad = 18;
-if ($edad >= 18) {
-    echo "Eres mayor de edad.";
-} else {
-    echo "Eres menor de edad.";
+// Error Semántico: usar una variable no definida
+echo $no_definida_variable; 
+
+function suma($a, $b) {
+    return $a + $b;
 }
 
-// Validar funcion anonima
-$multiplicar = function($a, $b) {
-    return $a * $b;
-};
-echo $multiplicar(3, 4); // Deberia imprimir: 12
+// Semántico: llamada de función con tipos incorrectos
+$resultado = suma("texto", 5); // "texto" no es un número
+
 ?>
